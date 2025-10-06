@@ -6,7 +6,6 @@
  * Purpose:  A class for mapping the outputs of a 74HC595 IC
  *           to the segments of a 7-segment display.
  * ----------------------------------------------------------------------------|---------------------------------------|
- * Notes:
  */
 
 
@@ -23,21 +22,21 @@
 
 /*************** GLOBAL VARIABLES ***************/
 
-SegMap595 segmap595;
+SegMap595Class SegMap595;
 
 
 /******************* FUNCTIONS ******************/
 
 /*--- Constructor ---*/
 
-SegMap595::SegMap595()
+SegMap595Class::SegMap595()
 {
 }
 
 
 /*--- Misc functions ---*/
 
-int32_t SegMap595::init(const char *map_str)
+int32_t SegMap595Class::init(const char *map_str)
 {
     _status = check_map_str(map_str);
 
@@ -56,7 +55,7 @@ int32_t SegMap595::init(const char *map_str)
     return _status;
 }
 
-int32_t SegMap595::check_map_str(const char *map_str)
+int32_t SegMap595Class::check_map_str(const char *map_str)
 {
     if (map_str == nullptr) {
         return SEGMAP595_STATUS_ERR_NULLPTR;
@@ -96,7 +95,7 @@ int32_t SegMap595::check_map_str(const char *map_str)
     return _status = SEGMAP595_STATUS_OK;
 }
 
-int32_t SegMap595::read_map_str()
+int32_t SegMap595Class::read_map_str()
 {
     int32_t bit_pos_set = 0;
 
@@ -118,7 +117,7 @@ int32_t SegMap595::read_map_str()
     }
 }
 
-void SegMap595::map_characters()
+void SegMap595Class::map_characters()
 {
     for (size_t i = 0; i < SEGMAP595_CHAR_NUM; ++i) {
         for (size_t j = 0; j < SEGMAP595_SEG_NUM; ++j) {
@@ -131,19 +130,19 @@ void SegMap595::map_characters()
     }
 }
 
-uint32_t SegMap595::get_dot_bit_pos()
+uint32_t SegMap595Class::get_dot_bit_pos()
 {
     return _bit_pos[0];  /* Dot (represented by the @ sign) is the first character
                           * whose position is determined when a segment string gets analyzed.
                           */
 }
 
-int32_t SegMap595::get_status()
+int32_t SegMap595Class::get_status()
 {
     return _status;
 }
 
-const char* SegMap595::get_map_str()
+const char* SegMap595Class::get_map_str()
 {
     if (_status >= 0) {  // If character mapping was successful.
         return _map_str;

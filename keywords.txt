@@ -24,6 +24,8 @@ map_characters  KEYWORD2
 # Constants (LITERAL1)
 #######################################
 
+SEGMAP595_COMMON_CATHODE                 LITERAL1
+SEGMAP595_COMMON_ANODE                   LITERAL1
 SEGMAP595_SEG_NUM                        LITERAL1
 SEGMAP595_CHAR_NUM                       LITERAL1
 SEGMAP595_MSB                            LITERAL1

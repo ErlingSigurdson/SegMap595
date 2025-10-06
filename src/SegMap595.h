@@ -6,34 +6,6 @@
  * Purpose:  A class for mapping the outputs of a 74HC595 IC
  *           to the segments of a 7-segment display.
  * ----------------------------------------------------------------------------|---------------------------------------|
- * Notes:    The init method takes a single argument - a map string, that is,
- *           a C-style (null-terminated) string that must reflect the order
- *           of connections made between parallel outputs of a 74HC595
- *           and segment control pins of a 7-segment display.
- *
- *           The map string must consist of exactly 8 characters: @, A, B, C, D,
- *           E, F and G. Every character corresponds to a single segment
- *           (@ stands for a dot). The first (leftmost) character in the
- *           map string corresponds to the 7th bit of the IC's parallel output
- *           (Q7 output), the second character corresponds to the 6th bit
- *           (Q6 output), etc.
- *
- *           Uppercase characters may be substituted for their lowercase
- *           counterparts. Any other characters are invalid. Duplicating
- *           characters in the map string is illegal.
- *
- *           If the map string is valid, mapped characters (bytes which
- *           correspond to intelligible symbols to be output on a 7-segment
- *           display) will be placed to the member array named mapped_characters
- *           in the ascending order (from 0 to Z).
- *
- *           The dot bit will be cleared in all mapped character bytes,
- *           therefore you will have to set this bit in your implementation
- *           if necessary (get_dot_bit_pos method can be helpful).
- *
- *           Characters get mapped on the assumption of a common-cathode
- *           7-segment display. Bits must be inverted if a common-anode
- *           display is used.
  */
 
 
@@ -51,6 +23,9 @@
 
 
 /*--- Misc ---*/
+
+#define SEGMAP595_COMMON_CATHODE 0
+#define SEGMAP595_COMMON_ANODE   1
 
 #define SEGMAP595_SEG_NUM  8   // Including a dot segment.
 #define SEGMAP595_CHAR_NUM 32
