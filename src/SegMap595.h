@@ -252,7 +252,7 @@ class SegMap595 {
 
 /*************** GLOBAL VARIABLES ***************/
 
-extern SegMap595 segmap595;
+extern SegMap595Class SegMap595;
 
 
 #endif  // Include guards.
