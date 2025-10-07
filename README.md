@@ -26,3 +26,9 @@ if necessary (get_dot_bit_pos method can be helpful).
 Characters get mapped on the assumption of a common-cathode
 7-segment display. Bits must be inverted if a common-anode
 display is used.
+
+
+### Miscellaneous
+
+The library is primarily intended and formatted for use with Arduino framework,
+but it doesn't include `Arduino.h` and can be readily used in non-Arduino projects. 
