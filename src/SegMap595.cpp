@@ -6,6 +6,7 @@
  * Purpose:  A class for mapping the outputs of a 74HC595 IC
  *           to the segments of a 7-segment display.
  * ----------------------------------------------------------------------------|---------------------------------------|
+ * Notes:
  */
 
 
@@ -36,7 +37,7 @@ SegMap595Class::SegMap595()
 
 /*--- Misc functions ---*/
 
-int32_t SegMap595Class::init(const char *map_str, bool common_display_led_pin)
+int32_t SegMap595Class::init(const char *map_str, bool display_led_common_pin)
 {
     _status = check_map_str(map_str);
 
@@ -50,8 +51,8 @@ int32_t SegMap595Class::init(const char *map_str, bool common_display_led_pin)
         return _status;
     }
 
-    map_characters(common_display_led_pin);
-
+    map_characters(display_led_common_pin);
+    
     return _status;
 }
 
@@ -78,7 +79,7 @@ int32_t SegMap595Class::check_map_str(const char *map_str)
 
     // Check for invalid characters.
     for (size_t i = 0; i < SEGMAP595_SEG_NUM; ++i) {
-        if (_map_str[i] < '@' || _map_str[i] > 'G') {
+        if (_map_str[i] < '@' || _map_str[i] > 'G') {  // Only ASCII characters from '@' to 'G' are valid.
             return _status = SEGMAP595_STATUS_ERR_MAP_STR_CHAR;
         }
     }
@@ -119,27 +120,23 @@ int32_t SegMap595Class::read_map_str()
 
 void SegMap595Class::map_characters(bool display_led_common_pin)
 {
-    if (display_led_common_pin == SEGMAP595_COMMON_CATHODE) {
-        for (size_t i = 0; i < SEGMAP595_CHAR_NUM; ++i) {
-            for (size_t j = 0; j < SEGMAP595_SEG_NUM; ++j) {
-                if ((_mapped_alphabetical[i) & SEGMAP595_ONLY_MSB_SET) {
-                    mapped_characters[i] |=  (1 << _bit_pos[j]);
-                } else {
-                    mapped_characters[i] &= ~(1 << _bit_pos[j]);
-                }
+    for (size_t i = 0; i < SEGMAP595_CHAR_NUM; ++i) {
+        for (size_t j = 0; j < SEGMAP595_SEG_NUM; ++j) {
+            if ((_mapped_alphabetical[i] << j) & SEGMAP595_ONLY_MSB_SET) {
+                mapped_characters[i] |=  (1 << _bit_pos[j]);
+            } else {
+                mapped_characters[i] &= ~(1 << _bit_pos[j]);
             }
         }
-    } else if (display_led_common_pin == SEGMAP595_COMMON_ANODE) {
-        for (size_t i = 0; i < SEGMAP595_CHAR_NUM; ++i) {
-            for (size_t j = 0; j < SEGMAP595_SEG_NUM; ++j) {
-                if ((_mapped_alphabetical[i) & SEGMAP595_ONLY_MSB_SET) {
-                    mapped_characters[i] |=  (1 << _bit_pos[j]);
-                } else {
-                    mapped_characters[i] &= ~(1 << _bit_pos[j]);
-                }
-            }
-        }
+    }
 
+    if (display_led_common_pin == SEGMAP595_COMMON_ANODE) {
+        for (size_t i = 0; i < SEGMAP595_CHAR_NUM; ++i) {
+            for (size_t j = 0; j < SEGMAP595_SEG_NUM; ++j) {
+                mapped_characters[i] ^= (1 << j);
+            }
+        }
+    }
 }
 
 uint32_t SegMap595Class::get_dot_bit_pos()
