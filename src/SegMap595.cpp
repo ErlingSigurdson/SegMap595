@@ -36,7 +36,7 @@ SegMap595Class::SegMap595()
 
 /*--- Misc functions ---*/
 
-int32_t SegMap595Class::init(const char *map_str)
+int32_t SegMap595Class::init(const char *map_str, bool common_display_led_pin)
 {
     _status = check_map_str(map_str);
 
@@ -50,7 +50,7 @@ int32_t SegMap595Class::init(const char *map_str)
         return _status;
     }
 
-    map_characters();
+    map_characters(common_display_led_pin);
 
     return _status;
 }
@@ -117,17 +117,29 @@ int32_t SegMap595Class::read_map_str()
     }
 }
 
-void SegMap595Class::map_characters()
+void SegMap595Class::map_characters(bool display_led_common_pin)
 {
-    for (size_t i = 0; i < SEGMAP595_CHAR_NUM; ++i) {
-        for (size_t j = 0; j < SEGMAP595_SEG_NUM; ++j) {
-            if ((_mapped_alphabetical[i] << j) & SEGMAP595_ONLY_MSB_SET) {
-                mapped_characters[i] |=  (1 << _bit_pos[j]);
-            } else {
-                mapped_characters[i] &= ~(1 << _bit_pos[j]);
+    if (display_led_common_pin == SEGMAP595_COMMON_CATHODE) {
+        for (size_t i = 0; i < SEGMAP595_CHAR_NUM; ++i) {
+            for (size_t j = 0; j < SEGMAP595_SEG_NUM; ++j) {
+                if ((_mapped_alphabetical[i) & SEGMAP595_ONLY_MSB_SET) {
+                    mapped_characters[i] |=  (1 << _bit_pos[j]);
+                } else {
+                    mapped_characters[i] &= ~(1 << _bit_pos[j]);
+                }
             }
         }
-    }
+    } else if (display_led_common_pin == SEGMAP595_COMMON_ANODE) {
+        for (size_t i = 0; i < SEGMAP595_CHAR_NUM; ++i) {
+            for (size_t j = 0; j < SEGMAP595_SEG_NUM; ++j) {
+                if ((_mapped_alphabetical[i) & SEGMAP595_ONLY_MSB_SET) {
+                    mapped_characters[i] |=  (1 << _bit_pos[j]);
+                } else {
+                    mapped_characters[i] &= ~(1 << _bit_pos[j]);
+                }
+            }
+        }
+
 }
 
 uint32_t SegMap595Class::get_dot_bit_pos()

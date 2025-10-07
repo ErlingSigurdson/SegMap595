@@ -24,8 +24,8 @@
 
 /*--- Misc ---*/
 
-#define SEGMAP595_COMMON_CATHODE 0
-#define SEGMAP595_COMMON_ANODE   1
+#define SEGMAP595_COMMON_ANODE   0
+#define SEGMAP595_COMMON_CATHODE 1
 
 #define SEGMAP595_SEG_NUM  8   // Including a dot segment.
 #define SEGMAP595_CHAR_NUM 32
@@ -201,6 +201,9 @@ class SegMap595 {
         // Mapping status. See preprocessor macros list for possible values.
         int32_t  _status = SEGMAP595_STATUS_INIT;
 
+        // Whether a display consists of common anode or common cathode LEDs.
+        bool _display_led_common_pin;
+
         // Array of bytes formed as if a map string is "@ABCDEFG" (@ is for dot).
         uint8_t  _mapped_alphabetical[SEGMAP595_CHAR_NUM] = {SEGMAP595_MAP_ALPHABETICAL_ALL_CHARS};
 
@@ -221,7 +224,7 @@ class SegMap595 {
          * (see preprocessor macros list for possible values).
          */
         int32_t  read_map_str();
-        void     map_characters();
+        void     map_characters(bool display_led_common_pin);
 };
 
 
