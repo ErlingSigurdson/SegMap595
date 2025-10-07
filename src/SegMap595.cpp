@@ -30,7 +30,7 @@ SegMap595Class SegMap595;
 
 /*--- Constructor ---*/
 
-SegMap595Class::SegMap595()
+SegMap595Class::SegMap595Class()
 {
 }
 
