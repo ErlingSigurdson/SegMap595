@@ -48,13 +48,14 @@ void setup()
 
 void loop()
 {
-    uint64_t current_millis = millis();
-    static uint64_t previous_millis = current_millis;
-
+    static int32_t mapping_status = SegMap595.get_status();
     uint32_t counter = 0;
     static bool display_update_due = true;
 
-    if (display_update_due) {
+    uint64_t current_millis = millis();
+    static uint64_t previous_millis = current_millis;
+
+    if ((mapping_status >= 0) && display_update_due) {  // If characters were successfully mapped.
         digitalWrite(LATCH_PIN, LOW);
         // Output a mapped character to a display.
         shiftOut(DATA_PIN, CLOCK_PIN, MSBFIRST, SegMap595.mapped_characters[counter]);
