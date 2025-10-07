@@ -63,7 +63,8 @@ void loop()
         display_update_due = false;
     }
 
-    if (current_millis - previous_millis >= 1000) {
+    if (current_millis - previous_millis >= 1000) {  // Every second.
+        ++counter;
         previous_millis = current_millis;
         display_update_due = true;
     }
