@@ -86,7 +86,7 @@ int32_t SegMap595Class::check_map_str(const char *map_str)
 
     // Check for character duplication.
     for (size_t i = 0; i < SEGMAP595_SEG_NUM; ++i) {
-        for (size_t j = i + 1; j < SEGMAP595_SEG_NUM; ++j) {
+        for (size_t j = i + 1u; j < SEGMAP595_SEG_NUM; ++j) {
             if (_map_str[i] == _map_str[j]) {
                 return _status = SEGMAP595_STATUS_ERR_MAP_STR_DUPLICATION;
             }
@@ -123,18 +123,16 @@ void SegMap595Class::map_characters(bool display_common_pin)
     for (size_t i = 0; i < SEGMAP595_CHAR_NUM; ++i) {
         for (size_t j = 0; j < SEGMAP595_SEG_NUM; ++j) {
             if ((_mapped_alphabetical[i] << j) & SEGMAP595_ONLY_MSB_SET) {
-                mapped_characters[i] |=  (1 << _bit_pos[j]);
+                mapped_characters[i] |=  (1u << _bit_pos[j]);
             } else {
-                mapped_characters[i] &= ~(1 << _bit_pos[j]);
+                mapped_characters[i] &= ~(1u << _bit_pos[j]);
             }
         }
     }
 
     if (display_common_pin != SEGMAP595_COMMON_CATHODE) {
         for (size_t i = 0; i < SEGMAP595_CHAR_NUM; ++i) {
-            for (size_t j = 0; j < SEGMAP595_SEG_NUM; ++j) {
-                mapped_characters[i] ^= (1 << j);
-            }
+            mapped_characters[i] ^= 0xFF;  // Toggle all bits.
         }
     }
 }

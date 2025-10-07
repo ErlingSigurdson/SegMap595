@@ -7,6 +7,7 @@
 #######################################
 
 SegMap595Class KEYWORD1
+SegMap595      KEYWORD1
 
 #######################################
 # Methods and Functions (KEYWORD2)
@@ -24,8 +25,8 @@ map_characters  KEYWORD2
 # Constants (LITERAL1)
 #######################################
 
-SEGMAP595_COMMON_ANODE                   LITERAL1
 SEGMAP595_COMMON_CATHODE                 LITERAL1
+SEGMAP595_COMMON_ANODE                   LITERAL1
 SEGMAP595_SEG_NUM                        LITERAL1
 SEGMAP595_CHAR_NUM                       LITERAL1
 SEGMAP595_MSB                            LITERAL1
@@ -69,6 +70,7 @@ SEGMAP595_MAP_ALPHABETICAL_T             LITERAL1
 SEGMAP595_MAP_ALPHABETICAL_U             LITERAL1
 SEGMAP595_MAP_ALPHABETICAL_Y             LITERAL1
 SEGMAP595_MAP_ALPHABETICAL_Z             LITERAL1
+SEGMAP595_MAP_ALPHABETICAL_ALL_CHARS     LITERAL1
 SEGMAP595_CHAR_0                         LITERAL1
 SEGMAP595_CHAR_1                         LITERAL1
 SEGMAP595_CHAR_2                         LITERAL1
