@@ -35,9 +35,9 @@ SegMap595Class::SegMap595()
 }
 
 
-/*--- Misc functions ---*/
+/*--- Methods ---*/
 
-int32_t SegMap595Class::init(const char *map_str, bool display_led_common_pin)
+int32_t SegMap595Class::init(const char *map_str, bool display_common_pin)
 {
     _status = check_map_str(map_str);
 
@@ -51,7 +51,7 @@ int32_t SegMap595Class::init(const char *map_str, bool display_led_common_pin)
         return _status;
     }
 
-    map_characters(display_led_common_pin);
+    map_characters(display_common_pin);
     
     return _status;
 }
@@ -118,7 +118,7 @@ int32_t SegMap595Class::read_map_str()
     }
 }
 
-void SegMap595Class::map_characters(bool display_led_common_pin)
+void SegMap595Class::map_characters(bool display_common_pin)
 {
     for (size_t i = 0; i < SEGMAP595_CHAR_NUM; ++i) {
         for (size_t j = 0; j < SEGMAP595_SEG_NUM; ++j) {
@@ -130,7 +130,7 @@ void SegMap595Class::map_characters(bool display_led_common_pin)
         }
     }
 
-    if (display_led_common_pin == SEGMAP595_COMMON_ANODE) {
+    if (display_common_pin != SEGMAP595_COMMON_CATHODE) {
         for (size_t i = 0; i < SEGMAP595_CHAR_NUM; ++i) {
             for (size_t j = 0; j < SEGMAP595_SEG_NUM; ++j) {
                 mapped_characters[i] ^= (1 << j);
@@ -142,7 +142,7 @@ void SegMap595Class::map_characters(bool display_led_common_pin)
 uint32_t SegMap595Class::get_dot_bit_pos()
 {
     return _bit_pos[0];  /* Dot (represented by the @ sign) is the first character
-                          * whose position is determined when a segment string gets analyzed.
+                          * whose position is determined when a map string gets analyzed.
                           */
 }
 
@@ -153,7 +153,7 @@ int32_t SegMap595Class::get_status()
 
 const char* SegMap595Class::get_map_str()
 {
-    if (_status >= 0) {  // If character mapping was successful.
+    if (_status == SEGMAP595_STATUS_OK) {  // If character mapping was successful.
         return _map_str;
     } else {
         return nullptr;
