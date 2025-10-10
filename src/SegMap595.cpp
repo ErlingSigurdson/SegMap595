@@ -67,6 +67,7 @@ int32_t SegMap595Class::check_map_str(const char *map_str)
         return _status = SEGMAP595_STATUS_ERR_MAP_STR_LEN;
     }
 
+    // Copy to internal buffer.
     memcpy(_map_str, map_str, SEGMAP595_SEG_NUM);
     _map_str[SEGMAP595_SEG_NUM] = '\0';
 
@@ -134,7 +135,7 @@ void SegMap595Class::map_characters(bool display_common_pin)
 
     if (display_common_pin != SEGMAP595_COMMON_CATHODE) {
         for (size_t i = 0; i < SEGMAP595_CHAR_NUM; ++i) {
-            _mapped_characters[i] ^= static_cast<uint8_t>(0xFF);  // Toggle all bits.
+            _mapped_characters[i] ^= static_cast<uint8_t>(SEGMAP595_ALL_BITS_SET_MASK);  // Toggle all bits.
         }
     }
 }

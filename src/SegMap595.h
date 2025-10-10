@@ -22,11 +22,12 @@
  *           counterparts. Any other characters are invalid. Duplicating
  *           characters in the map string leads to an error.
  *
- *           If the map string is valid, mapped characters (bytes which
- *           correspond to symbols to be output on a 7-segment display)
- *           will be placed to the member array in the ascending order
- *           (from 0 to 9, from A to Z). Symbols that cannot be displayed
- *           properly on a 7-segment display are not represented.
+ *           If the map string is valid, mapped characters (custom formed bytes
+ *           which correspond to symbols to be output on a 7-segment display)
+ *           will be placed to a member array in the ascending order
+ *           (from 0 to 9, from A to Z, but symbols that cannot be displayed
+ *           properly on a 7-segment display are not represented). Resulting
+ *           mapped characters are accessed via get_mapped_character() method.
  *
  *           The dot bit will be in "off" state in all mapped character
  *           bytes, therefore you will have to manipulate this bit in your
@@ -50,14 +51,16 @@
 
 /*--- Misc ---*/
 
-#define SEGMAP595_SEG_NUM        8     // Including a dot segment.
-#define SEGMAP595_CHAR_NUM       32
+#define SEGMAP595_SEG_NUM           8     // Including a dot segment.
+#define SEGMAP595_CHAR_NUM          32
 
-#define SEGMAP595_MSB            7
-#define SEGMAP595_ONLY_MSB_SET   (1u << SEGMAP595_MSB)
+#define SEGMAP595_MSB               7
+#define SEGMAP595_ONLY_MSB_SET      (1u << SEGMAP595_MSB)
 
-#define SEGMAP595_COMMON_CATHODE 0
-#define SEGMAP595_COMMON_ANODE   1
+#define SEGMAP595_COMMON_CATHODE    0
+#define SEGMAP595_COMMON_ANODE      1
+
+#define SEGMAP595_ALL_BITS_SET_MASK 0xFF
 
 // Function return codes.
 #define SEGMAP595_STATUS_INIT                    -1
@@ -138,8 +141,8 @@
                                              SEGMAP595_MAP_ALPHABETICAL_Y, \
                                              SEGMAP595_MAP_ALPHABETICAL_Z
 
-/* Handy index aliases for referring to the mapped characters
- * (custom formed bytes) within the resulting array.
+/* Handy index aliases for referring to the mapped
+ * characters within the resulting array.
  */
 #define SEGMAP595_CHAR_0 0
 #define SEGMAP595_CHAR_1 1
@@ -202,38 +205,39 @@ class SegMap595Class {
         int32_t  get_status();
 
         /* Get a mapped character.
-         * Returns: a mapped character (custom formed byte) if the characters were successfully mapped
-         * and passed index is within the array bounds, zero otherwise.
+         * Returns: a mapped character (custom formed byte) if the passed map string was valid,
+         * the characters were successfully mapped and the passed index is within the array bounds,
+         * zero otherwise.
          */
         uint8_t  get_mapped_character(uint32_t index);
 
         /* Get the position of the bit that represents the dot segment.
-         * Returns: integer less or equal to SEGMAP595_MSB if the characters were successfully mapped,
-         * bigger integer otherwise.
+         * Returns: integer less or equal to SEGMAP595_MSB if the passed map string was valid
+         * and the characters were successfully mapped, bigger integer otherwise.
          */
         uint32_t get_dot_bit_pos();
 
         /* Get a pointer to an object's internal buffer that holds the passed map string.
          * Returns: a pointer to the string if the passed map string was valid and the characters were successfully
          * mapped, nullptr otherwise (although the buffer always has a valid address in memory, nullptr serves
-         * as an issue indicator).
+         * as an error indicator).
          */
         const char* get_map_str();
 
     private:
         /*--- Variables ---*/
 
-        // Internal buffer.
-        char    _map_str[SEGMAP595_SEG_NUM + 1] = {0};
-
-        // Mapping status. See preprocessor macros list for possible values.
-        int32_t _status = SEGMAP595_STATUS_INIT;
-
         // Array of bytes formed as if the map string is "@ABCDEFG" (@ is for dot).
         static constexpr uint8_t _mapped_alphabetical[SEGMAP595_CHAR_NUM] = {SEGMAP595_MAP_ALPHABETICAL_ALL_CHARS};
 
+        // Internal buffer.
+        char     _map_str[SEGMAP595_SEG_NUM + 1] = {0};
+
+        // Mapping status. See preprocessor macros list for possible values.
+        int32_t  _status = SEGMAP595_STATUS_INIT;
+
         /* Resulting array.
-         * If the passed map string is valid and the characters are successfully mapped,
+         * If the passed map string was valid and the characters were successfully mapped,
          * this array will hold the mapped characters (custom formed bytes).
          */
         uint8_t  _mapped_characters[SEGMAP595_CHAR_NUM] = {0};
@@ -248,7 +252,7 @@ class SegMap595Class {
          * Returns: 0 if the passed map string is valid, negative integer otherwise (see preprocessor macros
          * list for possible values).
          */
-        int32_t  check_map_str(const char *map_str);
+        int32_t check_map_str(const char *map_str);
 
         /* Indicate bit positions for every display segment.
          * Returns: 0 if all bit positions are indicated, negative integer otherwise
@@ -256,19 +260,21 @@ class SegMap595Class {
          *
          * The map string isn't passed because it's already copied
          * to the internal buffer by the moment of this method call. 
-         *
          */
-        int32_t  read_map_str();
+        int32_t read_map_str();
 
         /* Do the main job of mapping the characters.
          * Returns: nothing.
          */
-        void     map_characters(bool display_common_pin);
+        void    map_characters(bool display_common_pin);
 };
 
 
 /*************** GLOBAL VARIABLES ***************/
 
+/* An Arduino-style singleton object.
+ * More instances of the same class can be created if necessary.
+ */
 extern SegMap595Class SegMap595;
 
 
