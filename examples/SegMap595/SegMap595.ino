@@ -18,6 +18,13 @@
 
 /*--- Misc ---*/
 
+#define SEGMAP595_MAP_STR   "ED@CGAFB"  // Valid map string example.
+//#define SEGMAP595_MAP_STR "ed@cgafb"  // Also valid.
+//#define SEGMAP595_MAP_STR "Ed@cGaFb"  // Still valid.
+//#define SEGMAP595_MAP_STR "E@CGAFB"   // Invalid: map string is too short.
+//#define SEGMAP595_MAP_STR "E@CGAFBM"  // Invalid: illegal character 'M'.
+//#define SEGMAP595_MAP_STR "E@CGAFBE"  // Invalid: duplicated character 'E'.
+
 // Specify display type.
 #define   USING_COMMON_CATHODE_DISPLAY
 //#define USING_COMMON_ANODE_DISPLAY
@@ -28,12 +35,8 @@
 #define LATCH_PIN 7
 #define CLOCK_PIN 8
 
-#define SEGMAP595_MAP_STR   "ED@CGAFB"  // Valid map string example.
-//#define SEGMAP595_MAP_STR "ed@cgafb"  // Also valid.
-//#define SEGMAP595_MAP_STR "Ed@cGaFb"  // Still valid.
-//#define SEGMAP595_MAP_STR "E@CGAFB"   // Invalid: map string is too short.
-//#define SEGMAP595_MAP_STR "E@CGAFBM"  // Invalid: illegal character 'M'.
-//#define SEGMAP595_MAP_STR "E@CGAFBE"  // Invalid: duplicated character 'E'.
+#define INTERVAL 1000
+
 
 
 /******************* FUNCTIONS ******************/
@@ -65,7 +68,7 @@ void loop()
         while(true) {
             Serial.print("Character mapping failed, error code: ");
             Serial.println(mapping_status);
-            delay(1000);
+            delay(INTERVAL);
         }
     }
 
@@ -90,7 +93,7 @@ void loop()
         display_update_due = false;
     }
 
-    if (current_millis - previous_millis >= 1000) {  // Every second.
+    if (current_millis - previous_millis >= INTERVAL) {
         ++counter;
         display_update_due = true;
         previous_millis = current_millis;
