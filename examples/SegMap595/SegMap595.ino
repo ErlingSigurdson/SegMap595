@@ -70,7 +70,7 @@ void loop()
     /*--- Demo output to single-digit 7-segment display ---*/
     
     static uint32_t counter = 0;
-    if (counter > SEGMAP595_CHAR_NUM) {
+    if (counter >= SEGMAP595_CHAR_NUM) {
         counter = 0;
     }
 
@@ -80,9 +80,16 @@ void loop()
     static bool display_update_due = true;
     
     if (display_update_due) {
-        digitalWrite(LATCH_PIN, LOW);
+        uint8_t byte_to_shift = SegMap595.get_mapped_character(counter);
+        // Dot segment blink.
+        if (counter % 2) {
+            uint8_t mask = static_cast<uint8_t>(1u << SegMap595.get_dot_bit_pos());
+            byte_to_shift ^= mask; 
+        }
+
         // Output a mapped character to the display.
-        shiftOut(DATA_PIN, CLOCK_PIN, MSBFIRST, SegMap595.mapped_characters[counter]);
+        digitalWrite(LATCH_PIN, LOW);
+        shiftOut(DATA_PIN, CLOCK_PIN, MSBFIRST, byte_to_shift);
         digitalWrite(LATCH_PIN, HIGH);
         display_update_due = false;
     }

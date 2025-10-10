@@ -24,10 +24,9 @@
  *
  *           If the map string is valid, mapped characters (bytes which
  *           correspond to symbols to be output on a 7-segment display)
- *           will be placed to the member array named mapped_characters
- *           in the ascending order (from 0 to 9, from A to Z). Symbols
- *           that cannot be displayed properly on a 7-segment display
- *           are not represented.
+ *           will be placed to the member array in the ascending order
+ *           (from 0 to 9, from A to Z). Symbols that cannot be displayed
+ *           properly on a 7-segment display are not represented.
  *
  *           The dot bit will be in "off" state in all mapped character
  *           bytes, therefore you will have to manipulate this bit in your
@@ -180,15 +179,6 @@
 
 class SegMap595Class {
     public:
-        /*--- Variables ---*/
-
-        /* Resulting array.
-         * If the passed map string is valid and the characters are successfully mapped,
-         * this array will hold the mapped characters (custom formed bytes).
-         */
-        uint8_t mapped_characters[SEGMAP595_CHAR_NUM] = {0};
-
-
         /*--- Methods ---*/
 
         // Default constructor.
@@ -203,18 +193,25 @@ class SegMap595Class {
          *
          * Multiple calls for this method are valid, each call will lead to a fresh character mapping.
          */
-        int32_t     init(const char *map_str, bool display_common_pin);
+        int32_t  init(const char *map_str, bool display_common_pin);
 
         /* Get the mapping status (whether the passed map string was valid and the characters were successfully mapped).
          * Returns: 0 if the passed map string was valid and the characters were successfully mapped,
          * negative integer otherwise (see preprocessor macros list for possible values).
          */
-        int32_t     get_status();
+        int32_t  get_status();
+
+        /* Get a mapped character.
+         * Returns: a mapped character (custom formed byte) if the characters were successfully mapped
+         * and passed index is within the array bounds, zero otherwise.
+         */
+        uint8_t  get_mapped_character(uint32_t index);
 
         /* Get the position of the bit that represents the dot segment.
-         * Returns: non-negative integer.
+         * Returns: integer less or equal to SEGMAP595_MSB if the characters were successfully mapped,
+         * bigger integer otherwise.
          */
-        uint32_t    get_dot_bit_pos();
+        uint32_t get_dot_bit_pos();
 
         /* Get a pointer to an object's internal buffer that holds the passed map string.
          * Returns: a pointer to the string if the passed map string was valid and the characters were successfully
@@ -227,13 +224,19 @@ class SegMap595Class {
         /*--- Variables ---*/
 
         // Internal buffer.
-        char     _map_str[SEGMAP595_SEG_NUM + 1] = {0};
+        char    _map_str[SEGMAP595_SEG_NUM + 1] = {0};
 
         // Mapping status. See preprocessor macros list for possible values.
-        int32_t  _status = SEGMAP595_STATUS_INIT;
+        int32_t _status = SEGMAP595_STATUS_INIT;
 
         // Array of bytes formed as if the map string is "@ABCDEFG" (@ is for dot).
-        uint8_t  _mapped_alphabetical[SEGMAP595_CHAR_NUM] = {SEGMAP595_MAP_ALPHABETICAL_ALL_CHARS};
+        static constexpr uint8_t _mapped_alphabetical[SEGMAP595_CHAR_NUM] = {SEGMAP595_MAP_ALPHABETICAL_ALL_CHARS};
+
+        /* Resulting array.
+         * If the passed map string is valid and the characters are successfully mapped,
+         * this array will hold the mapped characters (custom formed bytes).
+         */
+        uint8_t  _mapped_characters[SEGMAP595_CHAR_NUM] = {0};
 
         // Array of values that indicate the respective bit position number for every display segment.
         uint32_t _bit_pos[SEGMAP595_SEG_NUM] = {0};

@@ -67,7 +67,8 @@ int32_t SegMap595Class::check_map_str(const char *map_str)
         return _status = SEGMAP595_STATUS_ERR_MAP_STR_LEN;
     }
 
-    strncpy(_map_str, map_str, SEGMAP595_SEG_NUM);
+    memcpy(_map_str, map_str, SEGMAP595_SEG_NUM);
+    _map_str[SEGMAP595_SEG_NUM] = '\0';
 
     // Convert to uppercase.
     constexpr int32_t ascii_code_diff = 'a' - 'A';
@@ -122,31 +123,45 @@ void SegMap595Class::map_characters(bool display_common_pin)
 {
     for (size_t i = 0; i < SEGMAP595_CHAR_NUM; ++i) {
         for (size_t j = 0; j < SEGMAP595_SEG_NUM; ++j) {
+            uint8_t mask = static_cast<uint8_t>(1u << _bit_pos[j]);
             if ((_mapped_alphabetical[i] << j) & SEGMAP595_ONLY_MSB_SET) {
-                mapped_characters[i] |=  (1u << _bit_pos[j]);
+                _mapped_characters[i] |= mask;
             } else {
-                mapped_characters[i] &= ~(1u << _bit_pos[j]);
+                _mapped_characters[i] &= ~mask;
             }
         }
     }
 
     if (display_common_pin != SEGMAP595_COMMON_CATHODE) {
         for (size_t i = 0; i < SEGMAP595_CHAR_NUM; ++i) {
-            mapped_characters[i] ^= 0xFF;  // Toggle all bits.
+            _mapped_characters[i] ^= static_cast<uint8_t>(0xFF);  // Toggle all bits.
         }
     }
-}
-
-uint32_t SegMap595Class::get_dot_bit_pos()
-{
-    return _bit_pos[0];  /* Dot (represented by the @ sign) is the first character
-                          * whose position is determined when a map string gets analyzed.
-                          */
 }
 
 int32_t SegMap595Class::get_status()
 {
     return _status;
+}
+
+uint8_t SegMap595Class::get_mapped_character(uint32_t index)
+{
+    if (_status < 0 || index >= SEGMAP595_CHAR_NUM) {
+        return 0;
+    }
+
+    return _mapped_characters[index];
+}
+
+uint32_t SegMap595Class::get_dot_bit_pos()
+{
+    if (_status < 0) {
+        return SEGMAP595_MSB + 1;
+    } else {
+        return _bit_pos[0];  /* Dot (represented by the @ sign) is the first character
+                              * whose position is determined when a map string gets analyzed.
+                              */
+    }
 }
 
 const char* SegMap595Class::get_map_str()
