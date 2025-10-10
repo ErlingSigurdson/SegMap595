@@ -3,7 +3,9 @@
 /**
  * Filename: SegMap595.ino
  * ----------------------------------------------------------------------------|---------------------------------------|
- * Purpose:  Example sketch demonstrating a basic use of the SegMap595 library.
+ * Purpose:  An example sketch demonstrating a basic usage of the SegMap595
+ *           library. Outputs all valid characters one by one to a single-digit
+ *           7-segment display using a bit-banging and a single 74HC595 IC.
  * ----------------------------------------------------------------------------|---------------------------------------|
  * Notes:
  */
@@ -16,27 +18,23 @@
 #include <SegMap595.h>
 
 
+/*--- Library usage ---*/
+
+/* Valid map string example. You should specify the relevant string
+ * according to the actual order of connections in your circuit.
+ */
+#define SEGMAP595_MAP_STR "ED@CGAFB"
+
+
 /*--- Misc ---*/
 
-#define SEGMAP595_MAP_STR   "ED@CGAFB"  // Valid map string example.
-//#define SEGMAP595_MAP_STR "ed@cgafb"  // Also valid.
-//#define SEGMAP595_MAP_STR "Ed@cGaFb"  // Still valid.
-//#define SEGMAP595_MAP_STR "E@CGAFB"   // Invalid: map string is too short.
-//#define SEGMAP595_MAP_STR "E@CGAFBM"  // Invalid: illegal character 'M'.
-//#define SEGMAP595_MAP_STR "E@CGAFBE"  // Invalid: duplicated character 'E'.
-
-// Specify display type.
-#define   USING_COMMON_CATHODE_DISPLAY
-//#define USING_COMMON_ANODE_DISPLAY
-
-#define SERIAL_BAUD_RATE 115200
+#define BAUD_RATE 115200
 
 #define DATA_PIN  6
 #define LATCH_PIN 7
 #define CLOCK_PIN 8
 
 #define INTERVAL 1000
-
 
 
 /******************* FUNCTIONS ******************/
@@ -47,14 +45,11 @@ void setup()
     pinMode(LATCH_PIN, OUTPUT);
     pinMode(CLOCK_PIN, OUTPUT);
 
-    Serial.begin(SERIAL_BAUD_RATE);
+    Serial.begin(BAUD_RATE);
 
-    // Character mapping.
-    #if   defined USING_COMMON_CATHODE_DISPLAY
-        SegMap595.init(SEGMAP595_MAP_STR, SEGMAP595_COMMON_CATHODE);
-    #elif defined USING_COMMON_ANODE_DISPLAY
-        SegMap595.init(SEGMAP595_MAP_STR, SEGMAP595_COMMON_ANODE);
-    #endif
+    // Character mapping (choose variant according to display type).
+    SegMap595.init(SEGMAP595_MAP_STR, SEGMAP595_COMMON_CATHODE);
+    //SegMap595.init(SEGMAP595_MAP_STR, SEGMAP595_COMMON_ANODE);
 }
 
 void loop()
@@ -62,7 +57,6 @@ void loop()
     /*--- Mapping status check ---*/
     
     static int32_t mapping_status = SegMap595.get_status();
-
     // Loop error output if mapping was unsuccessful.
     if (mapping_status < 0) {
         while(true) {
@@ -73,10 +67,10 @@ void loop()
     }
 
 
-    /*--- Test output to single-digit 7-segment display ---*/
+    /*--- Demo output to single-digit 7-segment display ---*/
     
-    uint32_t counter = 0;
-    if (counter > 9) {
+    static uint32_t counter = 0;
+    if (counter > SEGMAP595_CHAR_NUM) {
         counter = 0;
     }
 
@@ -85,7 +79,7 @@ void loop()
 
     static bool display_update_due = true;
     
-    if (display_update_due) {  // If characters were successfully mapped.
+    if (display_update_due) {
         digitalWrite(LATCH_PIN, LOW);
         // Output a mapped character to the display.
         shiftOut(DATA_PIN, CLOCK_PIN, MSBFIRST, SegMap595.mapped_characters[counter]);

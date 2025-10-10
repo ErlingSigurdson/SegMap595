@@ -35,3 +35,11 @@ if necessary (get_dot_bit_pos method can be helpful).
 
 The library is primarily intended and formatted for use with Arduino framework,
 but it doesn't include `Arduino.h` and can be readily used in non-Arduino projects. 
+
+
+
+//#define SEGMAP595_MAP_STR "ed@cgafb"  // Also valid.
+//#define SEGMAP595_MAP_STR "Ed@CgAfB"  // Still valid.
+//#define SEGMAP595_MAP_STR "ED@CGAF"   // Invalid: map string is too short.
+//#define SEGMAP595_MAP_STR "ED@CGAFM"  // Invalid: illegal character 'M'.
+//#define SEGMAP595_MAP_STR "ED@CGAFE"  // Invalid: duplicated character 'E'.
