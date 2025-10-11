@@ -1,7 +1,7 @@
 # Overview
 
-SegMap595 is a single-class embdedded-oriented Arduino-friendly C++ library for mapping the outputs
-of a 74HC595 IC to the segments of a 7-segment display.
+SegMap595 is a single-class embedded-oriented Arduino-friendly C++ library
+for mapping the outputs of a 74HC595 IC to the segments of a 7-segment display.
 
 ## Concept
 
