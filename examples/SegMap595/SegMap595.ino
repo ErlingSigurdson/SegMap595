@@ -25,7 +25,7 @@
 /* Valid map string example. You should specify the relevant string
  * according to the actual (physical) order of connections in your circuit.
  */
-#define SEGMAP595_MAP_STR "ED@CGAFB"
+#define MAP_STR "ED@CGAFB"
 
 
 /*--- Misc ---*/
@@ -55,9 +55,9 @@ void setup()
 
     // Character mapping.
     #ifdef DISPLAY_TYPE_COMMON_CATHODE
-        SegMap595.init(SEGMAP595_MAP_STR, SEGMAP595_COMMON_CATHODE);
+        SegMap595.init(MAP_STR, SEGMAP595_COMMON_CATHODE);
     #elif defined DISPLAY_TYPE_COMMON_ANODE
-        SegMap595.init(SEGMAP595_MAP_STR, SEGMAP595_COMMON_ANODE);
+        SegMap595.init(MAP_STR, SEGMAP595_COMMON_ANODE);
     #else
         #error "Display type not specified."
     #endif
