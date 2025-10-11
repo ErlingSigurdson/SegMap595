@@ -24,7 +24,7 @@
  *
  *           If the map string is valid, mapped characters (custom formed bytes
  *           that correspond to symbols to be output on a 7-segment display)
- *           will be placed to a member array in the ascending order:
+ *           will be placed in a member array in the ascending order:
  *           from 0 to 9, from A to Z, dash and underscore on top. Undisplayable
  *           symbols ('M', 'V', 'W', 'X') are omitted. The mapped characters
  *           can be then retrieved using get_mapped_character() method.
