@@ -18,7 +18,7 @@
  *           output (Q7 output), the second character corresponds to the 6th
  *           bit (Q6 output), etc.
  *
- *           Uppercase characters may be substituted for their lowercase
+ *           Uppercase characters may be replaced with their lowercase
  *           counterparts. Any other characters are invalid. Duplicating
  *           characters in the map string is invalid.
  *
