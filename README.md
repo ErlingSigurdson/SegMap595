@@ -39,13 +39,19 @@ dash and underscore on top. Undisplayable symbols ('M', 'V', 'W', 'X') are omitt
 
 ## API usage
 
-At first "load" the map string into the object using init() method:
+Include the library:
 ```cpp
-SegMap595.init(MAP_STR, SEGMAP595_COMMON_CATHODE)  // If using common cathode display.
-SegMap595.init(MAP_STR, SEGMAP595_COMMON_ANODE)    // If using common anode display.
+#include <SegMap595.h>  // Arduino style.
+#include "SegMap595.h"  // Generic embedded programming style.
 ```
 
-Check the mapping status (optionally):
+"Load" the map string into an object using init() method:
+```cpp
+SegMap595.init(MAP_STR, SEGMAP595_COMMON_CATHODE);  // If using common cathode display.
+SegMap595.init(MAP_STR, SEGMAP595_COMMON_ANODE);    // If using common anode display.
+```
+
+Check the mapping status (optional):
 ```cpp
 static int32_t mapping_status = SegMap595.get_status();
 // Loop error output if mapping was unsuccessful.
@@ -58,10 +64,10 @@ if (mapping_status < 0) {
 }
 ```
 
-If mapping was successful, get necessary mapped character:
+Get necessary mapped character:
 ```cpp
-uint8_t mapped_character = SegMap595.get_mapped_character(counter);                      // Get by incremented index. 
-uint8_t mapped_character = SegMap595.get_mapped_character(SEGMAP595_MAP_ALPHABETICAL_A)  // Get by a macro index name.
+uint8_t mapped_character = SegMap595.get_mapped_character(counter);           // Get by incremented index.
+uint8_t mapped_character = SegMap595.get_mapped_character(SEGMAP595_CHAR_A);  // Get by a macro index name.
 ```
 
 If necessary, toggle the dot segment bit:
@@ -76,8 +82,10 @@ if (counter % 2) {
 
 If for some reason you need to retrieve the map string you've passed earlier, get a pointer to it:
 ```cpp
-const char map_str_retrieved = SegMap595.get_map_str();
+const char *map_str_retrieved = SegMap595.get_map_str();
 ```
+
+Refer to `SegMap595.h` for the full description of return values if necessary.
 
 ## Compatibility
 
