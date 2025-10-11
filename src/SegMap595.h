@@ -228,7 +228,7 @@ class SegMap595Class {
         /*--- Variables ---*/
 
         // Array of bytes formed as if the map string is "@ABCDEFG" (@ is for dot).
-        static constexpr uint8_t _mapped_alphabetical[SEGMAP595_CHAR_NUM] = {SEGMAP595_MAP_ALPHABETICAL_ALL_CHARS};
+        const uint8_t _mapped_alphabetical[SEGMAP595_CHAR_NUM] = {SEGMAP595_MAP_ALPHABETICAL_ALL_CHARS};
 
         // Internal buffer.
         char     _map_str[SEGMAP595_SEG_NUM + 1] = {0};
