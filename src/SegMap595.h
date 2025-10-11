@@ -273,7 +273,7 @@ class SegMap595Class {
         /* Do the main job of mapping the characters.
          * Returns: nothing.
          */
-        void    map_characters(bool display_common_pin);
+        void    map_characters(int32_t display_common_pin);
 };
 
 

@@ -121,7 +121,7 @@ int32_t SegMap595Class::read_map_str()
     }
 }
 
-void SegMap595Class::map_characters(bool display_common_pin)
+void SegMap595Class::map_characters(int32_t display_common_pin)
 {
     for (size_t i = 0; i < SEGMAP595_CHAR_NUM; ++i) {
         for (size_t j = 0; j < SEGMAP595_SEG_NUM; ++j) {
