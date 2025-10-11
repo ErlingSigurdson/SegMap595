@@ -1,18 +1,18 @@
-# SegMap595
+# Overview
 
 SegMap595 is a single-class embdedded-oriented Arduino-friendly C++ library for mapping the outputs
 of a 74HC595 IC to the segments of a 7-segment display.
 
 ## Concept
 
-Usually outputting characters to a 7-segment display is done by forming all corresponding bytes
-(sometimes called "bit masks") in advance and hardcoding them. This library simplifies the job
+Usually outputting characters to a 7-segment display involves forming all corresponding bytes
+(sometimes called "bit masks") in advance and hardcoding them. This library automates the task
 and lets your microcontroller do the whole job in one run based on a single parameter: the map string. 
 
 ## Map string
 
-The map string is a C-style (null-terminated) string that must reflect the actual order of connections
-made between parallel outputs of your 74HC595 and segment control pins of your 7-segment display.
+The map string is a C-style (null-terminated) string that must reflect the actual (physical) order
+of connections made between parallel outputs of your 74HC595 and segment control pins of your 7-segment display.
 
 The map string must consist of exactly 8 ASCII characters: @, A, B, C, D, E, F and G. Every character
 corresponds to a single segment (@ stands for a dot). The first (leftmost) character in the map string
