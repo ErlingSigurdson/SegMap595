@@ -7,7 +7,7 @@
  *           library.
  *
  *           Outputs all displayable characters one by one to a single-digit
- *           7-segment display using a bit-banging and a single 74HC595 IC.
+ *           7-segment display using bit-banging and a single 74HC595 IC.
  * ----------------------------------------------------------------------------|---------------------------------------|
  * Notes:
  */
@@ -30,8 +30,10 @@
 
 /*--- Misc ---*/
 
+// Set appropriately.
 #define BAUD_RATE 115200
 
+// Set appropriately.
 #define DATA_PIN  16
 #define LATCH_PIN 17
 #define CLOCK_PIN 18

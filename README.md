@@ -5,9 +5,9 @@ for mapping the outputs of a **74HC595 IC** to the segments of a **7-segment dis
 
 ## Concept
 
-Usually outputting characters to a 7-segment display involves forming all corresponding bytes
-(sometimes called "bit masks") in advance and hardcoding them. This library automates the task
-and lets your microcontroller do the whole job in one run based on a single parameter: the map string. 
+Usually, outputting characters to a 7-segment display involves forming all corresponding bytes
+(sometimes called "bit masks") in advance and hard-coding them. This library automates the task
+and lets your microcontroller do the whole job in one go based on a single parameter: the map string.
 
 ## Map string
 
@@ -41,14 +41,14 @@ dash and underscore on top. Undisplayable symbols ('M', 'V', 'W', 'X') are omitt
 
 Include the library:
 ```cpp
-#include <SegMap595.h>  // Arduino style.
-#include "SegMap595.h"  // Generic embedded programming style.
+#include <SegMap595.h>    // Arduino style.
+//#include "SegMap595.h"  // Generic embedded programming style.
 ```
 
 "Load" the map string into an object using init() method:
 ```cpp
 SegMap595.init(MAP_STR, SEGMAP595_COMMON_CATHODE);  // If using common cathode display.
-SegMap595.init(MAP_STR, SEGMAP595_COMMON_ANODE);    // If using common anode display.
+//SegMap595.init(MAP_STR, SEGMAP595_COMMON_ANODE);  // If using common anode display.
 ```
 
 Check the mapping status (optional):
@@ -66,8 +66,8 @@ if (mapping_status < 0) {
 
 Get a mapped character:
 ```cpp
-uint8_t mapped_character = SegMap595.get_mapped_character(counter);           // Get by incremented index.
-uint8_t mapped_character = SegMap595.get_mapped_character(SEGMAP595_CHAR_A);  // Get by a macro index name.
+uint8_t mapped_character = SegMap595.get_mapped_character(counter);             // Get by an incremented index.
+//uint8_t mapped_character = SegMap595.get_mapped_character(SEGMAP595_CHAR_A);  // Get by a macro index name.
 ```
 
 If necessary, toggle the dot segment bit:
@@ -88,6 +88,8 @@ const char *map_str_retrieved = SegMap595.get_map_str();
 Refer to `SegMap595.h` for the full description of return values if necessary.
 
 ## Compatibility
+
+The library works with any MCU capable of bit-banging or SPI data transfer.
 
 The library is primarily intended and documented for use with the Arduino framework, but it doesn't
 include `Arduino.h` and can be readily used in non-Arduino embedded electronics projects. 
