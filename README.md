@@ -12,7 +12,7 @@ and lets your microcontroller do the whole job in one run based on a single para
 The map string is a C-style (null-terminated) string that must reflect the actual order of connections
 made between parallel outputs of your 74HC595 and segment control pins of your 7-segment display.
 
-The map string must consist of exactly 8 characters: @, A, B, C, D, E, F and G. Every character
+The map string must consist of exactly 8 ASCII characters: @, A, B, C, D, E, F and G. Every character
 corresponds to a single segment (@ stands for a dot). The first (leftmost) character in the map string
 corresponds to the 7th (most significant) bit of the IC's parallel output (Q7 output), the second
 character corresponds to the 6th bit (Q6 output), etc.

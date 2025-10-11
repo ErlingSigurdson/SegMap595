@@ -108,6 +108,7 @@ int32_t SegMap595Class::read_map_str()
             if (_map_str[j] == current_char) {
                 _bit_pos[i] = SEGMAP595_MSB - j;
                 ++bit_pos_set;
+                break;
             }
         }
     }
