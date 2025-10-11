@@ -191,12 +191,12 @@ class SegMap595Class {
          * Returns: 0 if the passed map string is valid and the characters are successfully mapped,
          * negative integer otherwise (see preprocessor macros list for possible values).
          *
-         * If the second parameter evaluates to false, common cathode display is assumed.
-         * Otherwise common anode display is assumed.
+         * If the second parameter equals zero, a common cathode display is assumed.
+         * Otherwise a common anode display is assumed.
          *
          * Multiple calls for this method are valid, each call will lead to a fresh character mapping.
          */
-        int32_t  init(const char *map_str, bool display_common_pin);
+        int32_t  init(const char *map_str, int32_t display_common_pin);
 
         /* Get the mapping status (whether the passed map string was valid and the characters were successfully mapped).
          * Returns: 0 if the passed map string was valid and the characters were successfully mapped,

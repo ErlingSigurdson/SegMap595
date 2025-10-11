@@ -37,7 +37,7 @@ SegMap595Class::SegMap595Class()
 
 /*--- Methods ---*/
 
-int32_t SegMap595Class::init(const char *map_str, bool display_common_pin)
+int32_t SegMap595Class::init(const char *map_str, int32_t display_common_pin)
 {
     _status = check_map_str(map_str);
 
