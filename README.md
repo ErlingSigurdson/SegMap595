@@ -46,11 +46,7 @@ if necessary (get_dot_bit_pos method can be helpful).
 
 
 
-### Compatibility
+## Compatibility
 
-The library is primarily intended and formatted for use with Arduino framework, but it doesn't include `Arduino.h`
-and can be readily used in non-Arduino embedded electronics projects. 
-
-
-
-
+The library is primarily intended and documented for use with Arduino framework, but it doesn't
+include `Arduino.h` and can be readily used in non-Arduino embedded electronics projects. 
