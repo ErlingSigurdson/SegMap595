@@ -19,16 +19,16 @@ corresponds to a single segment (@ stands for a dot). The first (leftmost) chara
 corresponds to the 7th (most significant) bit of the IC's parallel output (Q7 output), the second
 character corresponds to the 6th bit (Q6 output), etc.
 
-Uppercase characters may be substituted for their lowercase counterparts. Any other characters are invalid.
+Uppercase characters may be replaced with their lowercase counterparts. Any other characters are invalid.
 Duplicating characters in the map string is invalid.
 
 ```cpp
-#define MAP_STR "ED@CGAFB"  // Valid map string example.
-#define MAP_STR "ed@cgafb"  // Also valid.
-#define MAP_STR "Ed@CgAfB"  // Still valid.
-#define MAP_STR "ED@CGAF"   // Invalid: map string is too short.
-#define MAP_STR "ED@CGAFM"  // Invalid: illegal character 'M'.
-#define MAP_STR "ED@CGAFE"  // Invalid: duplicated character 'E'.
+#define MAP_STR "ED@CGAFB"    // Valid map string example.
+//#define MAP_STR "ed@cgafb"  // Also valid.
+//#define MAP_STR "Ed@CgAfB"  // Still valid.
+//#define MAP_STR "ED@CGAF"   // Invalid: map string is too short.
+//#define MAP_STR "ED@CGAFM"  // Invalid: illegal character 'M'.
+//#define MAP_STR "ED@CGAFE"  // Invalid: duplicated character 'E'.
 ```
 
 ## Mapped characters
@@ -64,7 +64,7 @@ if (mapping_status < 0) {
 }
 ```
 
-Get necessary mapped character:
+Get a mapped character:
 ```cpp
 uint8_t mapped_character = SegMap595.get_mapped_character(counter);           // Get by incremented index.
 uint8_t mapped_character = SegMap595.get_mapped_character(SEGMAP595_CHAR_A);  // Get by a macro index name.
@@ -89,5 +89,5 @@ Refer to `SegMap595.h` for the full description of return values if necessary.
 
 ## Compatibility
 
-The library is primarily intended and documented for use with Arduino framework, but it doesn't
+The library is primarily intended and documented for use with the Arduino framework, but it doesn't
 include `Arduino.h` and can be readily used in non-Arduino embedded electronics projects. 
