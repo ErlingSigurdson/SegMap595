@@ -32,9 +32,9 @@
 
 #define BAUD_RATE 115200
 
-#define DATA_PIN  6
-#define LATCH_PIN 7
-#define CLOCK_PIN 8
+#define DATA_PIN  16
+#define LATCH_PIN 17
+#define CLOCK_PIN 18
 
 // Specify your display type. Use one directive, comment out or delete the other.
 #define DISPLAY_TYPE_COMMON_CATHODE
