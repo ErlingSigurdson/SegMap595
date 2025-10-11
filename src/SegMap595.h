@@ -6,7 +6,7 @@
  * Purpose:  A class for mapping the outputs of a 74HC595 IC
  *           to the segments of a 7-segment display.
  * ----------------------------------------------------------------------------|---------------------------------------|
- * Notes:    The init method takes a single argument - a map string, that is,
+ * Notes:    The init() method's first parameter is a map string, that is,
  *           a C-style (null-terminated) string that must reflect the actual
  *           (physical) order of connections made between parallel outputs
  *           of a 74HC595 and segment control pins of a 7-segment display.
