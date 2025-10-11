@@ -5,9 +5,10 @@ for mapping the outputs of a **74HC595 IC** to the segments of a **7-segment dis
 
 ## Concept
 
-Usually, outputting characters to a 7-segment display involves forming all corresponding bytes
+Usually, outputting characters (glyphs) to a 7-segment display involves forming all corresponding bytes
 (sometimes called "bit masks") in advance and hard-coding them. This library automates the task
-and lets your microcontroller do the whole job in one go based on a single parameter: the map string.
+and lets your microcontroller do the whole job in one go based on just two parameters: a map string
+and a display type (either common cathode or common anode).
 
 ## Map string
 
