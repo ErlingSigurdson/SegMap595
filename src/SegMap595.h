@@ -20,7 +20,7 @@
  *
  *           Uppercase characters may be substituted for their lowercase
  *           counterparts. Any other characters are invalid. Duplicating
- *           characters in the map string leads to an error.
+ *           characters in the map string is invalid.
  *
  *           If the map string is valid, mapped characters (custom formed bytes
  *           which correspond to symbols to be output on a 7-segment display)
@@ -99,7 +99,7 @@
 #define SEGMAP595_MAP_ALPHABETICAL_K 0b01010111  // Barely resembles actual 'K', but still usable.
 #define SEGMAP595_MAP_ALPHABETICAL_L 0b00001110
 #define SEGMAP595_MAP_ALPHABETICAL_N 0b00010101
-#define SEGMAP595_MAP_ALPHABETICAL_O 0b00011101
+#define SEGMAP595_MAP_ALPHABETICAL_O 0b00011101  // Stylized as lowercase to distinguish from zero.
 #define SEGMAP595_MAP_ALPHABETICAL_P 0b01100111
 #define SEGMAP595_MAP_ALPHABETICAL_Q 0b01110011
 #define SEGMAP595_MAP_ALPHABETICAL_R 0b00000101
