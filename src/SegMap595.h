@@ -254,7 +254,7 @@ class SegMap595Class {
         uint8_t  _mapped_characters[SEGMAP595_CHAR_NUM] = {0};
 
         // Array of values that indicate the respective bit position number for every display segment.
-        uint32_t _bit_pos[SEGMAP595_SEG_NUM] = {0};
+        uint32_t _bit_pos[SEGMAP595_SEG_NUM] = {0xFFFFFFFF};  // Initial values, intentionally invalid.
 
 
         /*--- Methods ---*/
