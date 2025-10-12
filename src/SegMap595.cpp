@@ -18,7 +18,11 @@
 #include "SegMap595.h"
 
 // Relevant standard libraries.
-#include <cstring>
+#if defined ARDUINO_ARCH_AVR
+    #include <string.h>
+#else
+    #include <cstring>
+#endif
 
 
 /*************** GLOBAL VARIABLES ***************/

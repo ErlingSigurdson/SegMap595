@@ -47,7 +47,11 @@
 /*--- Includes ---*/
 
 // Relevant standard libraries.
-#include <cstdint>
+#if defined ARDUINO_ARCH_AVR
+    #include <stdint.h>
+#else
+    #include <cstdint>
+#endif
 
 
 /*--- Misc ---*/
