@@ -27,6 +27,10 @@
  */
 #define MAP_STR "ED@CGAFB"
 
+// Specify your display type. Use one directive, comment out or delete the other.
+#define DISPLAY_TYPE_COMMON_CATHODE
+//#define DISPLAY_TYPE_COMMON_ANODE
+
 
 /*--- Misc ---*/
 
@@ -37,10 +41,6 @@
 #define DATA_PIN  16
 #define LATCH_PIN 17
 #define CLOCK_PIN 18
-
-// Specify your display type. Use one directive, comment out or delete the other.
-#define DISPLAY_TYPE_COMMON_CATHODE
-//#define DISPLAY_TYPE_COMMON_ANODE
 
 #define INTERVAL 1000
 
