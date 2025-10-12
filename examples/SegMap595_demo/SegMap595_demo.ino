@@ -42,7 +42,7 @@
 #define LATCH_PIN 17
 #define CLOCK_PIN 18
 
-#define INTERVAL 1000
+#define INTERVAL  1000
 
 
 /******************* FUNCTIONS ******************/
