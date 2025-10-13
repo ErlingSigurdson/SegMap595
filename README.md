@@ -7,7 +7,7 @@ for mapping the outputs of a **74HC595 IC** to the segments of a **7-segment dis
 
 Usually, outputting characters (glyphs) to a 7-segment display involves forming all corresponding bytes
 (sometimes called "bit masks") in advance and hard-coding them. This library automates the task
-and lets your microcontroller do the whole job in one go based on just two parameters: a map string
+and lets your microcontroller do the whole job in one go based on just two parameters: a **map string**
 and a display type (either common cathode or common anode).
 
 ## Map string
@@ -46,7 +46,7 @@ Include the library:
 //#include "SegMap595.h"  // Generic embedded programming style.
 ```
 
-"Load" the map string into an object using init() method:
+"Load" the map string into an object using init() method and specify a display type:
 ```cpp
 SegMap595.init(MAP_STR, SEGMAP595_COMMON_CATHODE);  // If using common cathode display.
 //SegMap595.init(MAP_STR, SEGMAP595_COMMON_ANODE);  // If using common anode display.
@@ -67,7 +67,7 @@ if (mapping_status < 0) {
 
 Get a mapped character:
 ```cpp
-uint8_t mapped_character = SegMap595.get_mapped_character(counter);             // Get by an incremented index.
+uint8_t mapped_character = SegMap595.get_mapped_character(counter);             // Get by an incremental index.
 //uint8_t mapped_character = SegMap595.get_mapped_character(SEGMAP595_CHAR_A);  // Get by an index macro name.
 //uint8_t mapped_character = SegMap595.get_mapped_character('A');               // Get by character (case insensitive).
 ```
