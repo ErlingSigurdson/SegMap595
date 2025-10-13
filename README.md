@@ -38,6 +38,9 @@ If the map string is valid, mapped characters (custom formed bytes that correspo
 on a 7-segment display) will be placed in a member array in the ascending order: from 0 to 9, from A to Z,
 special symbols in the end.
 
+Some resulting symbols resemble their actual prototypes, some are rather sketchy (like G, K, T and X),
+others are outright arbitrary (like M, V and W).
+
 ## API usage
 
 Include the library:
