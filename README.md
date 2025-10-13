@@ -36,7 +36,7 @@ Duplicating characters in the map string is invalid.
 
 If the map string is valid, mapped characters (custom formed bytes that correspond to symbols to be output
 on a 7-segment display) will be placed in a member array in the ascending order: from 0 to 9, from A to Z,
-dash and underscore on top. Undisplayable symbols ('M', 'V', 'W', 'X') are omitted.
+special symbols in the end.
 
 ## API usage
 

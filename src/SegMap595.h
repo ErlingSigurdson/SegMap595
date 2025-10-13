@@ -25,9 +25,9 @@
  *           If the map string is valid, mapped characters (custom formed bytes
  *           that correspond to symbols to be output on a 7-segment display)
  *           will be placed in a member array in the ascending order:
- *           from 0 to 9, from A to Z, dash and underscore on top. Undisplayable
- *           symbols ('M', 'V', 'W', 'X') are omitted. The mapped characters
- *           can then be retrieved using get_mapped_character() method.
+ *           from 0 to 9, from A to Z, special symbols in the end. The mapped
+ *           characters can then be retrieved using get_mapped_character()
+ *           method.
  *
  *           The dot bit will be in an "off" state (cleared for a common cathode
  *           display, set for a common anode display) in all mapped characters,
@@ -60,7 +60,7 @@
 /*--- Misc ---*/
 
 #define SEGMAP595_SEG_NUM           8     // Including a dot segment.
-#define SEGMAP595_CHAR_NUM          34
+#define SEGMAP595_CHAR_NUM          39
 
 #define SEGMAP595_MSB               7
 #define SEGMAP595_ONLY_MSB_SET      (1u << SEGMAP595_MSB)
