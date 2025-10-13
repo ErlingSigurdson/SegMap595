@@ -98,7 +98,7 @@ void loop()
         if (counter % 2) {
             static uint32_t dot_bit_pos = SegMap595.get_dot_bit_pos();
             uint8_t mask = static_cast<uint8_t>(1u << dot_bit_pos);
-            byte_to_shift ^= mask; 
+            byte_to_shift ^= mask;
         }
 
         // Output mapped character.
