@@ -18,6 +18,8 @@
 
 /*--- Macros/constants related to characters to be mapped ---*/
 
+#define SEGMAP595_CHAR_NUM 40
+
 /* Bytes formed as if the map string is "@ABCDEFG" (@ is for a dot).
  * In reality the map string is highly unlikely to be like that,
  * and alphabetically mapped bytes are just a set of default
@@ -61,45 +63,47 @@
 #define SEGMAP595_MAP_ALPHABETICAL_Z          0b01101101
 #define SEGMAP595_MAP_ALPHABETICAL_DASH       0b00000001
 #define SEGMAP595_MAP_ALPHABETICAL_EQUAL      0b00001001
+#define SEGMAP595_MAP_ALPHABETICAL_DEGREE     0b01100011
 #define SEGMAP595_MAP_ALPHABETICAL_UNDERSCORE 0b00001000
-#define SEGMAP595_MAP_ALPHABETICAL_ALL SEGMAP595_MAP_ALPHABETICAL_0,     \
-                                       SEGMAP595_MAP_ALPHABETICAL_1,     \
-                                       SEGMAP595_MAP_ALPHABETICAL_2,     \
-                                       SEGMAP595_MAP_ALPHABETICAL_3,     \
-                                       SEGMAP595_MAP_ALPHABETICAL_4,     \
-                                       SEGMAP595_MAP_ALPHABETICAL_5,     \
-                                       SEGMAP595_MAP_ALPHABETICAL_6,     \
-                                       SEGMAP595_MAP_ALPHABETICAL_7,     \
-                                       SEGMAP595_MAP_ALPHABETICAL_8,     \
-                                       SEGMAP595_MAP_ALPHABETICAL_9,     \
-                                       SEGMAP595_MAP_ALPHABETICAL_A,     \
-                                       SEGMAP595_MAP_ALPHABETICAL_B,     \
-                                       SEGMAP595_MAP_ALPHABETICAL_C,     \
-                                       SEGMAP595_MAP_ALPHABETICAL_D,     \
-                                       SEGMAP595_MAP_ALPHABETICAL_E,     \
-                                       SEGMAP595_MAP_ALPHABETICAL_F,     \
-                                       SEGMAP595_MAP_ALPHABETICAL_G,     \
-                                       SEGMAP595_MAP_ALPHABETICAL_H,     \
-                                       SEGMAP595_MAP_ALPHABETICAL_I,     \
-                                       SEGMAP595_MAP_ALPHABETICAL_J,     \
-                                       SEGMAP595_MAP_ALPHABETICAL_K,     \
-                                       SEGMAP595_MAP_ALPHABETICAL_L,     \
-                                       SEGMAP595_MAP_ALPHABETICAL_M,     \
-                                       SEGMAP595_MAP_ALPHABETICAL_N,     \
-                                       SEGMAP595_MAP_ALPHABETICAL_O,     \
-                                       SEGMAP595_MAP_ALPHABETICAL_P,     \
-                                       SEGMAP595_MAP_ALPHABETICAL_Q,     \
-                                       SEGMAP595_MAP_ALPHABETICAL_R,     \
-                                       SEGMAP595_MAP_ALPHABETICAL_S,     \
-                                       SEGMAP595_MAP_ALPHABETICAL_T,     \
-                                       SEGMAP595_MAP_ALPHABETICAL_U,     \
-                                       SEGMAP595_MAP_ALPHABETICAL_V,     \
-                                       SEGMAP595_MAP_ALPHABETICAL_W,     \
-                                       SEGMAP595_MAP_ALPHABETICAL_X,     \
-                                       SEGMAP595_MAP_ALPHABETICAL_Y,     \
-                                       SEGMAP595_MAP_ALPHABETICAL_Z,     \
-                                       SEGMAP595_MAP_ALPHABETICAL_DASH,  \
-                                       SEGMAP595_MAP_ALPHABETICAL_EQUAL, \
+#define SEGMAP595_MAP_ALPHABETICAL_ALL SEGMAP595_MAP_ALPHABETICAL_0,      \
+                                       SEGMAP595_MAP_ALPHABETICAL_1,      \
+                                       SEGMAP595_MAP_ALPHABETICAL_2,      \
+                                       SEGMAP595_MAP_ALPHABETICAL_3,      \
+                                       SEGMAP595_MAP_ALPHABETICAL_4,      \
+                                       SEGMAP595_MAP_ALPHABETICAL_5,      \
+                                       SEGMAP595_MAP_ALPHABETICAL_6,      \
+                                       SEGMAP595_MAP_ALPHABETICAL_7,      \
+                                       SEGMAP595_MAP_ALPHABETICAL_8,      \
+                                       SEGMAP595_MAP_ALPHABETICAL_9,      \
+                                       SEGMAP595_MAP_ALPHABETICAL_A,      \
+                                       SEGMAP595_MAP_ALPHABETICAL_B,      \
+                                       SEGMAP595_MAP_ALPHABETICAL_C,      \
+                                       SEGMAP595_MAP_ALPHABETICAL_D,      \
+                                       SEGMAP595_MAP_ALPHABETICAL_E,      \
+                                       SEGMAP595_MAP_ALPHABETICAL_F,      \
+                                       SEGMAP595_MAP_ALPHABETICAL_G,      \
+                                       SEGMAP595_MAP_ALPHABETICAL_H,      \
+                                       SEGMAP595_MAP_ALPHABETICAL_I,      \
+                                       SEGMAP595_MAP_ALPHABETICAL_J,      \
+                                       SEGMAP595_MAP_ALPHABETICAL_K,      \
+                                       SEGMAP595_MAP_ALPHABETICAL_L,      \
+                                       SEGMAP595_MAP_ALPHABETICAL_M,      \
+                                       SEGMAP595_MAP_ALPHABETICAL_N,      \
+                                       SEGMAP595_MAP_ALPHABETICAL_O,      \
+                                       SEGMAP595_MAP_ALPHABETICAL_P,      \
+                                       SEGMAP595_MAP_ALPHABETICAL_Q,      \
+                                       SEGMAP595_MAP_ALPHABETICAL_R,      \
+                                       SEGMAP595_MAP_ALPHABETICAL_S,      \
+                                       SEGMAP595_MAP_ALPHABETICAL_T,      \
+                                       SEGMAP595_MAP_ALPHABETICAL_U,      \
+                                       SEGMAP595_MAP_ALPHABETICAL_V,      \
+                                       SEGMAP595_MAP_ALPHABETICAL_W,      \
+                                       SEGMAP595_MAP_ALPHABETICAL_X,      \
+                                       SEGMAP595_MAP_ALPHABETICAL_Y,      \
+                                       SEGMAP595_MAP_ALPHABETICAL_Z,      \
+                                       SEGMAP595_MAP_ALPHABETICAL_DASH,   \
+                                       SEGMAP595_MAP_ALPHABETICAL_EQUAL,  \
+                                       SEGMAP595_MAP_ALPHABETICAL_DEGREE, \
                                        SEGMAP595_MAP_ALPHABETICAL_UNDERSCORE
 
 /* Handy index aliases for referring to the mapped characters
@@ -143,7 +147,8 @@
 #define SEGMAP595_INDEX_Z          35
 #define SEGMAP595_INDEX_DASH       36
 #define SEGMAP595_INDEX_EQUAL      37
-#define SEGMAP595_INDEX_UNDERSCORE 38
+#define SEGMAP595_INDEX_DEGREE     38
+#define SEGMAP595_INDEX_UNDERSCORE 39
 
 /* Some resulting symbols resemble their actual prototypes,
  * some are rather sketchy, others are outright arbitrary.
@@ -188,45 +193,47 @@
 #define SEGMAP595_CHAR_Z          'Z'  // Equivalent to '2'.
 #define SEGMAP595_CHAR_DASH       '-'
 #define SEGMAP595_CHAR_EQUAL      '='
+#define SEGMAP595_CHAR_DEGREE     '*'
 #define SEGMAP595_CHAR_UNDERSCORE '_'
-#define SEGMAP595_CHAR_ALL SEGMAP595_CHAR_0,     \
-                           SEGMAP595_CHAR_1,     \
-                           SEGMAP595_CHAR_2,     \
-                           SEGMAP595_CHAR_3,     \
-                           SEGMAP595_CHAR_4,     \
-                           SEGMAP595_CHAR_5,     \
-                           SEGMAP595_CHAR_6,     \
-                           SEGMAP595_CHAR_7,     \
-                           SEGMAP595_CHAR_8,     \
-                           SEGMAP595_CHAR_9,     \
-                           SEGMAP595_CHAR_A,     \
-                           SEGMAP595_CHAR_B,     \
-                           SEGMAP595_CHAR_C,     \
-                           SEGMAP595_CHAR_D,     \
-                           SEGMAP595_CHAR_E,     \
-                           SEGMAP595_CHAR_F,     \
-                           SEGMAP595_CHAR_G,     \
-                           SEGMAP595_CHAR_H,     \
-                           SEGMAP595_CHAR_I,     \
-                           SEGMAP595_CHAR_J,     \
-                           SEGMAP595_CHAR_K,     \
-                           SEGMAP595_CHAR_L,     \
-                           SEGMAP595_CHAR_M,     \
-                           SEGMAP595_CHAR_N,     \
-                           SEGMAP595_CHAR_O,     \
-                           SEGMAP595_CHAR_P,     \
-                           SEGMAP595_CHAR_Q,     \
-                           SEGMAP595_CHAR_R,     \
-                           SEGMAP595_CHAR_S,     \
-                           SEGMAP595_CHAR_T,     \
-                           SEGMAP595_CHAR_U,     \
-                           SEGMAP595_CHAR_V,     \
-                           SEGMAP595_CHAR_W,     \
-                           SEGMAP595_CHAR_X,     \
-                           SEGMAP595_CHAR_Y,     \
-                           SEGMAP595_CHAR_Z,     \
-                           SEGMAP595_CHAR_DASH,  \
-                           SEGMAP595_CHAR_EQUAL, \
+#define SEGMAP595_CHAR_ALL SEGMAP595_CHAR_0,      \
+                           SEGMAP595_CHAR_1,      \
+                           SEGMAP595_CHAR_2,      \
+                           SEGMAP595_CHAR_3,      \
+                           SEGMAP595_CHAR_4,      \
+                           SEGMAP595_CHAR_5,      \
+                           SEGMAP595_CHAR_6,      \
+                           SEGMAP595_CHAR_7,      \
+                           SEGMAP595_CHAR_8,      \
+                           SEGMAP595_CHAR_9,      \
+                           SEGMAP595_CHAR_A,      \
+                           SEGMAP595_CHAR_B,      \
+                           SEGMAP595_CHAR_C,      \
+                           SEGMAP595_CHAR_D,      \
+                           SEGMAP595_CHAR_E,      \
+                           SEGMAP595_CHAR_F,      \
+                           SEGMAP595_CHAR_G,      \
+                           SEGMAP595_CHAR_H,      \
+                           SEGMAP595_CHAR_I,      \
+                           SEGMAP595_CHAR_J,      \
+                           SEGMAP595_CHAR_K,      \
+                           SEGMAP595_CHAR_L,      \
+                           SEGMAP595_CHAR_M,      \
+                           SEGMAP595_CHAR_N,      \
+                           SEGMAP595_CHAR_O,      \
+                           SEGMAP595_CHAR_P,      \
+                           SEGMAP595_CHAR_Q,      \
+                           SEGMAP595_CHAR_R,      \
+                           SEGMAP595_CHAR_S,      \
+                           SEGMAP595_CHAR_T,      \
+                           SEGMAP595_CHAR_U,      \
+                           SEGMAP595_CHAR_V,      \
+                           SEGMAP595_CHAR_W,      \
+                           SEGMAP595_CHAR_X,      \
+                           SEGMAP595_CHAR_Y,      \
+                           SEGMAP595_CHAR_Z,      \
+                           SEGMAP595_CHAR_DASH,   \
+                           SEGMAP595_CHAR_EQUAL,  \
+                           SEGMAP595_CHAR_DEGREE, \
                            SEGMAP595_CHAR_UNDERSCORE
 
 

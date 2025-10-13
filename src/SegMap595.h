@@ -59,8 +59,7 @@
 
 /*--- Misc ---*/
 
-#define SEGMAP595_SEG_NUM           8     // Including a dot segment.
-#define SEGMAP595_CHAR_NUM          39
+#define SEGMAP595_SEG_NUM           8  // Including a dot segment.
 
 #define SEGMAP595_MSB               7
 #define SEGMAP595_ONLY_MSB_SET      (1u << SEGMAP595_MSB)
