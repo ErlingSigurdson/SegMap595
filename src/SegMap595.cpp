@@ -159,22 +159,31 @@ uint8_t SegMap595Class::get_mapped_character(uint32_t index)
     return _mapped_characters[index];
 }
 
-uint8_t SegMap595Class::get_mapped_character(char char_to_get)
+uint8_t SegMap595Class::get_mapped_character(unsigned char char_to_get)
 {
     if (_status < 0) {
         return 0;
     }
 
-    char valid_chars_uppercase[] = (SEGMAP595_CHAR_UPPERCASE_ALL);
-    char valid_chars_lowercase[] = (SEGMAP595_CHAR_LOWERCASE_ALL);
+    static constexpr unsigned char valid_chars[] = {SEGMAP595_CHAR_ALL};
+
+    constexpr int32_t ascii_code_diff = 'a' - 'A';
+    if (char_to_get >= 'a' && char_to_get <= 'z') {
+        char_to_get -= ascii_code_diff;
+    }
 
     for (size_t i = 0; i < SEGMAP595_CHAR_NUM; ++i) {
-        if (char_to_get == valid_chars_uppercase[i] || char_to_get == valid_chars_lowercase[i]) {
+        if (char_to_get == valid_chars[i]) {
             return _mapped_characters[i];
         }
     }
 
     return 0;
+}
+
+uint8_t SegMap595Class::get_mapped_character(char char_to_get)
+{
+    return get_mapped_character(static_cast<unsigned char>(char_to_get));
 }
 
 uint32_t SegMap595Class::get_dot_bit_pos()

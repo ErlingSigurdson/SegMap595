@@ -68,7 +68,8 @@ if (mapping_status < 0) {
 Get a mapped character:
 ```cpp
 uint8_t mapped_character = SegMap595.get_mapped_character(counter);             // Get by an incremented index.
-//uint8_t mapped_character = SegMap595.get_mapped_character(SEGMAP595_CHAR_A);  // Get by a macro index name.
+//uint8_t mapped_character = SegMap595.get_mapped_character(SEGMAP595_CHAR_A);  // Get by an index macro name.
+//uint8_t mapped_character = SegMap595.get_mapped_character('A');               // Get by character (case insensitive).
 ```
 
 If necessary, toggle the dot segment bit:

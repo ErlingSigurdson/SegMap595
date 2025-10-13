@@ -27,7 +27,7 @@
  *           will be placed in a member array in the ascending order:
  *           from 0 to 9, from A to Z, dash and underscore on top. Undisplayable
  *           symbols ('M', 'V', 'W', 'X') are omitted. The mapped characters
- *           can be then retrieved using get_mapped_character() method.
+ *           can then be retrieved using get_mapped_character() method.
  *
  *           The dot bit will be in an "off" state (cleared for a common cathode
  *           display, set for a common anode display) in all mapped characters,
@@ -118,6 +118,13 @@ class SegMap595Class {
          * the characters were successfully mapped and the character specified to be retrieved is valid,
          * zero otherwise.
          */
+        uint8_t  get_mapped_character(unsigned char char_to_get);
+
+        /* Get a mapped character (overload #3).
+         * Returns: a mapped character (custom formed byte) if the passed map string was valid,
+         * the characters were successfully mapped and the character specified to be retrieved is valid,
+         * zero otherwise.
+         */
         uint8_t  get_mapped_character(char char_to_get);
 
         /* Get the position of the bit that represents the dot segment.
@@ -136,8 +143,8 @@ class SegMap595Class {
     private:
         /*--- Variables ---*/
 
-        // Array of bytes formed as if the map string is "@ABCDEFG" (@ is for dot).
-        const uint8_t _mapped_alphabetical[SEGMAP595_CHAR_NUM] = {SEGMAP595_MAP_ALPHABETICAL_ALL_CHARS};
+        // Array of bytes formed as if the map string is "@ABCDEFG" (@ is for a dot).
+        const uint8_t _mapped_alphabetical[SEGMAP595_CHAR_NUM] = {SEGMAP595_MAP_ALPHABETICAL_ALL};
 
         // Internal buffer.
         char     _map_str[SEGMAP595_SEG_NUM + 1] = {0};
