@@ -77,7 +77,7 @@ Get a mapped character:
 uint8_t mapped_character = SegMap595.get_mapped_character(counter);
 
 // Get by an index macro name.
-//uint8_t mapped_character = SegMap595.get_mapped_character(SEGMAP595_CHAR_A);
+//uint8_t mapped_character = SegMap595.get_mapped_character(SEGMAP595_INDEX_A);
 
 // Get by character (case insensitive).
 //uint8_t mapped_character = SegMap595.get_mapped_character('A');
