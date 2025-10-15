@@ -47,7 +47,8 @@
 /*--- Includes ---*/
 
 //Macros/constants related to characters to be mapped.
-#include "SegMap595Characters.h"
+#include "SegMap595GlyphsSet1.h"
+#include "SegMap595GlyphsSet2.h"
 
 // Relevant standard libraries.
 #if defined ARDUINO_ARCH_AVR
@@ -97,7 +98,7 @@ class SegMap595Class {
          *
          * Multiple calls for this method are valid, each call will lead to a fresh character mapping.
          */
-        int32_t  init(const char *map_str, int32_t display_common_pin);
+        int32_t  init(const char *map_str, int32_t display_common_pin, uint32_t chosen_glyph_set);
 
         /* Get the mapping status (whether the passed map string was valid and the characters were successfully mapped).
          * Returns: 0 if the passed map string was valid and the characters were successfully mapped,
@@ -142,8 +143,13 @@ class SegMap595Class {
     private:
         /*--- Variables ---*/
 
-        // Array of bytes formed as if the map string is "@ABCDEFG" (@ is for a dot).
-        const uint8_t _mapped_alphabetical[SEGMAP595_CHAR_NUM] = {SEGMAP595_MAP_ALPHABETICAL_ALL};
+        // Array of bytes formed as if the map string is "@ABCDEFG" (@ is for a dot), set 1.
+        const uint8_t _mapped_alphabetical_set_1[] = {SEGMAP595_GLYPH_SET_1_MAP_ALPHABETICAL_ALL};
+
+        // Array of bytes formed as if the map string is "@ABCDEFG" (@ is for a dot), set 2.
+        const uint8_t _mapped_alphabetical_set_2[] = {SEGMAP595_GLYPH_SET_2_MAP_ALPHABETICAL_ALL};
+
+        uint8_t  _mapped_alphabetical_ptr_chosen = nullptr;
 
         // Internal buffer.
         char     _map_str[SEGMAP595_SEG_NUM + 1] = {0};

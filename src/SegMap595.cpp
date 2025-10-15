@@ -55,6 +55,8 @@ int32_t SegMap595Class::init(const char *map_str, int32_t display_common_pin)
         return _status;
     }
 
+    _
+
     map_characters(display_common_pin);
     
     return _status;
