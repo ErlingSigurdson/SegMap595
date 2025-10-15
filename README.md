@@ -41,7 +41,7 @@ special symbols in the end.
 Some resulting symbols resemble their actual prototypes, some are rather sketchy (like G, K, T and X),
 others are outright arbitrary (like M, V and W).
 
-![Glyphs](assets/glyphs.jpg)
+![Glyphs](assets/glyph_set_1.jpg)
 
 
 ## API usage
