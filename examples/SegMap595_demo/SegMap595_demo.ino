@@ -1,7 +1,7 @@
 /*************** FILE DESCRIPTION ***************/
 
 /**
- * Filename: SegMap595Demo.ino
+ * Filename: SegMap595_demo.ino
  * ----------------------------------------------------------------------------|---------------------------------------|
  * Purpose:  An example sketch demonstrating a basic usage of the SegMap595
  *           library.
