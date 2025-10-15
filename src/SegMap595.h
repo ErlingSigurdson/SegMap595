@@ -143,10 +143,14 @@ class SegMap595Class {
     private:
         /*--- Variables ---*/
 
-        // Array of bytes formed as if the map string is "@ABCDEFG" (@ is for a dot), set 1.
+        /* Array of bytes formed as if the map string is "@ABCDEFG" (@ is for a dot)
+         * Set #1.
+         */
         const uint8_t _mapped_alphabetical_set_1[] = {SEGMAP595_GLYPH_SET_1_MAP_ALPHABETICAL_ALL};
 
-        // Array of bytes formed as if the map string is "@ABCDEFG" (@ is for a dot), set 2.
+        /* Same as previous variable, but for another set of bytes.
+         * Set #2.
+         */
         const uint8_t _mapped_alphabetical_set_2[] = {SEGMAP595_GLYPH_SET_2_MAP_ALPHABETICAL_ALL};
 
         uint8_t  _mapped_alphabetical_ptr_chosen = nullptr;

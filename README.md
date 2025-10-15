@@ -5,10 +5,22 @@ for mapping the outputs of a **74HC595 IC** to the segments of a **7-segment dis
 
 ## Concept
 
-Usually, outputting characters (glyphs, symbols) to a 7-segment display involves forming all corresponding bytes
-(sometimes called "bit masks" or patterns) in advance and hard-coding them. This library automates
-the task and lets your microcontroller do the whole job in one go based on just two parameters:
-a **map string** and a display type (either common cathode or common anode).
+Typically, outputting a glyph (a character representation) to a 7-segment display involves custom-forming a byte
+whose combination of bit states (set or cleared) corresponds to a pattern in which the segments must be turned
+ON or OFF to form a recognizable symbol. Finding the proper correspondence between the bit states and the segment
+pattern is called **mapping**.
+
+74HC595, sometimes simply called **595**, is a widely used 8-bit serial-in, parallel-out (SIPO) shift register
+integrated circuit (IC) commonly employed to drive 7-segment displays.
+
+The **mapped bytes** (sometimes called **bit masks**) can be formed in advance and hard-coded into a program
+run by a microcontroller unit (MCU) or a similar device that drives a display. Although it may be perfectly
+acceptable, it may become troublesome if the program needs to be adapted to a circuit with a different wiring
+order between the device's outputs and the display's control pins. This library automates the task and lets
+your device do the whole job in one go based on three parameters:
+* **map string**
+* display type (either common cathode or common anode)
+* glyph set number (optional).
 
 ## Map string
 
@@ -32,17 +44,31 @@ Duplicating characters in the map string is invalid.
 //#define MAP_STR "ED@CGAFE"  // Invalid: duplicated character 'E'.
 ```
 
-## Mapped characters
+## Mapped bytes
 
-If the map string is valid, mapped characters (custom formed bytes that correspond to symbols to be output
-on a 7-segment display) will be placed in a member array in the ascending order: from 0 to 9, from A to Z,
-special symbols in the end.
+If the map string is valid, mapped bytes will be placed in a member array in the ascending order of characters
+they represent: from 0 to 9, from A to Z, non-alphanumerics in the end.
 
-Some resulting symbols resemble their actual prototypes, some are rather sketchy (like G, K, T and X),
-others are outright arbitrary (like M, V and W).
+By default, the dot bit will be in an OFF state (cleared for a common cathode display, set for a common anode display)
+in all mapped bytes, therefore you will have to manipulate this bit in your code as necessary. The dot bit position
+within a byte is indicated by a return value of `get_dot_bit_pos()` method.
+
+Glyphs are not standardized globally. Some of them do resemble their actual prototypes, some are rather sketchy
+(like G, K, X and Z), others are outright arbitrary (like M, V and W).
+
+This library offers two glyph sets:
+
+### Set #1 (used by default)
+
+This set includes all English letters, although some of them are represented by arbitrary glyphs:
 
 ![Glyphs](assets/glyph_set_1.jpg)
 
+### Set #2
+
+This set avoids arbitrary glyphs, but lacks letters M, V, W and X.
+
+![Glyphs](assets/glyph_set_2.jpg)
 
 ## API usage
 
@@ -52,11 +78,12 @@ Include the library:
 //#include "SegMap595.h"  // Generic embedded programming style.
 ```
 
-"Load" the map string into an object using init() method and specify a display type:
+"Load" the map string into an object using init() method, specify a display type and pick a glyph set:
 ```cpp
-SegMap595.init(MAP_STR, SEGMAP595_COMMON_CATHODE);  // If using common cathode display.
-//SegMap595.init(MAP_STR, SEGMAP595_COMMON_ANODE);  // If using common anode display.
+SegMap595.init(MAP_STR, SEGMAP595_COMMON_CATHODE, SEGMAP595_GLYPH_SET_1);  // If using common cathode display.
+//SegMap595.init(MAP_STR, SEGMAP595_COMMON_ANODE, SEGMAP595_GLYPH_SET_2);  // If using common anode display.
 ```
+If the third parameter is omitted, glyph set #1 will be used.
 
 Check the mapping status (optional):
 ```cpp
@@ -64,26 +91,26 @@ static int32_t mapping_status = SegMap595.get_status();
 // Loop error output if mapping was unsuccessful.
 if (mapping_status < 0) {
     while(true) {
-        Serial.print("Character mapping failed, error code: ");
+        Serial.print("Byte mapping failed, error code: ");
         Serial.println(mapping_status);
         delay(INTERVAL);
     }
 }
 ```
 
-Get a mapped character:
+Get a mapped byte:
 ```cpp
 // Get by an incremental index.
-uint8_t mapped_character = SegMap595.get_mapped_character(counter);
+uint8_t mapped_byte = SegMap595.get_mapped_byte(counter);
 
 // Get by an index macro name.
-//uint8_t mapped_character = SegMap595.get_mapped_character(SEGMAP595_INDEX_A);
+//uint8_t mapped_byte = SegMap595.get_mapped_byte(SEGMAP595_INDEX_A);
 
-// Get by character (case insensitive).
-//uint8_t mapped_character = SegMap595.get_mapped_character('A');
+// Get by a represented character (case insensitive).
+//uint8_t mapped_byte = SegMap595.get_mapped_byte('A');
 
-// Get by character, special case of degree symbol.
-//uint8_t mapped_character = SegMap595.get_mapped_character('*');
+// Get by a represented character (degree symbol as a special case).
+//uint8_t mapped_byte = SegMap595.get_mapped_byte('*');
 ```
 
 If necessary, toggle the dot segment bit:
@@ -92,7 +119,7 @@ If necessary, toggle the dot segment bit:
 if (counter % 2) {
     static uint32_t dot_bit_pos = SegMap595.get_dot_bit_pos();
     uint8_t mask = static_cast<uint8_t>(1u << dot_bit_pos);
-    mapped_character ^= mask;
+    mapped_byte ^= mask;
 }
 ```
 
