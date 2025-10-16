@@ -41,7 +41,7 @@ SegMap595Class::SegMap595Class()
 
 /*--- Methods ---*/
 
-int32_t SegMap595Class::init(const char *map_str, int32_t display_common_pin)
+int32_t SegMap595Class::init(const char *map_str, int32_t display_common_pin, uint32_t chosen_glyph_set_number)
 {
     _status = check_map_str(map_str);
 
@@ -152,7 +152,7 @@ int32_t SegMap595Class::get_status()
     return _status;
 }
 
-uint8_t SegMap595Class::get_mapped_character(uint32_t index)
+uint8_t SegMap595Class::get_mapped_byte(uint32_t index)
 {
     if (_status < 0 || index >= SEGMAP595_CHAR_NUM) {
         return 0;
@@ -161,7 +161,7 @@ uint8_t SegMap595Class::get_mapped_character(uint32_t index)
     return _mapped_characters[index];
 }
 
-uint8_t SegMap595Class::get_mapped_character(unsigned char char_to_get)
+uint8_t SegMap595Class::get_mapped_byte(unsigned char char_represented)
 {
     if (_status < 0) {
         return 0;
@@ -170,12 +170,12 @@ uint8_t SegMap595Class::get_mapped_character(unsigned char char_to_get)
     static constexpr unsigned char valid_chars[] = {SEGMAP595_CHAR_ALL};
 
     constexpr int32_t ascii_code_diff = 'a' - 'A';
-    if (char_to_get >= 'a' && char_to_get <= 'z') {
-        char_to_get -= ascii_code_diff;
+    if (char_represented >= 'a' && char_represented <= 'z') {
+        char_represented -= ascii_code_diff;
     }
 
     for (size_t i = 0; i < SEGMAP595_CHAR_NUM; ++i) {
-        if (char_to_get == valid_chars[i]) {
+        if (char_represented == valid_chars[i]) {
             return _mapped_characters[i];
         }
     }
@@ -183,9 +183,9 @@ uint8_t SegMap595Class::get_mapped_character(unsigned char char_to_get)
     return 0;
 }
 
-uint8_t SegMap595Class::get_mapped_character(char char_to_get)
+uint8_t SegMap595Class::get_mapped_byte(char char_represented)
 {
-    return get_mapped_character(static_cast<unsigned char>(char_to_get));
+    return get_mapped_byte(static_cast<unsigned char>(char_represented));
 }
 
 uint32_t SegMap595Class::get_dot_bit_pos()
