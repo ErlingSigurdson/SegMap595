@@ -54,7 +54,7 @@ in all mapped bytes, therefore you will have to manipulate this bit in your code
 within a byte is indicated by a return value of `get_dot_bit_pos()` method.
 
 Glyphs are not standardized globally. Some of them do resemble their actual prototypes, some are rather sketchy
-(like G, K, X and Z), others are outright arbitrary (like M, V and W).
+(like G, K, T, V, X and Z), others are outright arbitrary (like M and W).
 
 This library offers two glyph sets:
 
@@ -78,7 +78,7 @@ Include the library:
 //#include "SegMap595.h"  // Generic embedded programming style.
 ```
 
-"Load" the map string into an object using init() method, specify a display type and pick a glyph set:
+"Load" the map string into an object using init() method, specify a display type and choose a glyph set:
 ```cpp
 SegMap595.init(MAP_STR, SEGMAP595_COMMON_CATHODE, SEGMAP595_GLYPH_SET_1);  // If using common cathode display.
 //SegMap595.init(MAP_STR, SEGMAP595_COMMON_ANODE, SEGMAP595_GLYPH_SET_2);  // If using common anode display.
