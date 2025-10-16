@@ -78,7 +78,7 @@ Include the library:
 //#include "SegMap595.h"  // Generic embedded programming style.
 ```
 
-"Load" the map string into an object using init() method, specify a display type and choose a glyph set:
+"Load" the map string into an object, specify a display type and (optionally) choose a glyph set:
 ```cpp
 SegMap595.init(MAP_STR, SEGMAP595_COMMON_CATHODE, SEGMAP595_GLYPH_SET_1);  // If using common cathode display.
 //SegMap595.init(MAP_STR, SEGMAP595_COMMON_ANODE, SEGMAP595_GLYPH_SET_2);  // If using common anode display.
