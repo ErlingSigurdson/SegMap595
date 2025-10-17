@@ -53,8 +53,8 @@ By default, the dot bit will be in an OFF state (cleared for a common cathode di
 in all mapped bytes, therefore you will have to manipulate this bit in your code as necessary. The dot bit position
 within a byte is indicated by a return value of `get_dot_bit_pos()` method, as shown below.
 
-Glyphs are not standardized globally. Some of them do resemble their actual prototypes, some are rather sketchy
-(like G, K, T, V, X and Z), others are outright arbitrary (like M and W).
+Glyphs are not standardized globally. Some of them do resemble their actual prototype characters,
+some are rather sketchy (like G, K, T, V, X and Z), others are outright arbitrary (like M and W).
 
 This library offers two glyph sets:
 
