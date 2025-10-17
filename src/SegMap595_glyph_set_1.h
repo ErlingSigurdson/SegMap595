@@ -188,7 +188,7 @@
 #define SEGMAP595_GLYPH_SET_1_CHAR_J          'J'
 #define SEGMAP595_GLYPH_SET_1_CHAR_K          'K'
 #define SEGMAP595_GLYPH_SET_1_CHAR_L          'L'
-#define SEGMAP595_GLYPH_SET_1_CHAR_M          'M'.
+#define SEGMAP595_GLYPH_SET_1_CHAR_M          'M'
 #define SEGMAP595_GLYPH_SET_1_CHAR_N          'N'
 #define SEGMAP595_GLYPH_SET_1_CHAR_O          'O'
 #define SEGMAP595_GLYPH_SET_1_CHAR_P          'P'

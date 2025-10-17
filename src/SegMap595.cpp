@@ -41,9 +41,9 @@ SegMap595Class::SegMap595Class()
 
 /*--- Methods ---*/
 
-int32_t SegMap595Class::init(const char *map_str, int32_t display_common_pin, uint32_t chosen_glyph_set_number)
+int32_t SegMap595Class::init(const char *map_str, int32_t display_common_pin, uint32_t glyph_set_chosen)
 {
-    _status = check_map_str(map_str);
+    _status = check_map_str(map_str);  // Inside this function the map string is copied into the member buffer.
 
     if (_status < 0) {
         return _status;
@@ -55,10 +55,20 @@ int32_t SegMap595Class::init(const char *map_str, int32_t display_common_pin, ui
         return _status;
     }
 
-    _
+    _status = choose_glyph_set(glyph_set_chosen);  /* Inside this function the number of the chosen glyph set
+                                                    * is copied into the private member variable.
+                                                    *
+                                                    * Default parameter value for this function is 1.
+                                                    */
+          
+    if (_status < 0) {
+        return _status;
+    }
 
-    map_characters(display_common_pin);
-    
+    map_bytes(display_common_pin);  /* Inside this function the number that defines the display type
+                                          * is copied into the private member variable.
+                                          */
+
     return _status;
 }
 
@@ -127,22 +137,51 @@ int32_t SegMap595Class::read_map_str()
     }
 }
 
-void SegMap595Class::map_characters(int32_t display_common_pin)
+int32_t SegMap595Class::choose_glyph_set(uint32_t glyph_set_chosen)
 {
-    for (size_t i = 0; i < SEGMAP595_CHAR_NUM; ++i) {
+    if (glyph_set_chosen < 1 || glyph_set_chosen > SEGMAP595_GLYPH_SETS_PROVIDED) {
+        return _status = SEGMAP595_STATUS_ERR_GLYPH_SET_NUMBER;
+    }
+    _glyph_set_chosen = glyph_set_chosen;
+
+    switch (_glyph_set_chosen) {
+        case SEGMAP595_GLYPH_SET_1:
+            _glyph_set_chosen_char_num = _glyph_set_1_char_num;
+            _glyph_set_chosen_mapped_alphabetically = _glyph_set_1_mapped_alphabetically;
+            _glyph_set_chosen_valid_chars = _glyph_set_1_valid_chars;
+            break;
+
+        case SEGMAP595_GLYPH_SET_2:
+            _glyph_set_chosen_char_num = _glyph_set_2_char_num;
+            _glyph_set_chosen_mapped_alphabetically = _glyph_set_2_mapped_alphabetically;
+            _glyph_set_chosen_valid_chars = _glyph_set_2_valid_chars;
+            break;
+
+        default:
+            break;  // Do nothing and hail MISRA.
+    }
+
+    return 0;
+}
+
+void SegMap595Class::map_bytes(int32_t display_common_pin)
+{
+    _display_common_pin = display_common_pin;
+
+    for (size_t i = 0; i < _glyph_set_chosen_char_num; ++i) {
         for (size_t j = 0; j < SEGMAP595_SEG_NUM; ++j) {
             uint8_t mask = static_cast<uint8_t>(1u << _bit_pos[j]);
-            if ((_mapped_alphabetical[i] << j) & SEGMAP595_ONLY_MSB_SET) {
-                _mapped_characters[i] |= mask;
+            if ((_glyph_set_chosen_mapped_alphabetically[i] << j) & SEGMAP595_ONLY_MSB_SET_MASK) {
+                _mapped_bytes[i] |= mask;
             } else {
-                _mapped_characters[i] &= ~mask;
+                _mapped_bytes[i] &= ~mask;
             }
         }
     }
 
-    if (display_common_pin != SEGMAP595_COMMON_CATHODE) {
-        for (size_t i = 0; i < SEGMAP595_CHAR_NUM; ++i) {
-            _mapped_characters[i] ^= static_cast<uint8_t>(SEGMAP595_ALL_BITS_SET_MASK);  // Toggle all bits.
+    if (_display_common_pin != SEGMAP595_COMMON_CATHODE) {
+        for (size_t i = 0; i < _glyph_set_chosen_char_num; ++i) {
+            _mapped_bytes[i] ^= static_cast<uint8_t>(SEGMAP595_ALL_BITS_SET_MASK);  // Toggle all bits.
         }
     }
 }
@@ -154,11 +193,11 @@ int32_t SegMap595Class::get_status()
 
 uint8_t SegMap595Class::get_mapped_byte(uint32_t index)
 {
-    if (_status < 0 || index >= SEGMAP595_CHAR_NUM) {
+    if (_status < 0 || index >= _glyph_set_chosen_char_num) {
         return 0;
     }
 
-    return _mapped_characters[index];
+    return _mapped_bytes[index];
 }
 
 uint8_t SegMap595Class::get_mapped_byte(unsigned char char_represented)
@@ -167,16 +206,14 @@ uint8_t SegMap595Class::get_mapped_byte(unsigned char char_represented)
         return 0;
     }
 
-    static constexpr unsigned char valid_chars[] = {SEGMAP595_CHAR_ALL};
-
     constexpr int32_t ascii_code_diff = 'a' - 'A';
     if (char_represented >= 'a' && char_represented <= 'z') {
         char_represented -= ascii_code_diff;
     }
 
-    for (size_t i = 0; i < SEGMAP595_CHAR_NUM; ++i) {
-        if (char_represented == valid_chars[i]) {
-            return _mapped_characters[i];
+    for (size_t i = 0; i < _glyph_set_chosen_char_num; ++i) {
+        if (char_represented == _glyph_set_chosen_valid_chars[i]) {
+            return _mapped_bytes[i];
         }
     }
 
@@ -205,5 +242,14 @@ const char* SegMap595Class::get_map_str()
         return _map_str;
     } else {
         return nullptr;
+    }
+}
+
+size_t SegMap595Class::get_glyph_num()
+{
+    if (_status == SEGMAP595_STATUS_OK) {  // If character mapping was successful.
+        return _glyph_set_chosen_char_num;
+    } else {
+        return 0;
     }
 }
