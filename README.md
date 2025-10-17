@@ -1,16 +1,16 @@
 # Overview
 
 **SegMap595** is a single-class embedded-oriented Arduino-friendly C++ library
-for mapping the outputs of a **74HC595 IC** to the segments of a **7-segment display**.
+for mapping the outputs of a 74HC595 IC to the segments of a 7-segment display.
 
 ## Concept
 
 Typically, outputting a glyph (a character representation) to a 7-segment display involves custom-forming a byte
 whose combination of bit states (set or cleared) corresponds to a pattern in which the segments must be turned
-ON or OFF to form a recognizable symbol. Finding the proper correspondence between the bit states and the segment
+ON and OFF to form a recognizable symbol. Finding the proper correspondence between the bit states and the segment
 pattern is called **mapping**.
 
-74HC595, sometimes simply called **595**, is a widely used 8-bit serial-in, parallel-out (SIPO) shift register
+**74HC595**, sometimes simply called **595**, is a widely used 8-bit serial-in, parallel-out (SIPO) shift register
 integrated circuit (IC) commonly employed to drive 7-segment displays.
 
 The **mapped bytes** (sometimes called **bit masks**) can be formed in advance and hard-coded into a program
@@ -18,13 +18,13 @@ run by a microcontroller unit (MCU) or a similar device that drives a display. A
 acceptable, it may become troublesome if the program needs to be adapted to a circuit with a different wiring
 order between the device's outputs and the display's control pins. This library automates the task and lets
 your device do the whole job in one go based on three parameters:
-* **map string**
+* map string
 * display type (either common cathode or common anode)
-* glyph set number (optional).
+* glyph set (optional).
 
 ## Map string
 
-The map string is a C-style (null-terminated) string that must reflect the actual (physical) order
+The **map string** is a C-style (null-terminated) string that must reflect the actual (physical) order
 of connections made between parallel outputs of your 74HC595 and segment control pins of your 7-segment display.
 
 The map string must consist of exactly 8 ASCII characters: **@, A, B, C, D, E, F and G**. Every character
@@ -40,7 +40,7 @@ Duplicating characters in the map string is invalid.
 //#define MAP_STR "ed@cgafb"  // Also valid.
 //#define MAP_STR "Ed@CgAfB"  // Still valid.
 //#define MAP_STR "ED@CGAF"   // Invalid: map string is too short.
-//#define MAP_STR "ED@CGAFM"  // Invalid: illegal character 'M'.
+//#define MAP_STR "ED@CGAFM"  // Invalid: invalid character 'M'.
 //#define MAP_STR "ED@CGAFE"  // Invalid: duplicated character 'E'.
 ```
 
@@ -51,14 +51,14 @@ they represent: from 0 to 9, from A to Z, non-alphanumerics in the end.
 
 By default, the dot bit will be in an OFF state (cleared for a common cathode display, set for a common anode display)
 in all mapped bytes, therefore you will have to manipulate this bit in your code as necessary. The dot bit position
-within a byte is indicated by a return value of `get_dot_bit_pos()` method.
+within a byte is indicated by a return value of `get_dot_bit_pos()` method, as shown below.
 
 Glyphs are not standardized globally. Some of them do resemble their actual prototypes, some are rather sketchy
 (like G, K, T, V, X and Z), others are outright arbitrary (like M and W).
 
 This library offers two glyph sets:
 
-### Set #1 (used by default)
+### Set #1 (default)
 
 This set includes all English letters, although some of them are represented by arbitrary glyphs:
 
@@ -80,14 +80,28 @@ Include the library:
 
 "Load" the map string into an object, specify a display type and (optionally) choose a glyph set:
 ```cpp
-SegMap595.init(MAP_STR, SEGMAP595_COMMON_CATHODE, SEGMAP595_GLYPH_SET_1);  // If using common cathode display.
-//SegMap595.init(MAP_STR, SEGMAP595_COMMON_ANODE, SEGMAP595_GLYPH_SET_2);  // If using common anode display.
-```
-If the third parameter is omitted, glyph set #1 will be used.
+// Specify a common cathode display, choose glyph set #1.
+SegMap595.init(MAP_STR, SEGMAP595_COMMON_CATHODE, SEGMAP595_GLYPH_SET_1);
 
-Check the mapping status (optional):
+// Specify a common cathode display, choose glyph set #2.
+//SegMap595.init(MAP_STR, SEGMAP595_COMMON_CATHODE, SEGMAP595_GLYPH_SET_2);
+
+// Specify a common cathode display, omit the third parameter (glyph set #1 will be used by default).
+//SegMap595.init(MAP_STR, SEGMAP595_COMMON_CATHODE);
+
+// Specify a common anode display, choose glyph set #1.
+SegMap595.init(MAP_STR, SEGMAP595_COMMON_ANODE, SEGMAP595_GLYPH_SET_1);
+
+// Specify a common anode display, choose glyph set #2.
+//SegMap595.init(MAP_STR, SEGMAP595_COMMON_ANODE, SEGMAP595_GLYPH_SET_2);
+
+// Specify a common anode display, omit the third parameter (glyph set #1 will be used by default).
+//SegMap595.init(MAP_STR, SEGMAP595_COMMON_ANODE);
+```
+
+If necessary, check the mapping status:
 ```cpp
-static int32_t mapping_status = SegMap595.get_status();
+int32_t mapping_status = SegMap595.get_status();
 // Loop error output if mapping was unsuccessful.
 if (mapping_status < 0) {
     while(true) {
@@ -114,7 +128,6 @@ uint8_t mapped_byte = SegMap595.get_mapped_byte(counter);
 ```
 
 If necessary, toggle the dot segment bit:
-
 ```cpp
 if (counter % 2) {
     static uint32_t dot_bit_pos = SegMap595.get_dot_bit_pos();
@@ -132,7 +145,7 @@ Refer to `SegMap595.h` for the full description of return values if necessary.
 
 ## Compatibility
 
-The library works with any MCU capable of bit-banging or SPI data transfer.
+The library works with any MCU or similar device capable of bit-banging or SPI data transfer.
 
 The library is primarily intended and documented for use with the Arduino framework, but it doesn't
 include `Arduino.h` and can be readily used in non-Arduino embedded electronics projects. 
