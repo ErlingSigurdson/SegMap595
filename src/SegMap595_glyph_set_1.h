@@ -3,7 +3,7 @@
 /**
  * Filename: SegMap595_glyph_set_1.h
  * ----------------------------------------------------------------------------|---------------------------------------|
- * Purpose:  Specific macros/constants related to glyphs and mapping.
+ * Purpose:  Macros/constants related to glyphs and mapping.
  * ----------------------------------------------------------------------------|---------------------------------------|
  * Notes:    Some resulting glyphs resemble their actual prototype characters,
  *           some are rather sketchy, others are outright arbitrary.
@@ -19,107 +19,97 @@
 
 /*--- Specific macros/constants related to mapping and glyphs ---*/
 
-#define SEGMAP595_GLYPH_SET_1_CHAR_NUM 40
+#define SEGMAP595_GLYPH_SET_1_GLYPH_NUM 40
 
 /* Bytes formed as if the map string is "@ABCDEFG" (@ is for a dot).
  * In reality the map string is unlikely to be like that,
- * and alphabetically mapped bytes are just a set of default
- * combinations used in a mapping process.
+ * and the alphabetically mapped bytes are just a set
+ * of default combinations used in a mapping process.
  */
-#define SEGMAP595_GLYPH_SET_1_MAPPED_ALPHABETICALLY_0 0b01111110
-#define SEGMAP595_GLYPH_SET_1_MAPPED_ALPHABETICALLY_1 0b00110000
-#define SEGMAP595_GLYPH_SET_1_MAPPED_ALPHABETICALLY_2 0b01101101
-#define SEGMAP595_GLYPH_SET_1_MAPPED_ALPHABETICALLY_3 0b01111001
-#define SEGMAP595_GLYPH_SET_1_MAPPED_ALPHABETICALLY_4 0b00110011
-#define SEGMAP595_GLYPH_SET_1_MAPPED_ALPHABETICALLY_5 0b01011011
-#define SEGMAP595_GLYPH_SET_1_MAPPED_ALPHABETICALLY_6 0b01011111
-#define SEGMAP595_GLYPH_SET_1_MAPPED_ALPHABETICALLY_7 0b01110000
-#define SEGMAP595_GLYPH_SET_1_MAPPED_ALPHABETICALLY_8 0b01111111
-#define SEGMAP595_GLYPH_SET_1_MAPPED_ALPHABETICALLY_9 0b01111011
-#define SEGMAP595_GLYPH_SET_1_MAPPED_ALPHABETICALLY_A 0b01110111  // Like actual 'A'.
-#define SEGMAP595_GLYPH_SET_1_MAPPED_ALPHABETICALLY_B 0b00011111  // Like actual 'b'.
-#define SEGMAP595_GLYPH_SET_1_MAPPED_ALPHABETICALLY_C 0b01001110  // Like actual 'C'.
-#define SEGMAP595_GLYPH_SET_1_MAPPED_ALPHABETICALLY_D 0b00111101  // Like actual 'd'.
-#define SEGMAP595_GLYPH_SET_1_MAPPED_ALPHABETICALLY_E 0b01001111  // Like actual 'E'.
-#define SEGMAP595_GLYPH_SET_1_MAPPED_ALPHABETICALLY_F 0b01000111  // Like actual 'F'.
+#define SEGMAP595_GLYPH_SET_1_ABC_BYTE_0 0b01111110
+#define SEGMAP595_GLYPH_SET_1_ABC_BYTE_1 0b00110000
+#define SEGMAP595_GLYPH_SET_1_ABC_BYTE_2 0b01101101
+#define SEGMAP595_GLYPH_SET_1_ABC_BYTE_3 0b01111001
+#define SEGMAP595_GLYPH_SET_1_ABC_BYTE_4 0b00110011
+#define SEGMAP595_GLYPH_SET_1_ABC_BYTE_5 0b01011011
+#define SEGMAP595_GLYPH_SET_1_ABC_BYTE_6 0b01011111
+#define SEGMAP595_GLYPH_SET_1_ABC_BYTE_7 0b01110000
+#define SEGMAP595_GLYPH_SET_1_ABC_BYTE_8 0b01111111
+#define SEGMAP595_GLYPH_SET_1_ABC_BYTE_9 0b01111011
+#define SEGMAP595_GLYPH_SET_1_ABC_BYTE_A 0b01110111  // Like actual 'A'.
+#define SEGMAP595_GLYPH_SET_1_ABC_BYTE_B 0b00011111  // Like actual 'b'.
+#define SEGMAP595_GLYPH_SET_1_ABC_BYTE_C 0b01001110  // Like actual 'C'.
+#define SEGMAP595_GLYPH_SET_1_ABC_BYTE_D 0b00111101  // Like actual 'd'.
+#define SEGMAP595_GLYPH_SET_1_ABC_BYTE_E 0b01001111  // Like actual 'E'.
+#define SEGMAP595_GLYPH_SET_1_ABC_BYTE_F 0b01000111  // Like actual 'F'.
 
-#define SEGMAP595_GLYPH_SET_1_MAPPED_ALPHABETICALLY_G 0b01011110  /* More or less like actual 'G',
-                                                                   * but without the short horizontal stroke.
-                                                                   */
-
-#define SEGMAP595_GLYPH_SET_1_MAPPED_ALPHABETICALLY_H 0b00010111  // Like actual 'h'.
-#define SEGMAP595_GLYPH_SET_1_MAPPED_ALPHABETICALLY_I 0b00010000  // Short vertical stroke, not equivalent to '1'.
-#define SEGMAP595_GLYPH_SET_1_MAPPED_ALPHABETICALLY_J 0b00111100  // Like actual 'J'.
-#define SEGMAP595_GLYPH_SET_1_MAPPED_ALPHABETICALLY_K 0b01010111  // Barely resembles actual 'K'.
-#define SEGMAP595_GLYPH_SET_1_MAPPED_ALPHABETICALLY_L 0b00001110  // Like actual 'L'.
-#define SEGMAP595_GLYPH_SET_1_MAPPED_ALPHABETICALLY_M 0b01010101  // Like actual 'n' with a dash over it.
-#define SEGMAP595_GLYPH_SET_1_MAPPED_ALPHABETICALLY_N 0b00010101  // Like actual 'n'.
-#define SEGMAP595_GLYPH_SET_1_MAPPED_ALPHABETICALLY_O 0b00011101  // Like actual 'o' (to distinguish from zero).
-#define SEGMAP595_GLYPH_SET_1_MAPPED_ALPHABETICALLY_P 0b01100111  // Like actual 'P'.
-#define SEGMAP595_GLYPH_SET_1_MAPPED_ALPHABETICALLY_Q 0b01110011  // Like actual 'q'.
-#define SEGMAP595_GLYPH_SET_1_MAPPED_ALPHABETICALLY_R 0b00000101  // Like actual 'r'.
-#define SEGMAP595_GLYPH_SET_1_MAPPED_ALPHABETICALLY_S 0b01011011  // Like actual 'S', equivalent to '5'.
-#define SEGMAP595_GLYPH_SET_1_MAPPED_ALPHABETICALLY_T 0b00001111  // More or less like actual 't'.
-#define SEGMAP595_GLYPH_SET_1_MAPPED_ALPHABETICALLY_U 0b00111110  // Like actual 'U'.
-
-#define SEGMAP595_GLYPH_SET_1_MAPPED_ALPHABETICALLY_V 0b00011100  /* Like actual 'u', because keeping it
-                                                                   * like this gives up space for 'U' byte
-                                                                   * that looks like actual 'U'.
-                                                                   */
-
-#define SEGMAP595_GLYPH_SET_1_MAPPED_ALPHABETICALLY_W 0b00101011  // Like elevated actual 'u' with a dash under it.
-
-#define SEGMAP595_GLYPH_SET_1_MAPPED_ALPHABETICALLY_X 0b00110111  /* Like actual 'H', because keeping it
-                                                                   * like this gives up space for 'H' byte
-                                                                   * that looks like actual 'h'.
-                                                                   */
-
-#define SEGMAP595_GLYPH_SET_1_MAPPED_ALPHABETICALLY_Y 0b00111011  // Like actual 'y', but size of a capital letter.
-#define SEGMAP595_GLYPH_SET_1_MAPPED_ALPHABETICALLY_Z 0b01101101  // More or less like actual 'Z', equivalent to '2'.
-#define SEGMAP595_GLYPH_SET_1_MAPPED_ALPHABETICALLY_DASH       0b00000001
-#define SEGMAP595_GLYPH_SET_1_MAPPED_ALPHABETICALLY_EQUAL      0b00001001
-#define SEGMAP595_GLYPH_SET_1_MAPPED_ALPHABETICALLY_DEGREE     0b01100011
-#define SEGMAP595_GLYPH_SET_1_MAPPED_ALPHABETICALLY_UNDERSCORE 0b00001000
-#define SEGMAP595_GLYPH_SET_1_MAPPED_ALPHABETICALLY_ALL SEGMAP595_GLYPH_SET_1_MAPPED_ALPHABETICALLY_0, \
-                                                        SEGMAP595_GLYPH_SET_1_MAPPED_ALPHABETICALLY_1, \
-                                                        SEGMAP595_GLYPH_SET_1_MAPPED_ALPHABETICALLY_2, \
-                                                        SEGMAP595_GLYPH_SET_1_MAPPED_ALPHABETICALLY_3, \
-                                                        SEGMAP595_GLYPH_SET_1_MAPPED_ALPHABETICALLY_4, \
-                                                        SEGMAP595_GLYPH_SET_1_MAPPED_ALPHABETICALLY_5, \
-                                                        SEGMAP595_GLYPH_SET_1_MAPPED_ALPHABETICALLY_6, \
-                                                        SEGMAP595_GLYPH_SET_1_MAPPED_ALPHABETICALLY_7, \
-                                                        SEGMAP595_GLYPH_SET_1_MAPPED_ALPHABETICALLY_8, \
-                                                        SEGMAP595_GLYPH_SET_1_MAPPED_ALPHABETICALLY_9, \
-                                                        SEGMAP595_GLYPH_SET_1_MAPPED_ALPHABETICALLY_A, \
-                                                        SEGMAP595_GLYPH_SET_1_MAPPED_ALPHABETICALLY_B, \
-                                                        SEGMAP595_GLYPH_SET_1_MAPPED_ALPHABETICALLY_C, \
-                                                        SEGMAP595_GLYPH_SET_1_MAPPED_ALPHABETICALLY_D, \
-                                                        SEGMAP595_GLYPH_SET_1_MAPPED_ALPHABETICALLY_E, \
-                                                        SEGMAP595_GLYPH_SET_1_MAPPED_ALPHABETICALLY_F, \
-                                                        SEGMAP595_GLYPH_SET_1_MAPPED_ALPHABETICALLY_G, \
-                                                        SEGMAP595_GLYPH_SET_1_MAPPED_ALPHABETICALLY_H, \
-                                                        SEGMAP595_GLYPH_SET_1_MAPPED_ALPHABETICALLY_I, \
-                                                        SEGMAP595_GLYPH_SET_1_MAPPED_ALPHABETICALLY_J, \
-                                                        SEGMAP595_GLYPH_SET_1_MAPPED_ALPHABETICALLY_K, \
-                                                        SEGMAP595_GLYPH_SET_1_MAPPED_ALPHABETICALLY_L, \
-                                                        SEGMAP595_GLYPH_SET_1_MAPPED_ALPHABETICALLY_M, \
-                                                        SEGMAP595_GLYPH_SET_1_MAPPED_ALPHABETICALLY_N, \
-                                                        SEGMAP595_GLYPH_SET_1_MAPPED_ALPHABETICALLY_O, \
-                                                        SEGMAP595_GLYPH_SET_1_MAPPED_ALPHABETICALLY_P, \
-                                                        SEGMAP595_GLYPH_SET_1_MAPPED_ALPHABETICALLY_Q, \
-                                                        SEGMAP595_GLYPH_SET_1_MAPPED_ALPHABETICALLY_R, \
-                                                        SEGMAP595_GLYPH_SET_1_MAPPED_ALPHABETICALLY_S, \
-                                                        SEGMAP595_GLYPH_SET_1_MAPPED_ALPHABETICALLY_T, \
-                                                        SEGMAP595_GLYPH_SET_1_MAPPED_ALPHABETICALLY_U, \
-                                                        SEGMAP595_GLYPH_SET_1_MAPPED_ALPHABETICALLY_V, \
-                                                        SEGMAP595_GLYPH_SET_1_MAPPED_ALPHABETICALLY_W, \
-                                                        SEGMAP595_GLYPH_SET_1_MAPPED_ALPHABETICALLY_X, \
-                                                        SEGMAP595_GLYPH_SET_1_MAPPED_ALPHABETICALLY_Y, \
-                                                        SEGMAP595_GLYPH_SET_1_MAPPED_ALPHABETICALLY_Z, \
-                                                        SEGMAP595_GLYPH_SET_1_MAPPED_ALPHABETICALLY_DASH,   \
-                                                        SEGMAP595_GLYPH_SET_1_MAPPED_ALPHABETICALLY_EQUAL,  \
-                                                        SEGMAP595_GLYPH_SET_1_MAPPED_ALPHABETICALLY_DEGREE, \
-                                                        SEGMAP595_GLYPH_SET_1_MAPPED_ALPHABETICALLY_UNDERSCORE
+#define SEGMAP595_GLYPH_SET_1_ABC_BYTE_G 0b01011110  /* More or less like actual 'G',
+                                                      * but without the short horizontal stroke.
+                                                      */
+                                                      
+#define SEGMAP595_GLYPH_SET_1_ABC_BYTE_H 0b00010111  // Like actual 'h'.
+#define SEGMAP595_GLYPH_SET_1_ABC_BYTE_I 0b00010000  // Short vertical stroke, not equivalent to '1'.
+#define SEGMAP595_GLYPH_SET_1_ABC_BYTE_J 0b00111100  // Like actual 'J'.
+#define SEGMAP595_GLYPH_SET_1_ABC_BYTE_K 0b01010111  // Barely resembles actual 'K'.
+#define SEGMAP595_GLYPH_SET_1_ABC_BYTE_L 0b00001110  // Like actual 'L'.
+#define SEGMAP595_GLYPH_SET_1_ABC_BYTE_M 0b01010101  // Like actual 'n' with a dash over it.
+#define SEGMAP595_GLYPH_SET_1_ABC_BYTE_N 0b00010101  // Like actual 'n'.
+#define SEGMAP595_GLYPH_SET_1_ABC_BYTE_O 0b00011101  // Like actual 'o' (to distinguish from zero).
+#define SEGMAP595_GLYPH_SET_1_ABC_BYTE_P 0b01100111  // Like actual 'P'.
+#define SEGMAP595_GLYPH_SET_1_ABC_BYTE_Q 0b01110011  // Like actual 'q'.
+#define SEGMAP595_GLYPH_SET_1_ABC_BYTE_R 0b00000101  // Like actual 'r'.
+#define SEGMAP595_GLYPH_SET_1_ABC_BYTE_S 0b01011011  // Like actual 'S', equivalent to '5'.
+#define SEGMAP595_GLYPH_SET_1_ABC_BYTE_T 0b00001111  // More or less like actual 't'.
+#define SEGMAP595_GLYPH_SET_1_ABC_BYTE_U 0b00111110  // Like actual 'U'.
+#define SEGMAP595_GLYPH_SET_1_ABC_BYTE_V 0b00011100  // Like actual 'u'.
+#define SEGMAP595_GLYPH_SET_1_ABC_BYTE_W 0b00101011  // Like elevated actual 'u' with a dash under it.
+#define SEGMAP595_GLYPH_SET_1_ABC_BYTE_X 0b00110111  // Like actual 'H'.
+#define SEGMAP595_GLYPH_SET_1_ABC_BYTE_Y 0b00111011  // Like actual 'y', but the size of a capital letter.
+#define SEGMAP595_GLYPH_SET_1_ABC_BYTE_Z 0b01101101  // More or less like actual 'Z', equivalent to '2'.
+#define SEGMAP595_GLYPH_SET_1_ABC_BYTE_DASH       0b00000001
+#define SEGMAP595_GLYPH_SET_1_ABC_BYTE_EQUAL      0b00001001
+#define SEGMAP595_GLYPH_SET_1_ABC_BYTE_DEGREE     0b01100011
+#define SEGMAP595_GLYPH_SET_1_ABC_BYTE_UNDERSCORE 0b00001000
+#define SEGMAP595_GLYPH_SET_1_ABC_BYTES SEGMAP595_GLYPH_SET_1_ABC_BYTE_0, \
+                                        SEGMAP595_GLYPH_SET_1_ABC_BYTE_1, \
+                                        SEGMAP595_GLYPH_SET_1_ABC_BYTE_2, \
+                                        SEGMAP595_GLYPH_SET_1_ABC_BYTE_3, \
+                                        SEGMAP595_GLYPH_SET_1_ABC_BYTE_4, \
+                                        SEGMAP595_GLYPH_SET_1_ABC_BYTE_5, \
+                                        SEGMAP595_GLYPH_SET_1_ABC_BYTE_6, \
+                                        SEGMAP595_GLYPH_SET_1_ABC_BYTE_7, \
+                                        SEGMAP595_GLYPH_SET_1_ABC_BYTE_8, \
+                                        SEGMAP595_GLYPH_SET_1_ABC_BYTE_9, \
+                                        SEGMAP595_GLYPH_SET_1_ABC_BYTE_A, \
+                                        SEGMAP595_GLYPH_SET_1_ABC_BYTE_B, \
+                                        SEGMAP595_GLYPH_SET_1_ABC_BYTE_C, \
+                                        SEGMAP595_GLYPH_SET_1_ABC_BYTE_D, \
+                                        SEGMAP595_GLYPH_SET_1_ABC_BYTE_E, \
+                                        SEGMAP595_GLYPH_SET_1_ABC_BYTE_F, \
+                                        SEGMAP595_GLYPH_SET_1_ABC_BYTE_G, \
+                                        SEGMAP595_GLYPH_SET_1_ABC_BYTE_H, \
+                                        SEGMAP595_GLYPH_SET_1_ABC_BYTE_I, \
+                                        SEGMAP595_GLYPH_SET_1_ABC_BYTE_J, \
+                                        SEGMAP595_GLYPH_SET_1_ABC_BYTE_K, \
+                                        SEGMAP595_GLYPH_SET_1_ABC_BYTE_L, \
+                                        SEGMAP595_GLYPH_SET_1_ABC_BYTE_M, \
+                                        SEGMAP595_GLYPH_SET_1_ABC_BYTE_N, \
+                                        SEGMAP595_GLYPH_SET_1_ABC_BYTE_O, \
+                                        SEGMAP595_GLYPH_SET_1_ABC_BYTE_P, \
+                                        SEGMAP595_GLYPH_SET_1_ABC_BYTE_Q, \
+                                        SEGMAP595_GLYPH_SET_1_ABC_BYTE_R, \
+                                        SEGMAP595_GLYPH_SET_1_ABC_BYTE_S, \
+                                        SEGMAP595_GLYPH_SET_1_ABC_BYTE_T, \
+                                        SEGMAP595_GLYPH_SET_1_ABC_BYTE_U, \
+                                        SEGMAP595_GLYPH_SET_1_ABC_BYTE_V, \
+                                        SEGMAP595_GLYPH_SET_1_ABC_BYTE_W, \
+                                        SEGMAP595_GLYPH_SET_1_ABC_BYTE_X, \
+                                        SEGMAP595_GLYPH_SET_1_ABC_BYTE_Y, \
+                                        SEGMAP595_GLYPH_SET_1_ABC_BYTE_Z, \
+                                        SEGMAP595_GLYPH_SET_1_ABC_BYTE_DASH,   \
+                                        SEGMAP595_GLYPH_SET_1_ABC_BYTE_EQUAL,  \
+                                        SEGMAP595_GLYPH_SET_1_ABC_BYTE_DEGREE, \
+                                        SEGMAP595_GLYPH_SET_1_ABC_BYTE_UNDERSCORE
 
 /* Handy index aliases for referring to the mapped bytes
  * within the resulting array.
@@ -206,46 +196,46 @@
 #define SEGMAP595_GLYPH_SET_1_CHAR_EQUAL      '='
 #define SEGMAP595_GLYPH_SET_1_CHAR_DEGREE     '*'  // Special case: there's no ASCII character for degree symbol.
 #define SEGMAP595_GLYPH_SET_1_CHAR_UNDERSCORE '_'
-#define SEGMAP595_GLYPH_SET_1_CHAR_ALL SEGMAP595_GLYPH_SET_1_CHAR_0,      \
-                                       SEGMAP595_GLYPH_SET_1_CHAR_1,      \
-                                       SEGMAP595_GLYPH_SET_1_CHAR_2,      \
-                                       SEGMAP595_GLYPH_SET_1_CHAR_3,      \
-                                       SEGMAP595_GLYPH_SET_1_CHAR_4,      \
-                                       SEGMAP595_GLYPH_SET_1_CHAR_5,      \
-                                       SEGMAP595_GLYPH_SET_1_CHAR_6,      \
-                                       SEGMAP595_GLYPH_SET_1_CHAR_7,      \
-                                       SEGMAP595_GLYPH_SET_1_CHAR_8,      \
-                                       SEGMAP595_GLYPH_SET_1_CHAR_9,      \
-                                       SEGMAP595_GLYPH_SET_1_CHAR_A,      \
-                                       SEGMAP595_GLYPH_SET_1_CHAR_B,      \
-                                       SEGMAP595_GLYPH_SET_1_CHAR_C,      \
-                                       SEGMAP595_GLYPH_SET_1_CHAR_D,      \
-                                       SEGMAP595_GLYPH_SET_1_CHAR_E,      \
-                                       SEGMAP595_GLYPH_SET_1_CHAR_F,      \
-                                       SEGMAP595_GLYPH_SET_1_CHAR_G,      \
-                                       SEGMAP595_GLYPH_SET_1_CHAR_H,      \
-                                       SEGMAP595_GLYPH_SET_1_CHAR_I,      \
-                                       SEGMAP595_GLYPH_SET_1_CHAR_J,      \
-                                       SEGMAP595_GLYPH_SET_1_CHAR_K,      \
-                                       SEGMAP595_GLYPH_SET_1_CHAR_L,      \
-                                       SEGMAP595_GLYPH_SET_1_CHAR_M,      \
-                                       SEGMAP595_GLYPH_SET_1_CHAR_N,      \
-                                       SEGMAP595_GLYPH_SET_1_CHAR_O,      \
-                                       SEGMAP595_GLYPH_SET_1_CHAR_P,      \
-                                       SEGMAP595_GLYPH_SET_1_CHAR_Q,      \
-                                       SEGMAP595_GLYPH_SET_1_CHAR_R,      \
-                                       SEGMAP595_GLYPH_SET_1_CHAR_S,      \
-                                       SEGMAP595_GLYPH_SET_1_CHAR_T,      \
-                                       SEGMAP595_GLYPH_SET_1_CHAR_U,      \
-                                       SEGMAP595_GLYPH_SET_1_CHAR_V,      \
-                                       SEGMAP595_GLYPH_SET_1_CHAR_W,      \
-                                       SEGMAP595_GLYPH_SET_1_CHAR_X,      \
-                                       SEGMAP595_GLYPH_SET_1_CHAR_Y,      \
-                                       SEGMAP595_GLYPH_SET_1_CHAR_Z,      \
-                                       SEGMAP595_GLYPH_SET_1_CHAR_DASH,   \
-                                       SEGMAP595_GLYPH_SET_1_CHAR_EQUAL,  \
-                                       SEGMAP595_GLYPH_SET_1_CHAR_DEGREE, \
-                                       SEGMAP595_GLYPH_SET_1_CHAR_UNDERSCORE
+#define SEGMAP595_GLYPH_SET_1_CHARS SEGMAP595_GLYPH_SET_1_CHAR_0,      \
+                                    SEGMAP595_GLYPH_SET_1_CHAR_1,      \
+                                    SEGMAP595_GLYPH_SET_1_CHAR_2,      \
+                                    SEGMAP595_GLYPH_SET_1_CHAR_3,      \
+                                    SEGMAP595_GLYPH_SET_1_CHAR_4,      \
+                                    SEGMAP595_GLYPH_SET_1_CHAR_5,      \
+                                    SEGMAP595_GLYPH_SET_1_CHAR_6,      \
+                                    SEGMAP595_GLYPH_SET_1_CHAR_7,      \
+                                    SEGMAP595_GLYPH_SET_1_CHAR_8,      \
+                                    SEGMAP595_GLYPH_SET_1_CHAR_9,      \
+                                    SEGMAP595_GLYPH_SET_1_CHAR_A,      \
+                                    SEGMAP595_GLYPH_SET_1_CHAR_B,      \
+                                    SEGMAP595_GLYPH_SET_1_CHAR_C,      \
+                                    SEGMAP595_GLYPH_SET_1_CHAR_D,      \
+                                    SEGMAP595_GLYPH_SET_1_CHAR_E,      \
+                                    SEGMAP595_GLYPH_SET_1_CHAR_F,      \
+                                    SEGMAP595_GLYPH_SET_1_CHAR_G,      \
+                                    SEGMAP595_GLYPH_SET_1_CHAR_H,      \
+                                    SEGMAP595_GLYPH_SET_1_CHAR_I,      \
+                                    SEGMAP595_GLYPH_SET_1_CHAR_J,      \
+                                    SEGMAP595_GLYPH_SET_1_CHAR_K,      \
+                                    SEGMAP595_GLYPH_SET_1_CHAR_L,      \
+                                    SEGMAP595_GLYPH_SET_1_CHAR_M,      \
+                                    SEGMAP595_GLYPH_SET_1_CHAR_N,      \
+                                    SEGMAP595_GLYPH_SET_1_CHAR_O,      \
+                                    SEGMAP595_GLYPH_SET_1_CHAR_P,      \
+                                    SEGMAP595_GLYPH_SET_1_CHAR_Q,      \
+                                    SEGMAP595_GLYPH_SET_1_CHAR_R,      \
+                                    SEGMAP595_GLYPH_SET_1_CHAR_S,      \
+                                    SEGMAP595_GLYPH_SET_1_CHAR_T,      \
+                                    SEGMAP595_GLYPH_SET_1_CHAR_U,      \
+                                    SEGMAP595_GLYPH_SET_1_CHAR_V,      \
+                                    SEGMAP595_GLYPH_SET_1_CHAR_W,      \
+                                    SEGMAP595_GLYPH_SET_1_CHAR_X,      \
+                                    SEGMAP595_GLYPH_SET_1_CHAR_Y,      \
+                                    SEGMAP595_GLYPH_SET_1_CHAR_Z,      \
+                                    SEGMAP595_GLYPH_SET_1_CHAR_DASH,   \
+                                    SEGMAP595_GLYPH_SET_1_CHAR_EQUAL,  \
+                                    SEGMAP595_GLYPH_SET_1_CHAR_DEGREE, \
+                                    SEGMAP595_GLYPH_SET_1_CHAR_UNDERSCORE
 
 
 #endif  // Include guards.
