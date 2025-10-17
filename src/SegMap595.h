@@ -19,7 +19,7 @@
 
 /*--- Includes ---*/
 
-// Specific macros/constants related to glyphs and mapping.
+// Macros/constants related to glyphs and mapping.
 #include "SegMap595_glyph_set_1.h"
 #include "SegMap595_glyph_set_2.h"
 
@@ -44,7 +44,7 @@
 #define SEGMAP595_COMMON_CATHODE      0
 #define SEGMAP595_COMMON_ANODE        1
 
-#define SEGMAP595_GLYPH_SET_MAX_CHAR_NUM 40  // Highest number of characters among all provided glyph sets.
+#define SEGMAP595_GLYPH_SET_MAX_CHAR_NUM 40  // Highest number of glyphs among all provided glyph sets.
 #define SEGMAP595_GLYPH_SETS_PROVIDED    2
 #define SEGMAP595_GLYPH_SET_1            1
 #define SEGMAP595_GLYPH_SET_2            2
@@ -63,6 +63,12 @@
 /****************** DATA TYPES ******************/
 
 class SegMap595Class {
+    struct GlyphSet {
+        const uint8_t       abc_bytes[SEGMAP595_GLYPH_SET_MAX_CHAR_NUM];
+        const unsigned char valid_chars[SEGMAP595_GLYPH_SET_MAX_CHAR_NUM];
+        const size_t        glyph_num; 
+    };
+
     public:
         /*--- Methods ---*/
 
@@ -72,9 +78,9 @@ class SegMap595Class {
         /* "Load" a map string into an object, specify a display type and (optionally) choose a glyph set.
          *
          * Returns:
-         * 0 if mapping was successful (that is, if the passed map string was valid, the bytes were
+         * zero if mapping was successful (that is, if the passed map string was valid, the bytes were
          * successfully mapped and the passed glyph set number was valid), negative integer otherwise
-         * (see preprocessor macros list for possible values).
+         * (see the preprocessor macros list for possible values).
          *
          * If the second parameter equals zero, a common cathode display is assumed.
          * Otherwise a common anode display is assumed.
@@ -87,8 +93,8 @@ class SegMap595Class {
 
         /* Get the mapping status.
          * 
-         * Returns: 0 if mapping was successful, negative integer otherwise
-         * (see preprocessor macros list for possible values).
+         * Returns: zero if mapping was successful, negative integer otherwise
+         * (see the preprocessor macros list for possible values).
          */
         int32_t  get_status();
 
@@ -123,6 +129,13 @@ class SegMap595Class {
          */
         uint32_t get_dot_bit_pos();
 
+        /* Get the number of glyphs in the chosen glyph set.
+         *
+         * Returns: a positive integer if mapping was successful,
+         * zero otherwise.
+         */
+        size_t   get_glyph_num();
+
         /* Get a pointer to an object's internal buffer that holds the passed map string.
          *
          * Returns: a pointer to a string if mapping was successful,
@@ -131,94 +144,67 @@ class SegMap595Class {
          */
         const char* get_map_str();
 
-        /* Get a number of glyphs in the chosen set.
-         *
-         * Returns: a positive integer if mapping was successful,
-         * zero otherwise.
-         */
-        size_t get_glyph_num();
-
     private:
         /*--- Variables ---*/
 
-            /*--- Glyph set #1 ---*/
+        /* Glyph sets.
+         * Aggregate initialization.
+         */
+        GlyphSet  _glyph_set_1 = {
+                                  {SEGMAP595_GLYPH_SET_1_ABC_BYTES},
+                                  {SEGMAP595_GLYPH_SET_1_CHARS},
+                                  SEGMAP595_GLYPH_SET_1_GLYPH_NUM
+                                 };
+        GlyphSet  _glyph_set_2 = {
+                                  {SEGMAP595_GLYPH_SET_2_ABC_BYTES},
+                                  {SEGMAP595_GLYPH_SET_2_CHARS},
+                                  SEGMAP595_GLYPH_SET_2_GLYPH_NUM
+                                 };
+        GlyphSet *_glyph_set_chosen;
 
-            // Number of glyphs in the set.
-            const size_t  _glyph_set_1_char_num = SEGMAP595_GLYPH_SET_1_CHAR_NUM;
+        // Internal buffer.
+        char     _map_str[SEGMAP595_SEG_NUM + 1] = {0};
 
-            /* Array of bytes mapped as if the map string is "@ABCDEFG" (@ is for a dot).
-             */
-            const uint8_t _glyph_set_1_mapped_alphabetically[SEGMAP595_GLYPH_SET_1_CHAR_NUM] =
-                                                            {SEGMAP595_GLYPH_SET_1_MAPPED_ALPHABETICALLY_ALL};
+        // Mapping status. See the preprocessor macros list for possible values.
+        int32_t  _status = SEGMAP595_STATUS_INIT;
 
-            const unsigned char _glyph_set_1_valid_chars[SEGMAP595_GLYPH_SET_1_CHAR_NUM] =
-                                                        {SEGMAP595_GLYPH_SET_1_CHAR_ALL};
+        // Zero for common cathode, any other value for common anode.
+        int32_t  _display_common_pin;
 
+        /* Resulting array.
+         * If mapping was successful, this array will hold the mapped bytes.
+         */
+        uint8_t  _mapped_bytes[SEGMAP595_GLYPH_SET_MAX_CHAR_NUM] = {0};
 
-            /*--- Glyph set #2 ---*/
-
-            // Same logic for another set.
-            const size_t  _glyph_set_2_char_num = SEGMAP595_GLYPH_SET_2_CHAR_NUM;
-            const uint8_t _glyph_set_2_mapped_alphabetically[SEGMAP595_GLYPH_SET_2_CHAR_NUM] =
-                                                            {SEGMAP595_GLYPH_SET_2_MAPPED_ALPHABETICALLY_ALL};
-            const unsigned char _glyph_set_2_valid_chars[SEGMAP595_GLYPH_SET_2_CHAR_NUM] =
-                                                        {SEGMAP595_GLYPH_SET_2_CHAR_ALL};
-
-
-            /*--- Chosen glyph set ---*/
-
-            uint32_t _glyph_set_chosen;
-            size_t   _glyph_set_chosen_char_num;
-            const uint8_t       *_glyph_set_chosen_mapped_alphabetically = nullptr;
-            const unsigned char *_glyph_set_chosen_valid_chars;
-
-
-            /*--- Misc ---*/
-
-            // Internal buffer.
-            char     _map_str[SEGMAP595_SEG_NUM + 1] = {0};
-
-            // 0 means common cathode, any other value means common anode.
-            int32_t  _display_common_pin;
-
-            // Mapping status. See preprocessor macros list for possible values.
-            int32_t  _status = SEGMAP595_STATUS_INIT;
-
-            /* Resulting array.
-             * If mapping was successful, this array will hold the mapped bytes.
-             */
-            uint8_t  _mapped_bytes[SEGMAP595_GLYPH_SET_MAX_CHAR_NUM] = {0};
-
-            // Array of values that indicate a bit position number for every display segment.
-            uint32_t _bit_pos[SEGMAP595_SEG_NUM] = {0xFFFFFFFF};  // Initial values are intentionally invalid.
+        // Array of values that indicate a bit position number for every display segment.
+        uint32_t _bit_pos[SEGMAP595_SEG_NUM] = {0xFFFFFFFF};  // Initial values are intentionally invalid.
 
 
         /*--- Methods ---*/
 
+        /* Check the passed glyph set number and "load" the respective glyph set.
+         *
+         * Returns: zero if the passed glyph set number is valid, negative integer otherwise
+         * (see the preprocessor macros list for possible values).
+         */
+        int32_t choose_glyph_set(uint32_t glyph_set_num);
+
         /* Check the passed map string validity and, if it's valid, copy its contents to the internal buffer.
          *
-         * Returns: 0 if the passed map string is valid, negative integer otherwise
-         * (see preprocessor macros list for possible values).
+         * Returns: zero if the passed map string is valid, negative integer otherwise
+         * (see the preprocessor macros list for possible values).
          */
         int32_t check_map_str(const char *map_str);
 
-        /* Indicate bit positions for every display segment.
+        /* Indicate a bit position for every display segment.
          *
-         * Returns: 0 if all bit positions are indicated, negative integer otherwise
-         * (see preprocessor macros list for possible values).
+         * Returns: zero if all bit positions were indicated, negative integer otherwise
+         * (see the preprocessor macros list for possible values).
          *
          * The map string isn't passed because it's already copied
          * to the internal buffer by the moment this method is called. 
          */
         int32_t read_map_str();
-
-        /* Check a passed .
-         *
-         * Returns: 0 if the number of chosen glyph set is valid, negative integer otherwise
-         * (see preprocessor macros list for possible values). 
-         */
-        int32_t choose_glyph_set(uint32_t glyph_set_chosen);
-
 
         /* Do the main job of mapping the bytes.
          *
