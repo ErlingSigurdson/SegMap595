@@ -47,7 +47,7 @@ Duplicating characters in the map string is invalid.
 ## Mapped bytes
 
 If the map string is valid, mapped bytes will be placed in a member array in the ascending order of characters
-they represent: from 0 to 9, from A to Z, non-alphanumerics in the end.
+they represent: from 0 to 9, from A to Z, non-alphanumerics at the end.
 
 By default, the dot bit will be in an OFF state (cleared for a common cathode display, set for a common anode display)
 in all mapped bytes, therefore you will have to manipulate this bit in your code as necessary. The dot bit position
