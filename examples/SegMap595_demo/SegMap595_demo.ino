@@ -73,11 +73,11 @@ void loop()
 {
     /*--- Mapping status check ---*/
     
-    static int32_t mapping_status = SegMap595.get_status();
+    int32_t mapping_status = SegMap595.get_status();
     // Loop error output if mapping was unsuccessful.
     if (mapping_status < 0) {
         while(true) {
-            Serial.print("Character mapping failed, error code: ");
+            Serial.print("Mapping failed, error code: ");
             Serial.println(mapping_status);
             delay(INTERVAL);
         }
