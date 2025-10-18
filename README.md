@@ -90,7 +90,7 @@ SegMap595.init(MAP_STR, SEGMAP595_COMMON_CATHODE, SEGMAP595_GLYPH_SET_1);
 //SegMap595.init(MAP_STR, SEGMAP595_COMMON_CATHODE);
 
 // Specify a common anode display, choose glyph set #1.
-SegMap595.init(MAP_STR, SEGMAP595_COMMON_ANODE, SEGMAP595_GLYPH_SET_1);
+//SegMap595.init(MAP_STR, SEGMAP595_COMMON_ANODE, SEGMAP595_GLYPH_SET_1);
 
 // Specify a common anode display, choose glyph set #2.
 //SegMap595.init(MAP_STR, SEGMAP595_COMMON_ANODE, SEGMAP595_GLYPH_SET_2);
@@ -134,6 +134,11 @@ if (counter % 2) {
     uint8_t mask = static_cast<uint8_t>(1u << dot_bit_pos);
     mapped_byte ^= mask;
 }
+```
+
+If you need to know the number of glyphs available in the currently chosen glyph set:
+```cpp
+size_t glyph_num = SegMap595.get_glyph_num();
 ```
 
 If for some reason you need to retrieve the map string you've passed earlier, get a pointer to it:
