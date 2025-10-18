@@ -90,7 +90,8 @@ void loop()
     static uint64_t previous_millis = current_millis;
     
     static uint32_t counter = 0;
-    if (counter >= SegMap595.get_glyph_num()) {
+    static size_t   glyph_num = SegMap595.get_glyph_num();
+    if (static_cast<size_t>(counter) >= glyph_num) {
         counter = 0;
     }
 
