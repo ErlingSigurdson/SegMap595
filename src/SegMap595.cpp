@@ -96,7 +96,7 @@ int32_t SegMap595Class::choose_glyph_set(uint32_t glyph_set_num)
 int32_t SegMap595Class::check_map_str(const char *map_str)
 {
     if (map_str == nullptr) {
-        return SEGMAP595_STATUS_ERR_NULLPTR;
+        return _status = SEGMAP595_STATUS_ERR_NULLPTR;
     }
 
     size_t str_len = strlen(map_str);
