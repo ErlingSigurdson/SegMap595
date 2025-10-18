@@ -74,7 +74,7 @@ int32_t SegMap595Class::init(const char *map_str, int32_t display_common_pin, ui
 int32_t SegMap595Class::choose_glyph_set(uint32_t glyph_set_num)
 {
     if (glyph_set_num < 1 || glyph_set_num > SEGMAP595_GLYPH_SETS_PROVIDED) {
-        return _status = SEGMAP595_STATUS_ERR_GLYPH_SET_NUMBER;
+        return _status = SEGMAP595_STATUS_ERR_GLYPH_SET_NUM;
     }
 
     switch (glyph_set_num) {

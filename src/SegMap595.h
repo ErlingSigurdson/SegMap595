@@ -51,7 +51,7 @@
 
 // Function return codes.
 #define SEGMAP595_STATUS_INIT                    -1
-#define SEGMAP595_STATUS_ERR_GLYPH_SET_NUMBER    -2
+#define SEGMAP595_STATUS_ERR_GLYPH_SET_NUM       -2
 #define SEGMAP595_STATUS_ERR_NULLPTR             -3
 #define SEGMAP595_STATUS_ERR_MAP_STR_LEN         -4
 #define SEGMAP595_STATUS_ERR_MAP_STR_CHAR        -5
