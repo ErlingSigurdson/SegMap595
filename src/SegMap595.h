@@ -104,7 +104,7 @@ class SegMap595Class {
          * and the passed index is within the array bounds,
          * zero otherwise.
          */
-        uint8_t  get_mapped_byte(uint32_t index);
+        uint8_t  get_mapped_byte(size_t index);
 
         /* Get a mapped byte (overload #2).
          *
@@ -112,7 +112,7 @@ class SegMap595Class {
          * and the passed index is within the array bounds,
          * zero otherwise.
          */
-        uint8_t  get_mapped_byte(size_t index);
+        uint8_t  get_mapped_byte(uint32_t index);
 
         /* Get a mapped byte (overload #3).
          *
