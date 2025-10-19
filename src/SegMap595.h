@@ -109,12 +109,20 @@ class SegMap595Class {
         /* Get a mapped byte (overload #2).
          *
          * Returns: a mapped byte if mapping was successful
+         * and the passed index is within the array bounds,
+         * zero otherwise.
+         */
+        uint8_t  get_mapped_byte(size_t index);
+
+        /* Get a mapped byte (overload #3).
+         *
+         * Returns: a mapped byte if mapping was successful
          * and the passed character is represented in the chosen glyph set,
          * zero otherwise.
          */
         uint8_t  get_mapped_byte(unsigned char char_represented);
 
-        /* Get a mapped byte (overload #3).
+        /* Get a mapped byte (overload #4).
          *
          * Returns: a mapped byte if mapping was successful
          * and the passed character is represented in the chosen glyph set,

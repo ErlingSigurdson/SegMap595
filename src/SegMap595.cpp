@@ -193,6 +193,11 @@ uint8_t SegMap595Class::get_mapped_byte(uint32_t index)
     return _mapped_bytes[index];
 }
 
+uint8_t SegMap595Class::get_mapped_byte(size_t index)
+{
+    return get_mapped_byte(static_cast<uint32_t>(index));
+}
+
 uint8_t SegMap595Class::get_mapped_byte(unsigned char char_represented)
 {
     if (_status < 0) {
