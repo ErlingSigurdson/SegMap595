@@ -150,7 +150,9 @@ Refer to `SegMap595.h` for the full description of return values if necessary.
 
 ## Compatibility
 
-The library works with any MCU or similar device capable of bit-banging or SPI data transfer.
+The library is highly portable: its code should compile and run on any platform with a C++ compiler
+that supports C++11 or later. Actual interfacing with a 74HC595 (such as demonstrated in the example
+sketch) requires an MCU or a similar embedded device capable of bit-banging or SPI data transfer.
 
 The library is primarily intended and documented for use with the Arduino framework, but it doesn't
 include `Arduino.h` and can be readily used in non-Arduino embedded electronics projects. 
