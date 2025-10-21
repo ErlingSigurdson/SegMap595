@@ -114,17 +114,41 @@ if (mapping_status < 0) {
 
 Get a mapped byte:
 ```cpp
-// Get by an incremental index.
+// Get by a represented character (case insensitive).
+uint8_t mapped_byte = SegMap595.get_mapped_byte('0');
+uint8_t mapped_byte = SegMap595.get_mapped_byte('9');
+uint8_t mapped_byte = SegMap595.get_mapped_byte('A');
+uint8_t mapped_byte = SegMap595.get_mapped_byte('Z');
+uint8_t mapped_byte = SegMap595.get_mapped_byte('-');
+uint8_t mapped_byte = SegMap595.get_mapped_byte('_');
+uint8_t mapped_byte = SegMap595.get_mapped_byte('*');  // Represents a degree symbol because it's not present in ASCII.
+
+// Get by a decimal digit's numerical value (from 0 to 9).
+uint8_t mapped_byte = SegMap595.get_mapped_byte(0);    // Returns a byte for '0' character.
+uint8_t mapped_byte = SegMap595.get_mapped_byte(9);    // Returns a byte for '9' character.
+
+// Get by a hexadecimal digit's numerical value (from 0 to 15, or from 0x0 to 0xF).
+uint8_t mapped_byte = SegMap595.get_mapped_byte(15);   // Returns a byte for 'F' character.
+uint8_t mapped_byte = SegMap595.get_mapped_byte(0x0);  // Returns a byte for '0' character.
+uint8_t mapped_byte = SegMap595.get_mapped_byte(0xA);  // Returns a byte for 'A' character.
+uint8_t mapped_byte = SegMap595.get_mapped_byte(0xF);  // Returns a byte for 'F' character.
+
+// Get by an incremental index. Use `counter < SegMap595.get_glyph_num()` as an appropriate boundary.
 uint8_t mapped_byte = SegMap595.get_mapped_byte(counter);
 
-// Get by an index macro name.
-//uint8_t mapped_byte = SegMap595.get_mapped_byte(SEGMAP595_INDEX_A);
-
-// Get by a represented character (case insensitive).
-//uint8_t mapped_byte = SegMap595.get_mapped_byte('A');
-
-// Get by a represented character (degree symbol as a special case).
-//uint8_t mapped_byte = SegMap595.get_mapped_byte('*');
+// Get by an index macro name specific to a glyph set (match your selected set).
+uint8_t mapped_byte = SegMap595.get_mapped_byte(SEGMAP595_GLYPH_SET_1_INDEX_0);
+uint8_t mapped_byte = SegMap595.get_mapped_byte(SEGMAP595_GLYPH_SET_1_INDEX_9);
+uint8_t mapped_byte = SegMap595.get_mapped_byte(SEGMAP595_GLYPH_SET_1_INDEX_A);
+uint8_t mapped_byte = SegMap595.get_mapped_byte(SEGMAP595_GLYPH_SET_1_INDEX_Z);
+uint8_t mapped_byte = SegMap595.get_mapped_byte(SEGMAP595_GLYPH_SET_1_INDEX_DASH);
+uint8_t mapped_byte = SegMap595.get_mapped_byte(SEGMAP595_GLYPH_SET_1_INDEX_UNDERSCORE);
+uint8_t mapped_byte = SegMap595.get_mapped_byte(SEGMAP595_GLYPH_SET_2_INDEX_0);
+uint8_t mapped_byte = SegMap595.get_mapped_byte(SEGMAP595_GLYPH_SET_2_INDEX_9);
+uint8_t mapped_byte = SegMap595.get_mapped_byte(SEGMAP595_GLYPH_SET_2_INDEX_A);
+uint8_t mapped_byte = SegMap595.get_mapped_byte(SEGMAP595_GLYPH_SET_2_INDEX_Z);
+uint8_t mapped_byte = SegMap595.get_mapped_byte(SEGMAP595_GLYPH_SET_2_INDEX_DASH);
+uint8_t mapped_byte = SegMap595.get_mapped_byte(SEGMAP595_GLYPH_SET_2_INDEX_UNDERSCORE);
 ```
 
 If necessary, toggle the dot segment bit:
