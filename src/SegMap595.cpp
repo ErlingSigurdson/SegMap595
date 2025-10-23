@@ -198,19 +198,19 @@ uint8_t SegMap595Class::get_mapped_byte(uint32_t index)
     return get_mapped_byte(static_cast<size_t>(index));
 }
 
-uint8_t SegMap595Class::get_mapped_byte(char char_represented)
+uint8_t SegMap595Class::get_mapped_byte(char represented_char)
 {
     if (_status < 0) {
         return 0;
     }
 
     constexpr int32_t ascii_code_diff = 'a' - 'A';
-    if (char_represented >= 'a' && char_represented <= 'z') {
-        char_represented -= ascii_code_diff;
+    if (represented_char >= 'a' && represented_char <= 'z') {
+        represented_char -= ascii_code_diff;
     }
 
     for (size_t i = 0; i < _glyph_set_chosen->glyph_num; ++i) {
-        if (char_represented == _glyph_set_chosen->valid_chars[i]) {
+        if (represented_char == _glyph_set_chosen->valid_chars[i]) {
             return _mapped_bytes[i];
         }
     }
@@ -218,9 +218,9 @@ uint8_t SegMap595Class::get_mapped_byte(char char_represented)
     return 0;
 }
 
-uint8_t SegMap595Class::get_mapped_byte(unsigned char char_represented)
+uint8_t SegMap595Class::get_mapped_byte(unsigned char represented_char)
 {
-    return get_mapped_byte(static_cast<char>(char_represented));
+    return get_mapped_byte(static_cast<char>(represented_char));
 }
 
 uint32_t SegMap595Class::get_dot_bit_pos()
