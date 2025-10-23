@@ -120,7 +120,7 @@ class SegMap595Class {
          * and the passed character is represented in the chosen glyph set,
          * zero otherwise.
          */
-        uint8_t  get_mapped_byte(unsigned char char_represented);
+        uint8_t  get_mapped_byte(char char_represented);
 
         /* Get a mapped byte (overload #4).
          *
@@ -128,7 +128,7 @@ class SegMap595Class {
          * and the passed character is represented in the chosen glyph set,
          * zero otherwise.
          */
-        uint8_t  get_mapped_byte(char char_represented);
+        uint8_t  get_mapped_byte(unsigned char char_represented);
 
         /* Get the position of the bit that represents a dot segment.
          *
