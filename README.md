@@ -20,7 +20,7 @@ order between the device's outputs and the display's control pins. This library 
 your device do the whole job in one go based on three parameters:
 * map string
 * display type (either common cathode or common anode)
-* glyph set (optional).
+* glyph set.
 
 ## Map string
 
@@ -78,21 +78,21 @@ Include the library:
 //#include "SegMap595.h"  // Generic embedded programming style.
 ```
 
-"Load" the map string into an object, specify a display type and (optionally) choose a glyph set:
+"Load" the map string into an object, specify a display type (based on its common pin) and select a glyph set:
 ```cpp
-// Specify a common cathode display, choose glyph set #1.
+// Specify a common cathode display, select glyph set #1.
 SegMap595.init(MAP_STR, SEGMAP595_COMMON_CATHODE, SEGMAP595_GLYPH_SET_1);
 
-// Specify a common cathode display, choose glyph set #2.
+// Specify a common cathode display, select glyph set #2.
 //SegMap595.init(MAP_STR, SEGMAP595_COMMON_CATHODE, SEGMAP595_GLYPH_SET_2);
 
 // Specify a common cathode display, omit the third parameter (glyph set #1 will be used by default).
 //SegMap595.init(MAP_STR, SEGMAP595_COMMON_CATHODE);
 
-// Specify a common anode display, choose glyph set #1.
+// Specify a common anode display, select glyph set #1.
 //SegMap595.init(MAP_STR, SEGMAP595_COMMON_ANODE, SEGMAP595_GLYPH_SET_1);
 
-// Specify a common anode display, choose glyph set #2.
+// Specify a common anode display, select glyph set #2.
 //SegMap595.init(MAP_STR, SEGMAP595_COMMON_ANODE, SEGMAP595_GLYPH_SET_2);
 
 // Specify a common anode display, omit the third parameter (glyph set #1 will be used by default).
@@ -121,7 +121,9 @@ uint8_t mapped_byte = SegMap595.get_mapped_byte('A');
 uint8_t mapped_byte = SegMap595.get_mapped_byte('Z');
 uint8_t mapped_byte = SegMap595.get_mapped_byte('-');
 uint8_t mapped_byte = SegMap595.get_mapped_byte('_');
-uint8_t mapped_byte = SegMap595.get_mapped_byte('*');  // Represents a degree symbol because it's not present in ASCII.
+uint8_t mapped_byte = SegMap595.get_mapped_byte('*');  /* An asterisk represents a degree symbol because
+                                                        * the actual degree symbol isn't listed in ASCII.
+                                                        */
 
 // Get by a decimal digit's numerical value (from 0 to 9).
 uint8_t mapped_byte = SegMap595.get_mapped_byte(0);    // Returns a byte for '0' character.
@@ -160,17 +162,28 @@ if (counter % 2) {
 }
 ```
 
-If you need to know the number of glyphs available in the currently chosen glyph set:
+If you need to know the number of glyphs available in the currently
+selected glyph set (typically used as a loop boundary):
 ```cpp
 size_t glyph_num = SegMap595.get_glyph_num();
 ```
 
-If for some reason you need to retrieve the map string you've passed earlier, get a pointer to it:
+If you need to know which character corresponds to a certain index in the resulting array of mapped bytes:
+```cpp
+char represented_char = SegMap595.get_represented_char(counter);
+```
+
+If you need to know a standard C and C++ binary number notation for a given byte:
+```cpp
+const char *byte_bin_notation = SegMap595.get_byte_bin_notation_as_str(byte_to_shift);
+```
+
+If you need to retrieve the map string you've passed earlier, get a pointer to it:
 ```cpp
 const char *map_str_retrieved = SegMap595.get_map_str();
 ```
 
-Refer to `SegMap595.h` for the full description of return values if necessary.
+Refer to `SegMap595.h` for detailed API description if necessary.
 
 ## Compatibility
 

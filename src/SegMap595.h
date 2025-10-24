@@ -3,7 +3,7 @@
 /**
  * Filename: SegMap595.h
  * ----------------------------------------------------------------------------|---------------------------------------|
- * Purpose:  A class for mapping the outputs of a 74HC595 IC
+ * Purpose:  A class for mapping the outputs of a 74HC595 shift register IC
  *           to the segments of a 7-segment display.
  * ----------------------------------------------------------------------------|---------------------------------------|
  * Notes:
@@ -49,7 +49,7 @@
 #define SEGMAP595_GLYPH_SET_1            1
 #define SEGMAP595_GLYPH_SET_2            2
 
-// Function return codes.
+// Function return codes. Also serve as possible mapping status values.
 #define SEGMAP595_STATUS_INIT                    -1
 #define SEGMAP595_STATUS_ERR_GLYPH_SET_NUM       -2
 #define SEGMAP595_STATUS_ERR_NULLPTR             -3
@@ -75,7 +75,7 @@ class SegMap595Class {
         // Default constructor.
         SegMap595Class();
 
-        /* "Load" a map string into an object, specify a display type and (optionally) choose a glyph set.
+        /* "Load" a map string into an object, specify a display type (based on its common pin) and select a glyph set.
          *
          * Returns:
          * zero if mapping was successful (that is, if the passed map string was valid, the bytes were
@@ -85,11 +85,12 @@ class SegMap595Class {
          * If the second parameter equals zero, a common cathode display is assumed.
          * Otherwise a common anode display is assumed.
          *
-         * The third parameter must be an integer from 1 and up to the number of provided glyph sets.
+         * The third parameter (if passed) must be an integer from 1 and up to the number of provided glyph sets.
+         * Glyph set #1 is used by default.
          *
          * Multiple calls to this method are valid, each call will lead to a fresh byte mapping.
          */
-        int32_t  init(const char *map_str, int32_t display_common_pin, uint32_t glyph_set_num = 1);
+        int32_t  init(const char *map_str, int32_t display_common_pin, uint32_t glyph_set_num = SEGMAP595_GLYPH_SET_1);
 
         /* Get the mapping status.
          * 
@@ -117,7 +118,7 @@ class SegMap595Class {
         /* Get a mapped byte (overload #3).
          *
          * Returns: a mapped byte if mapping was successful
-         * and the passed character is represented in the chosen glyph set,
+         * and the passed character is represented in the selected glyph set,
          * zero otherwise.
          */
         uint8_t  get_mapped_byte(char represented_char);
@@ -125,7 +126,7 @@ class SegMap595Class {
         /* Get a mapped byte (overload #4).
          *
          * Returns: a mapped byte if mapping was successful
-         * and the passed character is represented in the chosen glyph set,
+         * and the passed character is represented in the selected glyph set,
          * zero otherwise.
          */
         uint8_t  get_mapped_byte(unsigned char represented_char);
@@ -137,14 +138,52 @@ class SegMap595Class {
          */
         uint32_t get_dot_bit_pos();
 
-        /* Get the number of glyphs in the chosen glyph set.
+        /* Get the number of glyphs in the selected glyph set.
          *
          * Returns: a positive integer if mapping was successful,
          * zero otherwise.
          */
         size_t   get_glyph_num();
 
-        /* Get a pointer to an object's internal buffer that holds the passed map string.
+        /* Get the character represented by a glyph by its index (overload #1).
+         *
+         * Returns: resprective ASCII code if mapping was successful
+         * and the passed index is within the array bounds,
+         * zero otherwise.
+         */
+        char     get_represented_char(size_t index);
+
+        /* Get the character represented by a glyph by its index (overload #2).
+         *
+         * Returns: resprective ASCII code if mapping was successful
+         * and the passed index is within the array bounds,
+         * zero otherwise.
+         */
+        char     get_represented_char(uint32_t index);
+
+        /* Get the pointer to a string that represents a standard C and C++ 
+         * binary number notation for a given byte (overload #1).
+         *
+         * Returns: a pointer to a string if mapping was successful,
+         * nullptr otherwise (although the buffer always has a valid
+         * address in memory, nullptr serves as an error indicator).
+         *
+         * String buffer is static and therefore a pointer to it can be returned correctly.
+         */
+        const char* get_byte_bin_notation_as_str(char byte_to_write_down);
+
+        /* Get the pointer to a string that represents a standard C and C++ 
+         * binary number notation for a given byte (overload #2).
+         *
+         * Returns: a pointer to a string if mapping was successful,
+         * nullptr otherwise (although the buffer always has a valid
+         * address in memory, nullptr serves as an error indicator).
+         *
+         * String buffer is static and therefore a pointer to it can be returned correctly.
+         */
+        const char* get_byte_bin_notation_as_str(unsigned char byte_to_write_down);
+
+        /* Get the pointer to an object's internal buffer that holds the passed map string.
          *
          * Returns: a pointer to a string if mapping was successful,
          * nullptr otherwise (although the buffer always has a valid
@@ -168,9 +207,9 @@ class SegMap595Class {
                                   {SEGMAP595_GLYPH_SET_2_CHARS},
                                   SEGMAP595_GLYPH_SET_2_GLYPH_NUM
                                  };
-        GlyphSet *_glyph_set_chosen;
+        GlyphSet *_glyph_set_selected;
 
-        // Internal buffer.
+        // Internal buffer that holds the passed map string.
         char     _map_str[SEGMAP595_SEG_NUM + 1] = {0};
 
         // Mapping status. See the preprocessor macros list for possible values.
@@ -190,12 +229,12 @@ class SegMap595Class {
 
         /*--- Methods ---*/
 
-        /* Check the passed glyph set number and "load" the respective glyph set.
+        /* Check the passed glyph set number and "load" the selected glyph set.
          *
          * Returns: zero if the passed glyph set number is valid, negative integer otherwise
          * (see the preprocessor macros list for possible values).
          */
-        int32_t choose_glyph_set(uint32_t glyph_set_num);
+        int32_t select_glyph_set(uint32_t glyph_set_num);
 
         /* Check the passed map string validity and, if it's valid, copy its contents to the internal buffer.
          *
@@ -209,7 +248,7 @@ class SegMap595Class {
          * Returns: zero if all bit positions were indicated, negative integer otherwise
          * (see the preprocessor macros list for possible values).
          *
-         * The map string isn't passed because it's already copied
+         * The map string doesn't get passed because it's already copied
          * to the internal buffer by the moment this method is called. 
          */
         int32_t read_map_str();

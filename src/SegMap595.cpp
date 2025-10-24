@@ -3,7 +3,7 @@
 /**
  * Filename: SegMap595.cpp
  * ----------------------------------------------------------------------------|---------------------------------------|
- * Purpose:  A class for mapping the outputs of a 74HC595 IC
+ * Purpose:  A class for mapping the outputs of a 74HC595 shift register IC
  *           to the segments of a 7-segment display.
  * ----------------------------------------------------------------------------|---------------------------------------|
  * Notes:
@@ -18,7 +18,7 @@
 #include "SegMap595.h"
 
 // Relevant standard libraries.
-#if defined ARDUINO_ARCH_AVR
+#if defined ARDUINO_ARCH_AVR || defined ARDUINO_ARCH_MEGAAVR
     #include <string.h>
 #else
     #include <cstring>
@@ -37,12 +37,12 @@ SegMap595Class SegMap595;
 SegMap595Class::SegMap595Class() {}
 
 
-/*--- Methods ---*/
+/*--- Public API methods ---*/
 
 int32_t SegMap595Class::init(const char *map_str, int32_t display_common_pin, uint32_t glyph_set_num)
 {
     // Default value of glyph_set_num is 1.
-    _status = choose_glyph_set(glyph_set_num);  /* Within this call the passed glyph set number
+    _status = select_glyph_set(glyph_set_num);  /* Within this call the passed glyph set number
                                                  * gets copied into a private member variable.
                                                  */
 
@@ -71,7 +71,129 @@ int32_t SegMap595Class::init(const char *map_str, int32_t display_common_pin, ui
     return _status;
 }
 
-int32_t SegMap595Class::choose_glyph_set(uint32_t glyph_set_num)
+int32_t SegMap595Class::get_status()
+{
+    return _status;
+}
+
+uint8_t SegMap595Class::get_mapped_byte(size_t index)
+{
+    if (_status < 0 || index >= _glyph_set_selected->glyph_num) {
+        return 0;
+    }
+
+    return _mapped_bytes[index];
+}
+
+uint8_t SegMap595Class::get_mapped_byte(uint32_t index)
+{
+    return get_mapped_byte(static_cast<size_t>(index));
+}
+
+uint8_t SegMap595Class::get_mapped_byte(char represented_char)
+{
+    if (_status < 0) {
+        return 0;
+    }
+
+    constexpr int32_t ascii_code_diff = 'a' - 'A';
+    if (represented_char >= 'a' && represented_char <= 'z') {
+        represented_char -= ascii_code_diff;
+    }
+
+    for (size_t i = 0; i < _glyph_set_selected->glyph_num; ++i) {
+        if (represented_char == _glyph_set_selected->valid_chars[i]) {
+            return _mapped_bytes[i];
+        }
+    }
+
+    return 0;
+}
+
+uint8_t SegMap595Class::get_mapped_byte(unsigned char represented_char)
+{
+    return get_mapped_byte(static_cast<char>(represented_char));
+}
+
+uint32_t SegMap595Class::get_dot_bit_pos()
+{
+    if (_status < 0) {
+        return SEGMAP595_MSB + 1;
+    } else {
+        return _bit_pos[0];  /* Dot (represented by @ sign) is the first character
+                              * whose position is determined when a map string gets analyzed.
+                              */
+    }
+}
+
+size_t SegMap595Class::get_glyph_num()
+{
+    if (_status < 0) {
+        return 0;
+    } else {
+        return _glyph_set_selected->glyph_num;
+    }
+}
+
+char SegMap595Class::get_represented_char(size_t index)
+{
+    if (_status < 0 || index >= _glyph_set_selected->glyph_num) {
+        return 0;
+    }
+
+    return _glyph_set_selected->valid_chars[index];
+}
+
+char SegMap595Class::get_represented_char(uint32_t index)
+{
+    return get_represented_char(static_cast<size_t>(index));
+}
+
+const char* SegMap595Class::get_byte_bin_notation_as_str(unsigned char byte_to_write_down)
+{
+    if (_status < 0) {
+        return nullptr;
+    }
+
+    // Standard C and C++ binary number notation.
+    constexpr size_t bin_notation_prefix_len = 2;                     // "0b".
+    constexpr size_t notation_len = bin_notation_prefix_len + 8 + 1;  // Binary notation prefix + 8 bits + null terminator.
+    
+    static char buf[notation_len];
+    buf[0] = '0';
+    buf[1] = 'b';
+
+    for (uint8_t bit_pos = 0; bit_pos < SEGMAP595_SEG_NUM; ++bit_pos) { 
+        uint8_t shifted = static_cast<uint8_t>(byte_to_write_down << bit_pos);
+        if ((shifted & SEGMAP595_ONLY_MSB_SET_MASK) != 0) {
+            buf[2 + bit_pos] = '1';
+        } else {
+            buf[2 + bit_pos] = '0';
+        }
+    }
+    buf[notation_len - 1] = '\0';
+
+    return buf;
+}
+
+const char* SegMap595Class::get_byte_bin_notation_as_str(char byte_to_write_down)
+{
+    return get_byte_bin_notation_as_str(static_cast<unsigned char>(byte_to_write_down));
+}
+
+const char* SegMap595Class::get_map_str()
+{
+    if (_status < 0) {
+        return nullptr;
+    } else {
+        return _map_str;
+    }
+}
+
+
+/* --- Private methods ---*/
+
+int32_t SegMap595Class::select_glyph_set(uint32_t glyph_set_num)
 {
     if (glyph_set_num < 1 || glyph_set_num > SEGMAP595_GLYPH_SETS_PROVIDED) {
         return _status = SEGMAP595_STATUS_ERR_GLYPH_SET_NUM;
@@ -79,11 +201,11 @@ int32_t SegMap595Class::choose_glyph_set(uint32_t glyph_set_num)
 
     switch (glyph_set_num) {
         case SEGMAP595_GLYPH_SET_1:
-            _glyph_set_chosen = &_glyph_set_1;
+            _glyph_set_selected = &_glyph_set_1;
             break;
 
         case SEGMAP595_GLYPH_SET_2:
-            _glyph_set_chosen = &_glyph_set_2;
+            _glyph_set_selected = &_glyph_set_2;
             break;
 
         default:
@@ -161,10 +283,10 @@ void SegMap595Class::map_bytes(int32_t display_common_pin)
 {
     _display_common_pin = display_common_pin;
 
-    for (size_t i = 0; i < _glyph_set_chosen->glyph_num; ++i) {
+    for (size_t i = 0; i < _glyph_set_selected->glyph_num; ++i) {
         for (size_t j = 0; j < SEGMAP595_SEG_NUM; ++j) {
             uint8_t mask = static_cast<uint8_t>(1u << _bit_pos[j]);
-            if ((_glyph_set_chosen->abc_bytes[i] << j) & SEGMAP595_ONLY_MSB_SET_MASK) {
+            if ((_glyph_set_selected->abc_bytes[i] << j) & SEGMAP595_ONLY_MSB_SET_MASK) {
                 _mapped_bytes[i] |= mask;
             } else {
                 _mapped_bytes[i] &= ~mask;
@@ -173,81 +295,8 @@ void SegMap595Class::map_bytes(int32_t display_common_pin)
     }
 
     if (_display_common_pin != SEGMAP595_COMMON_CATHODE) {
-        for (size_t i = 0; i < _glyph_set_chosen->glyph_num; ++i) {
+        for (size_t i = 0; i < _glyph_set_selected->glyph_num; ++i) {
             _mapped_bytes[i] ^= static_cast<uint8_t>(SEGMAP595_ALL_BITS_SET_MASK);  // Toggle all bits.
         }
-    }
-}
-
-int32_t SegMap595Class::get_status()
-{
-    return _status;
-}
-
-uint8_t SegMap595Class::get_mapped_byte(size_t index)
-{
-    if (_status < 0 || index >= _glyph_set_chosen->glyph_num) {
-        return 0;
-    }
-
-    return _mapped_bytes[index];
-}
-
-uint8_t SegMap595Class::get_mapped_byte(uint32_t index)
-{
-    return get_mapped_byte(static_cast<size_t>(index));
-}
-
-uint8_t SegMap595Class::get_mapped_byte(char represented_char)
-{
-    if (_status < 0) {
-        return 0;
-    }
-
-    constexpr int32_t ascii_code_diff = 'a' - 'A';
-    if (represented_char >= 'a' && represented_char <= 'z') {
-        represented_char -= ascii_code_diff;
-    }
-
-    for (size_t i = 0; i < _glyph_set_chosen->glyph_num; ++i) {
-        if (represented_char == _glyph_set_chosen->valid_chars[i]) {
-            return _mapped_bytes[i];
-        }
-    }
-
-    return 0;
-}
-
-uint8_t SegMap595Class::get_mapped_byte(unsigned char represented_char)
-{
-    return get_mapped_byte(static_cast<char>(represented_char));
-}
-
-uint32_t SegMap595Class::get_dot_bit_pos()
-{
-    if (_status < 0) {
-        return SEGMAP595_MSB + 1;
-    } else {
-        return _bit_pos[0];  /* Dot (represented by @ sign) is the first character
-                              * whose position is determined when a map string gets analyzed.
-                              */
-    }
-}
-
-size_t SegMap595Class::get_glyph_num()
-{
-    if (_status < 0) {
-        return 0;
-    } else {
-        return _glyph_set_chosen->glyph_num;
-    }
-}
-
-const char* SegMap595Class::get_map_str()
-{
-    if (_status < 0) {
-        return nullptr;
-    } else {
-        return _map_str;
     }
 }

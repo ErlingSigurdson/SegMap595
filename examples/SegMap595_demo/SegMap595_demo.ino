@@ -3,11 +3,15 @@
 /**
  * Filename: SegMap595_demo.ino
  * ----------------------------------------------------------------------------|---------------------------------------|
- * Purpose:  An example sketch demonstrating a basic usage of the SegMap595
+ * Purpose:  An example sketch demonstrating basic usage of the SegMap595
  *           library.
  *
- *           Outputs all glyphs from a chosen set one by one to a single-digit
- *           7-segment display using bit-banging and a single 74HC595 IC.
+ *           Cycles through all glyphs in the selected glyph set
+ *           and displays them, one by one, on a single-digit 7-segment
+ *           display by bit-banging a 74HC595 shift register IC.
+ *           Additionally, prints mapping information via UART.
+ *
+ *           Refer to README for detailed description. 
  * ----------------------------------------------------------------------------|---------------------------------------|
  * Notes:
  */
@@ -20,20 +24,28 @@
 #include <SegMap595.h>
 
 
-/*--- Library usage ---*/
+/*--- Library API parameters ---*/
 
-/* Valid map string example. You should specify the relevant string
- * according to the actual (physical) order of connections in your circuit.
+/* Specify the relevant string according to the actual
+ * (physical) order of connections in your circuit.
  */
 #define MAP_STR "ED@CGAFB"
 
-// Specify your display type. Use one directive, comment out or delete the other.
-#define DISPLAY_TYPE_COMMON_CATHODE
-//#define DISPLAY_TYPE_COMMON_ANODE
+// Specify your display type based on its common pin. Use one directive, comment out or delete the other.
+#define DISPLAY_COMMON_PIN SEGMAP595_COMMON_CATHODE
+//#define DISPLAY_COMMON_PIN SEGMAP595_COMMON_ANODE
 
-// Choose a glyph set. Use one directive, comment out or delete the other.
+// Select a glyph set. Use one directive, comment out or delete the other.
 #define GLYPH_SET_NUM SEGMAP595_GLYPH_SET_1
 //#define GLYPH_SET_NUM SEGMAP595_GLYPH_SET_2
+
+#ifndef DISPLAY_COMMON_PIN
+    #error "Error: display type (common pin) not specified."
+#endif
+
+#ifndef GLYPH_SET_NUM
+    #error "Error: glyph set not specified."
+#endif
 
 
 /*--- Misc ---*/
@@ -46,6 +58,7 @@
 #define LATCH_PIN 17
 #define CLOCK_PIN 18
 
+// Output interval ("once in X milliseconds").
 #define INTERVAL  1000
 
 
@@ -55,36 +68,29 @@ void setup()
 {
     Serial.begin(BAUD_RATE);
 
+    // Pin setup.
     pinMode(DATA_PIN,  OUTPUT);
     pinMode(LATCH_PIN, OUTPUT);
     pinMode(CLOCK_PIN, OUTPUT);
 
     // Byte mapping.
-    #ifdef DISPLAY_TYPE_COMMON_CATHODE
-        SegMap595.init(MAP_STR, SEGMAP595_COMMON_CATHODE, GLYPH_SET_NUM);
-    #elif defined DISPLAY_TYPE_COMMON_ANODE
-        SegMap595.init(MAP_STR, SEGMAP595_COMMON_ANODE, GLYPH_SET_NUM);
-    #else
-        #error "Display type not specified."
-    #endif
-}
+    SegMap595.init(MAP_STR, DISPLAY_COMMON_PIN, GLYPH_SET_NUM);
 
-void loop()
-{
-    /*--- Mapping status check ---*/
-    
+    // Mapping status check.
     int32_t mapping_status = SegMap595.get_status();
     // Loop error output if mapping was unsuccessful.
     if (mapping_status < 0) {
         while(true) {
-            Serial.print("Mapping failed, error code: ");
+            Serial.print("Error: mapping failed, error code ");
             Serial.println(mapping_status);
             delay(INTERVAL);
         }
     }
+}
 
-
-    /*--- Demo output to a single-digit 7-segment display ---*/
+void loop()
+{
+    /*--- Counter and output trigger ---*/
 
     uint64_t current_millis = millis();
     static uint64_t previous_millis = current_millis;
@@ -95,10 +101,15 @@ void loop()
         counter = 0;
     }
 
-    static bool display_update_due = true;
+    // Output trigger.
+    static bool output_due = true;
+
+
+    /*--- Demo output ---*/
     
-    if (display_update_due) {
+    if (output_due) {
         uint8_t byte_to_shift = SegMap595.get_mapped_byte(counter);
+
         // Dot segment blink.
         if (counter % 2) {
             static uint32_t dot_bit_pos = SegMap595.get_dot_bit_pos();
@@ -106,16 +117,31 @@ void loop()
             byte_to_shift ^= mask;
         }
 
-        // Output a glyph.
+        // Output a glyph on the display.
         digitalWrite(LATCH_PIN, LOW);
         shiftOut(DATA_PIN, CLOCK_PIN, MSBFIRST, byte_to_shift);
         digitalWrite(LATCH_PIN, HIGH);
-        display_update_due = false;
+
+        // Print mapping information via UART.
+        Serial.print("Based on the map string ");
+        Serial.print(SegMap595.get_map_str());
+        Serial.print(" character ");
+        char represented_char = SegMap595.get_represented_char(counter);
+        Serial.print(represented_char);  /* Note that a degree symbol is represented by an asterisk (*)
+                                          * because the actual degree symbol isn't listed in ASCII.
+                                          */
+        Serial.print(" corresponds to the mapped byte ");
+        Serial.println(SegMap595.get_byte_bin_notation_as_str(byte_to_shift));
+
+        output_due = false;
     }
+
+
+    /*--- Counter and output trigger, continued ---*/
 
     if (current_millis - previous_millis >= INTERVAL) {
         ++counter;
-        display_update_due = true;
+        output_due = true;
         previous_millis = current_millis;
     }
 }

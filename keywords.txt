@@ -18,8 +18,10 @@ get_status	KEYWORD2
 get_mapped_byte	KEYWORD2
 get_dot_bit_pos	KEYWORD2
 get_glyph_num	KEYWORD2
+get_represented_char	KEYWORD2
+get_byte_bin_notation_as_str	KEYWORD2
 get_map_str	KEYWORD2
-choose_glyph_set	KEYWORD2
+select_glyph_set	KEYWORD2
 check_map_str	KEYWORD2
 read_map_str	KEYWORD2
 map_bytes	KEYWORD2
