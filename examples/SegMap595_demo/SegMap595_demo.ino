@@ -11,7 +11,7 @@
  *           display by bit-banging a 74HC595 shift register IC.
  *           Additionally, prints mapping information via UART.
  *
- *           Refer to README for detailed description. 
+ *           Refer to README for detailed description.
  * ----------------------------------------------------------------------------|---------------------------------------|
  * Notes:
  */
@@ -94,7 +94,7 @@ void loop()
 
     uint64_t current_millis = millis();
     static uint64_t previous_millis = current_millis;
-    
+
     static size_t counter = 0;
     static size_t glyph_num = SegMap595.get_glyph_num();
     if (counter >= glyph_num) {
@@ -106,14 +106,32 @@ void loop()
 
 
     /*--- Demo output ---*/
-    
+
     if (output_due) {
         uint8_t byte_to_shift = SegMap595.get_mapped_byte(counter);
+
+        // Print mapping information via UART.
+        Serial.print("Based on map string ");
+        Serial.print(SegMap595.get_map_str());
+
+        char represented_char = SegMap595.get_represented_char(counter);
+        if (represented_char == '*') {        /* An asterisk represents a degree symbol because
+                                               * the actual degree symbol isn't listed in ASCII.
+                                               */
+            Serial.print(" degree symbol ");
+        } else {
+            Serial.print(" character '");
+            Serial.print(represented_char);
+            Serial.print("' ");
+        }
+
+        Serial.print("corresponds to mapped byte ");
+        Serial.println(SegMap595.get_byte_bin_notation_as_str(byte_to_shift));
 
         // Dot segment blink.
         if (counter % 2) {
             static uint32_t dot_bit_pos = SegMap595.get_dot_bit_pos();
-            uint8_t mask = static_cast<uint8_t>(1u << dot_bit_pos);
+            static uint8_t mask = static_cast<uint8_t>(1u << dot_bit_pos);
             byte_to_shift ^= mask;
         }
 
@@ -121,17 +139,6 @@ void loop()
         digitalWrite(LATCH_PIN, LOW);
         shiftOut(DATA_PIN, CLOCK_PIN, MSBFIRST, byte_to_shift);
         digitalWrite(LATCH_PIN, HIGH);
-
-        // Print mapping information via UART.
-        Serial.print("Based on the map string ");
-        Serial.print(SegMap595.get_map_str());
-        Serial.print(" character ");
-        char represented_char = SegMap595.get_represented_char(counter);
-        Serial.print(represented_char);  /* Note that a degree symbol is represented by an asterisk (*)
-                                          * because the actual degree symbol isn't listed in ASCII.
-                                          */
-        Serial.print(" corresponds to the mapped byte ");
-        Serial.println(SegMap595.get_byte_bin_notation_as_str(byte_to_shift));
 
         output_due = false;
     }

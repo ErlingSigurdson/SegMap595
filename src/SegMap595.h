@@ -67,7 +67,7 @@ class SegMap595Class {
     struct GlyphSet {
         const uint8_t       abc_bytes[SEGMAP595_GLYPH_SET_MAX_CHAR_NUM];
         const unsigned char valid_chars[SEGMAP595_GLYPH_SET_MAX_CHAR_NUM];
-        const size_t        glyph_num; 
+        const size_t        glyph_num;
     };
 
     public:
@@ -93,8 +93,8 @@ class SegMap595Class {
          */
         int32_t  init(const char *map_str, int32_t display_common_pin, uint32_t glyph_set_num = SEGMAP595_GLYPH_SET_1);
 
-        /* Get the mapping status.
-         * 
+        /* Get the last mapping status.
+         *
          * Returns: zero if mapping was successful, negative integer otherwise
          * (see the preprocessor macros list for possible values).
          */
@@ -162,7 +162,7 @@ class SegMap595Class {
          */
         char     get_represented_char(uint32_t index);
 
-        /* Get the pointer to a string that represents a standard C and C++ 
+        /* Get the pointer to a string that represents a standard C and C++
          * binary number notation for a given byte (overload #1).
          *
          * Returns: a pointer to a string if mapping was successful,
@@ -173,7 +173,7 @@ class SegMap595Class {
          */
         const char* get_byte_bin_notation_as_str(char byte_to_write_down);
 
-        /* Get the pointer to a string that represents a standard C and C++ 
+        /* Get the pointer to a string that represents a standard C and C++
          * binary number notation for a given byte (overload #2).
          *
          * Returns: a pointer to a string if mapping was successful,
@@ -216,7 +216,9 @@ class SegMap595Class {
         // Mapping status. See the preprocessor macros list for possible values.
         int32_t  _status = SEGMAP595_STATUS_INIT;
 
-        // Zero for a common-cathode display, any other value for a common-anode display.
+        /* Display type (display common pin).
+         * Zero for a common-cathode display, any other value for a common-anode display.
+         */
         int32_t  _display_common_pin;
 
         /* Resulting array.
@@ -250,7 +252,7 @@ class SegMap595Class {
          * (see the preprocessor macros list for possible values).
          *
          * The map string doesn't get passed because it's already copied
-         * to the internal buffer by the moment this method is called. 
+         * to the internal buffer by the moment this method is called.
          */
         int32_t read_map_str();
 

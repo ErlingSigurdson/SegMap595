@@ -46,7 +46,7 @@
 #define SEGMAP595_GLYPH_SET_1_ABC_BYTE_G 0b01011110  /* More or less like actual 'G',
                                                       * but without the short horizontal stroke.
                                                       */
-                                                      
+
 #define SEGMAP595_GLYPH_SET_1_ABC_BYTE_H 0b00010111  // Like actual 'h'.
 #define SEGMAP595_GLYPH_SET_1_ABC_BYTE_I 0b00010000  // Short vertical stroke, not equivalent to '1'.
 #define SEGMAP595_GLYPH_SET_1_ABC_BYTE_J 0b00111100  // Like actual 'J'.

@@ -191,4 +191,4 @@ that supports C++11 or later. Actual interfacing with a 74HC595 (such as demonst
 sketch) requires an MCU or a similar embedded device capable of bit-banging or SPI data transfer.
 
 The library is primarily intended and documented for use with the Arduino framework, but it doesn't
-include `Arduino.h` and can be readily used in non-Arduino embedded electronics projects. 
+include `Arduino.h` and can be readily used in non-Arduino embedded electronics projects.
