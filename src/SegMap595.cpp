@@ -158,22 +158,22 @@ const char* SegMap595Class::get_byte_bin_notation_as_str(unsigned char byte_to_w
     // Standard C and C++ binary number notation prefix "0b"(as in "0bXXXXXXXX").
     constexpr size_t bin_notation_prefix_len = 2;
 
-    // Binary notation length: prefix + 8 bits + null terminator.
-    constexpr size_t notation_len = bin_notation_prefix_len + SEGMAP595_SEG_NUM + 1;
-    
-    static char buf[notation_len];
+    // Binary notation length: prefix + 8 bits.
+    constexpr size_t notation_len = bin_notation_prefix_len + SEGMAP595_SEG_NUM;
+
+    static char buf[notation_len + 1];  // Plus one byte for null terminator.
     buf[0] = '0';
     buf[1] = 'b';
 
-    for (uint8_t bit_pos = 0; bit_pos < SEGMAP595_SEG_NUM; ++bit_pos) { 
-        uint8_t shifted = static_cast<uint8_t>(byte_to_write_down << bit_pos);
-        if ((shifted & SEGMAP595_ONLY_MSB_SET_MASK) != 0) {
-            buf[bin_notation_prefix_len + bit_pos] = '1';
+    for (int32_t bit_pos = SEGMAP595_MSB; bit_pos >= 0; --bit_pos) {
+        uint8_t shifted = byte_to_write_down >> bit_pos;
+        if ((shifted & 0x01) != 0) {
+            buf[bin_notation_prefix_len + SEGMAP595_MSB - bit_pos] = '1';
         } else {
-            buf[bin_notation_prefix_len + bit_pos] = '0';
+            buf[bin_notation_prefix_len + SEGMAP595_MSB - bit_pos] = '0';
         }
     }
-    buf[notation_len - 1] = '\0';
+    buf[notation_len] = '\0';
 
     return buf;
 }
