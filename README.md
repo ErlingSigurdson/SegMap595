@@ -172,7 +172,8 @@ Get the character that corresponds to a certain index in the resulting array of 
 char represented_char = SegMap595.get_represented_char(counter);
 ```
 
-Get the pointer to a string that represents the standard C and C++ binary number notation for a given byte:
+Get the pointer to a string that represents a standard (since GCC 4.3 or C++14)
+binary number notation for a given byte:
 ```cpp
 const char *byte_bin_notation = SegMap595.get_byte_bin_notation_as_str(byte_to_shift);
 ```

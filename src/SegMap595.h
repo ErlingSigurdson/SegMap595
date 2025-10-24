@@ -162,7 +162,7 @@ class SegMap595Class {
          */
         char     get_represented_char(uint32_t index);
 
-        /* Get the pointer to a string that represents a standard C and C++
+        /* Get the pointer to a string that represents a standard (since GCC 4.3 or C++14)
          * binary number notation for a given byte (overload #1).
          *
          * Returns: a pointer to a string if mapping was successful,
@@ -173,7 +173,7 @@ class SegMap595Class {
          */
         const char* get_byte_bin_notation_as_str(char byte_to_write_down);
 
-        /* Get the pointer to a string that represents a standard C and C++
+        /* Get the pointer to a string that represents a standard (since GCC 4.3 or C++14)
          * binary number notation for a given byte (overload #2).
          *
          * Returns: a pointer to a string if mapping was successful,
