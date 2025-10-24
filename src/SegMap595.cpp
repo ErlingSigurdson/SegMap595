@@ -85,10 +85,12 @@ uint8_t SegMap595Class::get_mapped_byte(size_t index)
     return _mapped_bytes[index];
 }
 
+#if defined(UINT32_MAX) && defined(SIZE_MAX) && (UINT32_MAX > SIZE_MAX)
 uint8_t SegMap595Class::get_mapped_byte(uint32_t index)
 {
     return get_mapped_byte(static_cast<size_t>(index));
 }
+#endif
 
 uint8_t SegMap595Class::get_mapped_byte(char represented_char)
 {
@@ -144,10 +146,12 @@ char SegMap595Class::get_represented_char(size_t index)
     return _glyph_set_selected->valid_chars[index];
 }
 
+#if defined(UINT32_MAX) && defined(SIZE_MAX) && (UINT32_MAX > SIZE_MAX)
 char SegMap595Class::get_represented_char(uint32_t index)
 {
     return get_represented_char(static_cast<size_t>(index));
 }
+#endif
 
 const char* SegMap595Class::get_byte_bin_notation_as_str(unsigned char byte_to_write_down)
 {

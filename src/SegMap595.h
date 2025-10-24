@@ -114,7 +114,9 @@ class SegMap595Class {
          * and the passed index is within the array bounds,
          * zero otherwise.
          */
+        #if defined(UINT32_MAX) && defined(SIZE_MAX) && (UINT32_MAX > SIZE_MAX)
         uint8_t  get_mapped_byte(uint32_t index);
+        #endif
 
         /* Get a mapped byte (overload #3).
          *
@@ -160,7 +162,9 @@ class SegMap595Class {
          * and the passed index is within the array bounds,
          * zero otherwise.
          */
+        #if defined(UINT32_MAX) && defined(SIZE_MAX) && (UINT32_MAX > SIZE_MAX)
         char     get_represented_char(uint32_t index);
+        #endif
 
         /* Get the pointer to a string that represents a standard (since GCC 4.3 or C++14)
          * binary number notation for a given byte (overload #1).
