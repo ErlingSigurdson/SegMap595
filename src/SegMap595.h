@@ -35,14 +35,15 @@
 
 /*--- Misc ---*/
 
-#define SEGMAP595_SEG_NUM             8  // Including a dot segment.
+#define SEGMAP595_SEG_NUM           8  // Including a dot segment.
 
-#define SEGMAP595_MSB                 7
-#define SEGMAP595_ONLY_MSB_SET_MASK   (1u << SEGMAP595_MSB)
-#define SEGMAP595_ALL_BITS_SET_MASK   0xFF
+#define SEGMAP595_MSB               7
+#define SEGMAP595_ONLY_MSB_SET_MASK (1u << SEGMAP595_MSB)
+#define SEGMAP595_ONLY_LSB_SET_MASK 0x01
+#define SEGMAP595_ALL_BITS_SET_MASK 0xFF
 
-#define SEGMAP595_COMMON_CATHODE      0
-#define SEGMAP595_COMMON_ANODE        1
+#define SEGMAP595_COMMON_CATHODE    0
+#define SEGMAP595_COMMON_ANODE      1
 
 #define SEGMAP595_GLYPH_SET_MAX_CHAR_NUM 40  // Highest number of glyphs among all provided glyph sets.
 #define SEGMAP595_GLYPH_SETS_PROVIDED    2
@@ -82,10 +83,10 @@ class SegMap595Class {
          * successfully mapped and the passed glyph set number was valid), negative integer otherwise
          * (see the preprocessor macros list for possible values).
          *
-         * If the second parameter equals zero, a common cathode display is assumed.
-         * Otherwise a common anode display is assumed.
+         * If the second parameter equals zero, a common-cathode display is assumed.
+         * Otherwise a common-anode display is assumed.
          *
-         * The third parameter (if passed) must be an integer from 1 and up to the number of provided glyph sets.
+         * The third parameter (if passed) must be an integer from 1 and up to SEGMAP595_GLYPH_SETS_PROVIDED.
          * Glyph set #1 is used by default.
          *
          * Multiple calls to this method are valid, each call will lead to a fresh byte mapping.
@@ -215,7 +216,7 @@ class SegMap595Class {
         // Mapping status. See the preprocessor macros list for possible values.
         int32_t  _status = SEGMAP595_STATUS_INIT;
 
-        // Zero for common cathode, any other value for common anode.
+        // Zero for a common-cathode display, any other value for a common-anode display.
         int32_t  _display_common_pin;
 
         /* Resulting array.

@@ -121,7 +121,7 @@ uint32_t SegMap595Class::get_dot_bit_pos()
         return SEGMAP595_MSB + 1;
     } else {
         return _bit_pos[0];  /* Dot (represented by @ sign) is the first character
-                              * whose position is determined when a map string gets analyzed.
+                              * whose position is checked when a map string gets analyzed.
                               */
     }
 }
@@ -167,7 +167,7 @@ const char* SegMap595Class::get_byte_bin_notation_as_str(unsigned char byte_to_w
 
     for (int32_t bit_pos = SEGMAP595_MSB; bit_pos >= 0; --bit_pos) {
         uint8_t shifted = byte_to_write_down >> bit_pos;
-        if ((shifted & 0x01) != 0) {
+        if ((shifted & SEGMAP595_ONLY_LSB_SET_MASK) != 0) {
             buf[bin_notation_prefix_len + SEGMAP595_MSB - bit_pos] = '1';
         } else {
             buf[bin_notation_prefix_len + SEGMAP595_MSB - bit_pos] = '0';
