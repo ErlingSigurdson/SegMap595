@@ -218,7 +218,7 @@ class SegMap595Class {
         char     _map_str[SEGMAP595_SEG_NUM + 1] = {0};
 
         // Mapping status. See the preprocessor macros list for possible values.
-        int32_t  _status = SEGMAP595_STATUS_INIT;
+        int32_t  _status = SEGMAP595_STATUS_INITIAL;
 
         /* Display type (display common pin).
          * Zero for a common-cathode display, any other value for a common-anode display.
