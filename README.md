@@ -208,7 +208,7 @@ using two daisy-chained 74HC595 shift register ICs.
 
 ## Contact details
 
-Maintainer - **Dmitriy Efimov aka Erling Sigurdson**
+**Maintainer** — Dmitriy Efimov aka Erling Sigurdson
 * <efimov-d-v@yandex.ru>
 * <erlingsigurdson@gmail.com>
 * Telegram: @erlingsigurdson
