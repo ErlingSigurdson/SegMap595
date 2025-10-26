@@ -202,7 +202,7 @@ const char* SegMap595Class::get_map_str()
 int32_t SegMap595Class::select_glyph_set(uint32_t glyph_set_num)
 {
     if (glyph_set_num < 1 || glyph_set_num > SEGMAP595_GLYPH_SETS_PROVIDED) {
-        return _status = SEGMAP595_STATUS_ERR_GLYPH_SET_NUM;
+        return SEGMAP595_STATUS_ERR_GLYPH_SET_NUM;
     }
 
     switch (glyph_set_num) {
@@ -224,12 +224,12 @@ int32_t SegMap595Class::select_glyph_set(uint32_t glyph_set_num)
 int32_t SegMap595Class::check_map_str(const char *map_str)
 {
     if (map_str == nullptr) {
-        return _status = SEGMAP595_STATUS_ERR_NULLPTR;
+        return SEGMAP595_STATUS_ERR_NULLPTR;
     }
 
     size_t str_len = strlen(map_str);
     if (str_len != SEGMAP595_SEG_NUM) {
-        return _status = SEGMAP595_STATUS_ERR_MAP_STR_LEN;
+        return SEGMAP595_STATUS_ERR_MAP_STR_LEN;
     }
 
     // Copy to internal buffer.
@@ -247,7 +247,7 @@ int32_t SegMap595Class::check_map_str(const char *map_str)
     // Check for invalid characters.
     for (size_t i = 0; i < SEGMAP595_SEG_NUM; ++i) {
         if (_map_str[i] < '@' || _map_str[i] > 'G') {  // Only ASCII characters from '@' to 'G' are valid.
-            return _status = SEGMAP595_STATUS_ERR_MAP_STR_CHAR;
+            return SEGMAP595_STATUS_ERR_MAP_STR_CHAR;
         }
     }
 
@@ -255,12 +255,12 @@ int32_t SegMap595Class::check_map_str(const char *map_str)
     for (size_t i = 0; i < SEGMAP595_SEG_NUM; ++i) {
         for (size_t j = i + 1u; j < SEGMAP595_SEG_NUM; ++j) {
             if (_map_str[i] == _map_str[j]) {
-                return _status = SEGMAP595_STATUS_ERR_MAP_STR_DUPLICATION;
+                return SEGMAP595_STATUS_ERR_MAP_STR_DUPLICATION;
             }
         }
     }
 
-    return _status = SEGMAP595_STATUS_OK;
+    return SEGMAP595_STATUS_OK;
 }
 
 int32_t SegMap595Class::read_map_str()
