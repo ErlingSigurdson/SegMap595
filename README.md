@@ -196,12 +196,15 @@ include `Arduino.h` and can be readily used in non-Arduino embedded electronics 
 
 ## Links
 
-### Git repositories
-[Primary repository](https://github.com/ErlingSigurdson/SegMap595)
-[Backup repository](https://gitflic.ru/project/efimov-d-v/segmap595)
+### This library
+[Primary repository on GitHub](https://github.com/ErlingSigurdson/SegMap595)
+
+[Backup repository on GitFlic](https://gitflic.ru/project/efimov-d-v/segmap595)
 
 ### Related libraries
 **Drv7Seg4D585** is a single-class Arduino library for driving a multiplexed 7-segment display
 using two daisy-chained 74HC595 shift register ICs.
-[Primary repository](https://github.com/ErlingSigurdson/Drv7Seg2x595)
-[Backup repository](https://gitflic.ru/project/efimov-d-v/drv7seg4d595)
+
+[Primary repository on GitHub](https://github.com/ErlingSigurdson/Drv7Seg2x595)
+
+[Backup repository on GitFlic](https://gitflic.ru/project/efimov-d-v/drv7seg4d595)
