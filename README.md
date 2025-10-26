@@ -167,7 +167,7 @@ Get the number of glyphs available in the selected glyph set (typically used as 
 size_t glyph_num = SegMap595.get_glyph_num();
 ```
 
-Get the character (its ASCII code) that corresponds to a certain index in the resulting array of mapped bytes:
+Get the character (its ASCII code) that corresponds to a given index in the resulting array of mapped bytes:
 ```cpp
 char represented_char = SegMap595.get_represented_char(counter);
 ```
