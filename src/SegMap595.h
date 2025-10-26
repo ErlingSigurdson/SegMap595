@@ -50,7 +50,7 @@
 #define SEGMAP595_GLYPH_SET_1            1
 #define SEGMAP595_GLYPH_SET_2            2
 
-// Possible mapping status values. Double as return codes for some functions.
+// Mapping status codes. Double as return codes for some functions.
 #define SEGMAP595_STATUS_INITIAL                 -1
 #define SEGMAP595_STATUS_ERR_GLYPH_SET_NUM       -2
 #define SEGMAP595_STATUS_ERR_NULLPTR             -3
