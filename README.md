@@ -205,3 +205,10 @@ include `Arduino.h` and can be readily used in non-Arduino embedded electronics 
 using two daisy-chained 74HC595 shift register ICs.
 * [Primary repository on GitHub](https://github.com/ErlingSigurdson/Drv7Seg2x595)
 * [Backup repository on GitFlic](https://gitflic.ru/project/efimov-d-v/drv7seg4d595)
+
+## Contact details
+
+Maintainer - **Dmitriy Efimov aka Erling Sigurdson**
+* <efimov-d-v@yandex.ru>
+* <erlingsigurdson@gmail.com>
+* Telegram: @erlingsigurdson
