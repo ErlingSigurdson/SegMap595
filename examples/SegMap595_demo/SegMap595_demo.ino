@@ -10,10 +10,9 @@
  *           and displays them, one by one, on a single-digit 7-segment
  *           display by bit-banging a 74HC595 shift register IC.
  *           Additionally, prints mapping information via UART.
- *
- *           Refer to README for detailed description.
  * ----------------------------------------------------------------------------|---------------------------------------|
- * Notes:
+ * Notes:    Refer to the README for an API overview.
+ *           Refer to SegMap595.h for a complete API description.
  */
 
 
@@ -24,7 +23,7 @@
 #include <SegMap595.h>
 
 
-/*--- Library API parameters ---*/
+/*--- SegMap595 library API parameters ---*/
 
 /* Specify the relevant string according to the actual
  * (physical) order of connections in your circuit.
@@ -138,6 +137,11 @@ void loop()
         // Output a glyph on the display.
         digitalWrite(LATCH_PIN, LOW);
         shiftOut(DATA_PIN, CLOCK_PIN, MSBFIRST, byte_to_shift);
+        /* Note that if your display's common pin is connected to a ground (for a common-cathode display)
+         * or a positive rail (for a common-anode display) not directly, but via a switching device
+         * (typically a transistor), at this point you also have to call a function that will turn on
+         * the switch and thus power up your display.
+         */
         digitalWrite(LATCH_PIN, HIGH);
 
         output_due = false;
