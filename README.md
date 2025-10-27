@@ -189,7 +189,7 @@ Refer to `SegMap595.h` for the detailed API description if necessary.
 
 The library is highly portable: its code should compile and run on any platform with a C++ compiler that supports
 C++14 or later. It will also compile with C++11 if your compiler supports binary literals (0bXXXXXXXX) as an extension
-(e.g. GCC 4.3+).
+(e.g., GCC 4.3+).
 
 Actual interfacing with a 74HC595 (such as demonstrated in the example sketch) requires
 an MCU or a similar embedded device capable of bit-banging or SPI data transfer.
