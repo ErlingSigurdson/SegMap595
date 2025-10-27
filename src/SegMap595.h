@@ -150,7 +150,7 @@ class SegMap595Class {
 
         /* Get the character represented by a glyph by its index (overload #1).
          *
-         * Returns: resprective ASCII code if mapping was successful
+         * Returns: respective ASCII code if mapping was successful
          * and the passed index is within the array bounds,
          * zero otherwise.
          */
@@ -158,7 +158,7 @@ class SegMap595Class {
 
         /* Get the character represented by a glyph by its index (overload #2).
          *
-         * Returns: resprective ASCII code if mapping was successful
+         * Returns: respective ASCII code if mapping was successful
          * and the passed index is within the array bounds,
          * zero otherwise.
          */
