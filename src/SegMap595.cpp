@@ -159,7 +159,7 @@ const char* SegMap595Class::get_byte_bin_notation_as_str(unsigned char byte_to_w
         return nullptr;
     }
 
-    // Standard (since GCC 4.3 or C++14) binary number notation prefix "0b"(as in "0bXXXXXXXX").
+    // Standard (since GCC 4.3 or C++14) binary number notation prefix "0b" (as in "0bXXXXXXXX").
     constexpr size_t bin_notation_prefix_len = 2;
 
     // Binary notation length: prefix + 8 bits.
