@@ -42,7 +42,7 @@
 #define SEGMAP595_ONLY_LSB_SET_MASK 0x01
 #define SEGMAP595_ALL_BITS_SET_MASK 0xFF
 
-#define SEGMAP595_GLYPH_SET_MAX_CHAR_NUM 40  // Highest number of glyphs among all provided glyph sets.
+#define SEGMAP595_GLYPH_SET_MAX_GLYPH_NUM 40  // Highest number of glyphs among all provided glyph sets.
 
 // Mapping status codes. Double as return codes for some functions.
 #define SEGMAP595_STATUS_INITIAL                 -1
@@ -202,8 +202,8 @@ class SegMap595Class {
         /*--- Data types ---*/
 
         struct GlyphSet {
-            const uint8_t       abc_bytes[SEGMAP595_GLYPH_SET_MAX_CHAR_NUM];
-            const unsigned char valid_chars[SEGMAP595_GLYPH_SET_MAX_CHAR_NUM];
+            const uint8_t       abc_bytes[SEGMAP595_GLYPH_SET_MAX_GLYPH_NUM];
+            const unsigned char valid_chars[SEGMAP595_GLYPH_SET_MAX_GLYPH_NUM];
             const size_t        glyph_num;
         };
 
@@ -238,7 +238,7 @@ class SegMap595Class {
         /* Resulting array.
          * If mapping was successful, this array will hold the mapped bytes.
          */
-        uint8_t  _mapped_bytes[SEGMAP595_GLYPH_SET_MAX_CHAR_NUM] = {0};
+        uint8_t  _mapped_bytes[SEGMAP595_GLYPH_SET_MAX_GLYPH_NUM] = {0};
 
         // Array of values that indicate a bit position number for every display segment.
         uint32_t _bit_pos[SEGMAP595_SEG_NUM] = {0xFFFFFFFF};  // Initial values are intentionally invalid.
