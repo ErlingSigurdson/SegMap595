@@ -9,7 +9,7 @@
 SegMap595Class	KEYWORD1
 SegMap595	KEYWORD1
 DisplayType	KEYWORD1
-GlyphNum	KEYWORD1
+GlyphSetNum	KEYWORD1
 GlyphSet	KEYWORD1
 
 #######################################
