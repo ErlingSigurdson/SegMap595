@@ -35,8 +35,8 @@ SegMap595Class::DisplayType display_common_pin = SegMap595CommonCathode;
 //SegMap595Class::DisplayType display_common_pin = SegMap595CommonAnode;
 
 // Select a glyph set. Use one variant, comment out or delete the other.
-SegMap595Class::GlyphSetID glyph_set_id = SegMap595GlyphSetNo1;
-//SegMap595Class::GlyphSetID glyph_set_id = SegMap595GlyphSetNo2;
+SegMap595Class::GlyphSetId glyph_set_id = SegMap595GlyphSetNo1;
+//SegMap595Class::GlyphSetId glyph_set_id = SegMap595GlyphSetNo2;
 
 
 /*--- Misc ---*/
