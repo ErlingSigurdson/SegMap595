@@ -42,9 +42,6 @@
 #define SEGMAP595_ONLY_LSB_SET_MASK 0x01
 #define SEGMAP595_ALL_BITS_SET_MASK 0xFF
 
-#define SEGMAP595_COMMON_CATHODE    0
-#define SEGMAP595_COMMON_ANODE      1
-
 #define SEGMAP595_GLYPH_SET_MAX_CHAR_NUM 40  // Highest number of glyphs among all provided glyph sets.
 #define SEGMAP595_GLYPH_SETS_PROVIDED    2
 #define SEGMAP595_GLYPH_SET_1            1
@@ -64,13 +61,15 @@
 /****************** DATA TYPES ******************/
 
 class SegMap595Class {
-    struct GlyphSet {
-        const uint8_t       abc_bytes[SEGMAP595_GLYPH_SET_MAX_CHAR_NUM];
-        const unsigned char valid_chars[SEGMAP595_GLYPH_SET_MAX_CHAR_NUM];
-        const size_t        glyph_num;
-    };
-
     public:
+        /*--- Data types ---*/
+        
+        enum class DisplayType {
+            CommonCathode = 0,
+            CommonAnode = 1
+        };
+
+    
         /*--- Methods ---*/
 
         // Default constructor.
@@ -91,7 +90,8 @@ class SegMap595Class {
          *
          * Multiple calls to this method are valid, each call will lead to a fresh byte mapping.
          */
-        int32_t  init(const char *map_str, int32_t display_common_pin, uint32_t glyph_set_num = SEGMAP595_GLYPH_SET_1);
+        int32_t  init(const char *map_str, DisplayType display_common_pin,
+                      uint32_t glyph_set_num = SEGMAP595_GLYPH_SET_1);
 
         /* Get the last mapping status.
          *
@@ -197,6 +197,15 @@ class SegMap595Class {
         const char* get_map_str();
 
     private:
+        /*--- Data types ---*/
+    
+        struct GlyphSet {
+            const uint8_t       abc_bytes[SEGMAP595_GLYPH_SET_MAX_CHAR_NUM];
+            const unsigned char valid_chars[SEGMAP595_GLYPH_SET_MAX_CHAR_NUM];
+            const size_t        glyph_num;
+        };
+
+    
         /*--- Variables ---*/
 
         /* Glyph sets.
@@ -221,9 +230,8 @@ class SegMap595Class {
         int32_t  _status = SEGMAP595_STATUS_INITIAL;
 
         /* Display type (display common pin).
-         * Zero for a common-cathode display, any other value for a common-anode display.
          */
-        int32_t  _display_common_pin;
+        DisplayType _display_common_pin;
 
         /* Resulting array.
          * If mapping was successful, this array will hold the mapped bytes.
@@ -264,8 +272,12 @@ class SegMap595Class {
          *
          * Returns: nothing.
          */
-        void    map_bytes(int32_t display_common_pin);
+        void    map_bytes(DisplayType display_common_pin);
 };
+
+// Class-related aliases.
+constexpr SegMap595Class::DisplayType CommonCathode = SegMap595Class::DisplayType::CommonCathode;
+constexpr SegMap595Class::DisplayType CommonAnode   = SegMap595Class::DisplayType::CommonAnode;
 
 
 /*************** GLOBAL VARIABLES ***************/

@@ -30,17 +30,13 @@
  */
 #define MAP_STR "ED@CGAFB"
 
-// Specify your display type based on its common pin. Use one directive, comment out or delete the other.
-#define DISPLAY_COMMON_PIN SEGMAP595_COMMON_CATHODE
-//#define DISPLAY_COMMON_PIN SEGMAP595_COMMON_ANODE
+// Specify your display type based on its common pin. Use one variant, comment out or delete the other.
+SegMap595Class::DisplayType display_common_pin = CommonCathode;
+//SegMap595Class::DisplayType display_common_pin = CommonAnode;
 
 // Select a glyph set. Use one directive, comment out or delete the other.
 #define GLYPH_SET_NUM SEGMAP595_GLYPH_SET_1
 //#define GLYPH_SET_NUM SEGMAP595_GLYPH_SET_2
-
-#ifndef DISPLAY_COMMON_PIN
-    #error "Error: display type (common pin) not specified."
-#endif
 
 #ifndef GLYPH_SET_NUM
     #error "Error: glyph set not specified."
@@ -73,7 +69,7 @@ void setup()
     pinMode(CLOCK_PIN, OUTPUT);
 
     // Byte mapping.
-    SegMap595.init(MAP_STR, DISPLAY_COMMON_PIN, GLYPH_SET_NUM);
+    SegMap595.init(MAP_STR, display_common_pin, GLYPH_SET_NUM);
 
     // Mapping status check.
     int32_t mapping_status = SegMap595.get_status();

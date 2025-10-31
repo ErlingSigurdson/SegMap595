@@ -39,7 +39,7 @@ SegMap595Class::SegMap595Class() {}
 
 /*--- Public API methods ---*/
 
-int32_t SegMap595Class::init(const char *map_str, int32_t display_common_pin, uint32_t glyph_set_num)
+int32_t SegMap595Class::init(const char *map_str, DisplayType display_common_pin, uint32_t glyph_set_num)
 {
     // Default value of glyph_set_num is 1.
     _status = select_glyph_set(glyph_set_num);  /* Within this call the passed glyph set number
@@ -285,7 +285,7 @@ int32_t SegMap595Class::read_map_str()
     }
 }
 
-void SegMap595Class::map_bytes(int32_t display_common_pin)
+void SegMap595Class::map_bytes(DisplayType display_common_pin)
 {
     _display_common_pin = display_common_pin;
 
@@ -300,7 +300,7 @@ void SegMap595Class::map_bytes(int32_t display_common_pin)
         }
     }
 
-    if (_display_common_pin != SEGMAP595_COMMON_CATHODE) {
+    if (_display_common_pin == CommonAnode) {
         for (size_t i = 0; i < _glyph_set_selected->glyph_num; ++i) {
             _mapped_bytes[i] ^= static_cast<uint8_t>(SEGMAP595_ALL_BITS_SET_MASK);  // Toggle all bits.
         }
