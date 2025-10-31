@@ -83,7 +83,7 @@ Include the library:
 SegMap595.init(MAP_STR,
                SegMap595CommonCathode,  // Other option is `SegMap595CommonAnode`.
                SegMap595GlyphSetFirst   /* Other option is `SegMap595GlyphSetSecond`.
-                                         * If omitted, glyph set #1 will be selected be default.
+                                         * If omitted, glyph set #1 will be selected by default.
                                          */
               );
 ```
