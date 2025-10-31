@@ -63,13 +63,13 @@
 class SegMap595Class {
     public:
         /*--- Data types ---*/
-        
+
         enum class DisplayType {
             CommonCathode = 0,
             CommonAnode = 1
         };
 
-    
+
         /*--- Methods ---*/
 
         // Default constructor.
@@ -198,14 +198,14 @@ class SegMap595Class {
 
     private:
         /*--- Data types ---*/
-    
+
         struct GlyphSet {
             const uint8_t       abc_bytes[SEGMAP595_GLYPH_SET_MAX_CHAR_NUM];
             const unsigned char valid_chars[SEGMAP595_GLYPH_SET_MAX_CHAR_NUM];
             const size_t        glyph_num;
         };
 
-    
+
         /*--- Variables ---*/
 
         /* Glyph sets.
