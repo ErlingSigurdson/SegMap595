@@ -202,11 +202,11 @@ const char* SegMap595Class::get_map_str()
 int32_t SegMap595Class::select_glyph_set(GlyphSetId glyph_set_id)
 {
     switch (glyph_set_id) {
-        case SegMap595GlyphSetNo1:
+        case SegMap595GlyphSet1:
             _glyph_set_selected = &_glyph_set_1;
             break;
 
-        case SegMap595GlyphSetNo2:
+        case SegMap595GlyphSet2:
             _glyph_set_selected = &_glyph_set_2;
             break;
 

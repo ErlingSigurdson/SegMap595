@@ -66,8 +66,8 @@ class SegMap595Class {
         };
 
         enum class GlyphSetId {
-            GlyphSetNo1  = 0,
-            GlyphSetNo2 = 1
+            GlyphSet1  = 0,
+            GlyphSet2 = 1
         };
 
 
@@ -93,7 +93,7 @@ class SegMap595Class {
          */
         int32_t  init(const char *map_str,
                       DisplayType display_common_pin,
-                      GlyphSetId glyph_set_id = GlyphSetId::GlyphSetNo1);
+                      GlyphSetId glyph_set_id = GlyphSetId::GlyphSet1);
 
         /* Get the last mapping status.
          *
@@ -278,8 +278,8 @@ class SegMap595Class {
 };
 
 // Class-related aliases.
-constexpr SegMap595Class::GlyphSetId SegMap595GlyphSetNo1  = SegMap595Class::GlyphSetId::GlyphSetNo1;
-constexpr SegMap595Class::GlyphSetId SegMap595GlyphSetNo2 = SegMap595Class::GlyphSetId::GlyphSetNo2;
+constexpr SegMap595Class::GlyphSetId SegMap595GlyphSet1  = SegMap595Class::GlyphSetId::GlyphSet1;
+constexpr SegMap595Class::GlyphSetId SegMap595GlyphSet2 = SegMap595Class::GlyphSetId::GlyphSet2;
 constexpr SegMap595Class::DisplayType SegMap595CommonCathode  = SegMap595Class::DisplayType::CommonCathode;
 constexpr SegMap595Class::DisplayType SegMap595CommonAnode    = SegMap595Class::DisplayType::CommonAnode;
 
