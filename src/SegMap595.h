@@ -43,18 +43,14 @@
 #define SEGMAP595_ALL_BITS_SET_MASK 0xFF
 
 #define SEGMAP595_GLYPH_SET_MAX_CHAR_NUM 40  // Highest number of glyphs among all provided glyph sets.
-#define SEGMAP595_GLYPH_SETS_PROVIDED    2
-#define SEGMAP595_GLYPH_SET_1            1
-#define SEGMAP595_GLYPH_SET_2            2
 
 // Mapping status codes. Double as return codes for some functions.
 #define SEGMAP595_STATUS_INITIAL                 -1
-#define SEGMAP595_STATUS_ERR_GLYPH_SET_NUM       -2
-#define SEGMAP595_STATUS_ERR_NULLPTR             -3
-#define SEGMAP595_STATUS_ERR_MAP_STR_LEN         -4
-#define SEGMAP595_STATUS_ERR_MAP_STR_CHAR        -5
-#define SEGMAP595_STATUS_ERR_MAP_STR_DUPLICATION -6
-#define SEGMAP595_STATUS_ERR_BIT_POS_SET         -7
+#define SEGMAP595_STATUS_ERR_NULLPTR             -2
+#define SEGMAP595_STATUS_ERR_MAP_STR_LEN         -3
+#define SEGMAP595_STATUS_ERR_MAP_STR_CHAR        -4
+#define SEGMAP595_STATUS_ERR_MAP_STR_DUPLICATION -5
+#define SEGMAP595_STATUS_ERR_BIT_POS_SET         -6
 #define SEGMAP595_STATUS_OK                       0
 
 
@@ -66,7 +62,12 @@ class SegMap595Class {
 
         enum class DisplayType {
             CommonCathode = 0,
-            CommonAnode = 1
+            CommonAnode   = 1
+        };
+
+        enum class GlyphSetNum {
+            GlyphSetFirst  = 0,
+            GlyphSetSecond = 1
         };
 
 
@@ -90,8 +91,9 @@ class SegMap595Class {
          *
          * Multiple calls to this method are valid, each call will lead to a fresh byte mapping.
          */
-        int32_t  init(const char *map_str, DisplayType display_common_pin,
-                      uint32_t glyph_set_num = SEGMAP595_GLYPH_SET_1);
+        int32_t  init(const char *map_str,
+                      DisplayType display_common_pin,
+                      GlyphSetNum glyph_set_num = GlyphSetNum::GlyphSetFirst);
 
         /* Get the last mapping status.
          *
@@ -249,7 +251,7 @@ class SegMap595Class {
          * Returns: zero if the passed glyph set number is valid, negative integer otherwise
          * (see the preprocessor macros list for possible values).
          */
-        int32_t select_glyph_set(uint32_t glyph_set_num);
+        int32_t select_glyph_set(GlyphSetNum glyph_set_num);
 
         /* Check the passed map string validity and, if it's valid, copy its contents to the internal buffer.
          *
@@ -276,8 +278,10 @@ class SegMap595Class {
 };
 
 // Class-related aliases.
-constexpr SegMap595Class::DisplayType CommonCathode = SegMap595Class::DisplayType::CommonCathode;
-constexpr SegMap595Class::DisplayType CommonAnode   = SegMap595Class::DisplayType::CommonAnode;
+constexpr SegMap595Class::GlyphSetNum GlyphSetFirst  = SegMap595Class::GlyphSetNum::GlyphSetFirst;
+constexpr SegMap595Class::GlyphSetNum GlyphSetSecond = SegMap595Class::GlyphSetNum::GlyphSetSecond;
+constexpr SegMap595Class::DisplayType CommonCathode  = SegMap595Class::DisplayType::CommonCathode;
+constexpr SegMap595Class::DisplayType CommonAnode    = SegMap595Class::DisplayType::CommonAnode;
 
 
 /*************** GLOBAL VARIABLES ***************/
