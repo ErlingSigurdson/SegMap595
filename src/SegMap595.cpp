@@ -117,10 +117,10 @@ uint8_t SegMap595Class::get_mapped_byte(unsigned char represented_char)
     return get_mapped_byte(static_cast<char>(represented_char));
 }
 
-uint32_t SegMap595Class::get_dot_bit_pos()
+int32_t SegMap595Class::get_dot_bit_pos()
 {
     if (_status < 0) {
-        return SEGMAP595_MSB + 1;
+        return _status;
     } else {
         return _bit_pos[0];  /* Dot (represented by @ sign) is the first character
                               * whose position is checked when a map string gets analyzed.
@@ -243,7 +243,7 @@ int32_t SegMap595Class::check_map_str(const char *map_str)
     // Check for invalid characters.
     for (size_t i = 0; i < SEGMAP595_SEG_NUM; ++i) {
         if (_map_str[i] < '@' || _map_str[i] > 'G') {  // Only ASCII characters from '@' to 'G' are valid.
-            return SEGMAP595_STATUS_ERR_MAP_STR_CHAR;
+            return SEGMAP595_STATUS_ERR_MAP_STR_INVALID_CHAR;
         }
     }
 
@@ -251,7 +251,7 @@ int32_t SegMap595Class::check_map_str(const char *map_str)
     for (size_t i = 0; i < SEGMAP595_SEG_NUM; ++i) {
         for (size_t j = i + 1u; j < SEGMAP595_SEG_NUM; ++j) {
             if (_map_str[i] == _map_str[j]) {
-                return SEGMAP595_STATUS_ERR_MAP_STR_DUPLICATION;
+                return SEGMAP595_STATUS_ERR_MAP_STR_CHAR_DUPLICATION;
             }
         }
     }

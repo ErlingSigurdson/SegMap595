@@ -38,20 +38,20 @@
 #define SEGMAP595_SEG_NUM           8  // Including a dot segment.
 
 #define SEGMAP595_MSB               7
-#define SEGMAP595_ONLY_MSB_SET_MASK (1u << SEGMAP595_MSB)
-#define SEGMAP595_ONLY_LSB_SET_MASK 0x01
+#define SEGMAP595_ONLY_LSB_SET_MASK 0x01u
+#define SEGMAP595_ONLY_MSB_SET_MASK (SEGMAP595_ONLY_LSB_SET_MASK << SEGMAP595_MSB)
 #define SEGMAP595_ALL_BITS_SET_MASK 0xFF
 
 #define SEGMAP595_GLYPH_SET_MAX_GLYPH_NUM 40  // Highest number of glyphs among all provided glyph sets.
 
 // Mapping status codes. Double as return codes for some functions.
-#define SEGMAP595_STATUS_INITIAL                 -1
-#define SEGMAP595_STATUS_ERR_NULLPTR             -2
-#define SEGMAP595_STATUS_ERR_MAP_STR_LEN         -3
-#define SEGMAP595_STATUS_ERR_MAP_STR_CHAR        -4
-#define SEGMAP595_STATUS_ERR_MAP_STR_DUPLICATION -5
-#define SEGMAP595_STATUS_ERR_BIT_POS_SET         -6
-#define SEGMAP595_STATUS_OK                       0
+#define SEGMAP595_STATUS_INITIAL                      -1
+#define SEGMAP595_STATUS_ERR_NULLPTR                  -2
+#define SEGMAP595_STATUS_ERR_MAP_STR_LEN              -3
+#define SEGMAP595_STATUS_ERR_MAP_STR_INVALID_CHAR     -4
+#define SEGMAP595_STATUS_ERR_MAP_STR_CHAR_DUPLICATION -5
+#define SEGMAP595_STATUS_ERR_BIT_POS_SET              -6
+#define SEGMAP595_STATUS_OK                            0
 
 
 /****************** DATA TYPES ******************/
@@ -66,8 +66,8 @@ class SegMap595Class {
         };
 
         enum class GlyphSetId {
-            GlyphSet1  = 0,
-            GlyphSet2 = 1
+            GlyphSet1 = 1,
+            GlyphSet2 = 2
         };
 
 
@@ -80,14 +80,10 @@ class SegMap595Class {
          *
          * Returns:
          * zero if mapping was successful (that is, if the passed map string was valid, the bytes were
-         * successfully mapped and the passed glyph set number was valid), negative integer otherwise
+         * successfully mapped and the passed glyph set ID was valid), negative integer otherwise
          * (see the preprocessor macros list for possible values).
          *
-         * If the second parameter equals zero, a common-cathode display is assumed.
-         * Otherwise a common-anode display is assumed.
-         *
-         * The third parameter (if passed) must be an integer from 1 and up to SEGMAP595_GLYPH_SETS_PROVIDED.
-         * Glyph set #1 is used by default.
+         * Third parameter can be omitted. In this case glyph set #1 is used by default.
          *
          * Multiple calls to this method are valid, each call will lead to a fresh byte mapping.
          */
@@ -138,10 +134,10 @@ class SegMap595Class {
 
         /* Get the position of the bit that represents a dot segment.
          *
-         * Returns: integer less or equal to SEGMAP595_MSB if mapping was successful,
-         * bigger integer otherwise.
+         * Returns: integer from zero and up to SEGMAP595_MSB if mapping was successful,
+         * negative integer otherwise.
          */
-        uint32_t get_dot_bit_pos();
+        int32_t get_dot_bit_pos();
 
         /* Get the number of glyphs in the selected glyph set.
          *
@@ -278,10 +274,10 @@ class SegMap595Class {
 };
 
 // Class-related aliases.
-constexpr SegMap595Class::GlyphSetId SegMap595GlyphSet1  = SegMap595Class::GlyphSetId::GlyphSet1;
-constexpr SegMap595Class::GlyphSetId SegMap595GlyphSet2 = SegMap595Class::GlyphSetId::GlyphSet2;
-constexpr SegMap595Class::DisplayType SegMap595CommonCathode  = SegMap595Class::DisplayType::CommonCathode;
-constexpr SegMap595Class::DisplayType SegMap595CommonAnode    = SegMap595Class::DisplayType::CommonAnode;
+constexpr SegMap595Class::DisplayType SegMap595CommonCathode = SegMap595Class::DisplayType::CommonCathode;
+constexpr SegMap595Class::DisplayType SegMap595CommonAnode   = SegMap595Class::DisplayType::CommonAnode;
+constexpr SegMap595Class::GlyphSetId  SegMap595GlyphSet1     = SegMap595Class::GlyphSetId::GlyphSet1;
+constexpr SegMap595Class::GlyphSetId  SegMap595GlyphSet2     = SegMap595Class::GlyphSetId::GlyphSet2;
 
 
 /*************** GLOBAL VARIABLES ***************/
