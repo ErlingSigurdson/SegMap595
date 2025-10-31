@@ -278,10 +278,10 @@ class SegMap595Class {
 };
 
 // Class-related aliases.
-constexpr SegMap595Class::GlyphSetNum GlyphSetFirst  = SegMap595Class::GlyphSetNum::GlyphSetFirst;
-constexpr SegMap595Class::GlyphSetNum GlyphSetSecond = SegMap595Class::GlyphSetNum::GlyphSetSecond;
-constexpr SegMap595Class::DisplayType CommonCathode  = SegMap595Class::DisplayType::CommonCathode;
-constexpr SegMap595Class::DisplayType CommonAnode    = SegMap595Class::DisplayType::CommonAnode;
+constexpr SegMap595Class::GlyphSetNum SegMap595GlyphSetFirst  = SegMap595Class::GlyphSetNum::GlyphSetFirst;
+constexpr SegMap595Class::GlyphSetNum SegMap595GlyphSetSecond = SegMap595Class::GlyphSetNum::GlyphSetSecond;
+constexpr SegMap595Class::DisplayType SegMap595CommonCathode  = SegMap595Class::DisplayType::CommonCathode;
+constexpr SegMap595Class::DisplayType SegMap595CommonAnode    = SegMap595Class::DisplayType::CommonAnode;
 
 
 /*************** GLOBAL VARIABLES ***************/

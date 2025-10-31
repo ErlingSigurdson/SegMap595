@@ -202,11 +202,11 @@ const char* SegMap595Class::get_map_str()
 int32_t SegMap595Class::select_glyph_set(GlyphSetNum glyph_set_num)
 {
     switch (glyph_set_num) {
-        case GlyphSetFirst:
+        case SegMap595GlyphSetFirst:
             _glyph_set_selected = &_glyph_set_1;
             break;
 
-        case GlyphSetSecond:
+        case SegMap595GlyphSetSecond:
             _glyph_set_selected = &_glyph_set_2;
             break;
 
@@ -296,7 +296,7 @@ void SegMap595Class::map_bytes(DisplayType display_common_pin)
         }
     }
 
-    if (_display_common_pin == CommonAnode) {
+    if (_display_common_pin == SegMap595CommonAnode) {
         for (size_t i = 0; i < _glyph_set_selected->glyph_num; ++i) {
             _mapped_bytes[i] ^= static_cast<uint8_t>(SEGMAP595_ALL_BITS_SET_MASK);  // Toggle all bits.
         }

@@ -31,12 +31,12 @@
 #define MAP_STR "ED@CGAFB"
 
 // Specify your display type based on its common pin. Use one variant, comment out or delete the other.
-SegMap595Class::DisplayType display_common_pin = CommonCathode;
-//SegMap595Class::DisplayType display_common_pin = CommonAnode;
+SegMap595Class::DisplayType display_common_pin = SegMap595CommonCathode;
+//SegMap595Class::DisplayType display_common_pin = SegMap595CommonAnode;
 
 // Select a glyph set. Use one variant, comment out or delete the other.
-SegMap595Class::GlyphSetNum glyph_set_num = GlyphSetFirst;
-//SegMap595Class::GlyphSetNum glyph_set_num = GlyphSetSecond;
+SegMap595Class::GlyphSetNum glyph_set_num = SegMap595GlyphSetFirst;
+//SegMap595Class::GlyphSetNum glyph_set_num = SegMap595GlyphSetSecond;
 
 
 /*--- Misc ---*/

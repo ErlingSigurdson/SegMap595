@@ -81,10 +81,10 @@ Include the library:
 "Load" the map string into an object, specify a display type (based on its common pin) and select a glyph set:
 ```cpp
 SegMap595.init(MAP_STR,
-               CommonCathode,  // Other option is `CommonAnode`.
-               GlyphSetFirst   /* Other option is `GlyphSetSecond`. If omitted,
-                                * glyph set #1 will be selected be default.
-                                */
+               SegMap595CommonCathode,  // Other option is `SegMap595CommonAnode`.
+               SegMap595GlyphSetFirst   /* Other option is `SegMap595GlyphSetSecond`.
+                                         * If omitted, glyph set #1 will be selected be default.
+                                         */
               );
 ```
 
