@@ -39,10 +39,10 @@ SegMap595Class::SegMap595Class() {}
 
 /*--- Public API methods ---*/
 
-int32_t SegMap595Class::init(const char *map_str, DisplayType display_common_pin, GlyphSetNum glyph_set_num)
+int32_t SegMap595Class::init(const char *map_str, DisplayType display_common_pin, GlyphSetID glyph_set_id)
 {
-    // Default value of glyph_set_num is 1.
-    _status = select_glyph_set(glyph_set_num);  /* Within this call the passed glyph set number
+    // Default value of glyph_set_id is 1.
+    _status = select_glyph_set(glyph_set_id);  /* Within this call the passed glyph set number
                                                  * gets copied into a private member variable.
                                                  */
 
@@ -199,9 +199,9 @@ const char* SegMap595Class::get_map_str()
 
 /* --- Private methods ---*/
 
-int32_t SegMap595Class::select_glyph_set(GlyphSetNum glyph_set_num)
+int32_t SegMap595Class::select_glyph_set(GlyphSetID glyph_set_id)
 {
-    switch (glyph_set_num) {
+    switch (glyph_set_id) {
         case SegMap595GlyphSetFirst:
             _glyph_set_selected = &_glyph_set_1;
             break;

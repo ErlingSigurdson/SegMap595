@@ -35,8 +35,8 @@ SegMap595Class::DisplayType display_common_pin = SegMap595CommonCathode;
 //SegMap595Class::DisplayType display_common_pin = SegMap595CommonAnode;
 
 // Select a glyph set. Use one variant, comment out or delete the other.
-SegMap595Class::GlyphSetNum glyph_set_num = SegMap595GlyphSetFirst;
-//SegMap595Class::GlyphSetNum glyph_set_num = SegMap595GlyphSetSecond;
+SegMap595Class::GlyphSetID glyph_set_id = SegMap595GlyphSetFirst;
+//SegMap595Class::GlyphSetID glyph_set_id = SegMap595GlyphSetSecond;
 
 
 /*--- Misc ---*/
@@ -65,7 +65,7 @@ void setup()
     pinMode(CLOCK_PIN, OUTPUT);
 
     // Byte mapping.
-    SegMap595.init(MAP_STR, display_common_pin, glyph_set_num);
+    SegMap595.init(MAP_STR, display_common_pin, glyph_set_id);
 
     // Mapping status check.
     int32_t mapping_status = SegMap595.get_status();

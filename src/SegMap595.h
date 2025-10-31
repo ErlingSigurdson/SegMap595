@@ -65,7 +65,7 @@ class SegMap595Class {
             CommonAnode   = 1
         };
 
-        enum class GlyphSetNum {
+        enum class GlyphSetID {
             GlyphSetFirst  = 0,
             GlyphSetSecond = 1
         };
@@ -93,7 +93,7 @@ class SegMap595Class {
          */
         int32_t  init(const char *map_str,
                       DisplayType display_common_pin,
-                      GlyphSetNum glyph_set_num = GlyphSetNum::GlyphSetFirst);
+                      GlyphSetID glyph_set_id = GlyphSetID::GlyphSetFirst);
 
         /* Get the last mapping status.
          *
@@ -251,7 +251,7 @@ class SegMap595Class {
          * Returns: zero if the passed glyph set number is valid, negative integer otherwise
          * (see the preprocessor macros list for possible values).
          */
-        int32_t select_glyph_set(GlyphSetNum glyph_set_num);
+        int32_t select_glyph_set(GlyphSetID glyph_set_id);
 
         /* Check the passed map string validity and, if it's valid, copy its contents to the internal buffer.
          *
@@ -278,8 +278,8 @@ class SegMap595Class {
 };
 
 // Class-related aliases.
-constexpr SegMap595Class::GlyphSetNum SegMap595GlyphSetFirst  = SegMap595Class::GlyphSetNum::GlyphSetFirst;
-constexpr SegMap595Class::GlyphSetNum SegMap595GlyphSetSecond = SegMap595Class::GlyphSetNum::GlyphSetSecond;
+constexpr SegMap595Class::GlyphSetID SegMap595GlyphSetFirst  = SegMap595Class::GlyphSetID::GlyphSetFirst;
+constexpr SegMap595Class::GlyphSetID SegMap595GlyphSetSecond = SegMap595Class::GlyphSetID::GlyphSetSecond;
 constexpr SegMap595Class::DisplayType SegMap595CommonCathode  = SegMap595Class::DisplayType::CommonCathode;
 constexpr SegMap595Class::DisplayType SegMap595CommonAnode    = SegMap595Class::DisplayType::CommonAnode;
 
