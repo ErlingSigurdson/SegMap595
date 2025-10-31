@@ -80,23 +80,12 @@ Include the library:
 
 "Load" the map string into an object, specify a display type (based on its common pin) and select a glyph set:
 ```cpp
-// Specify a common-cathode display, select glyph set #1.
-SegMap595.init(MAP_STR, SEGMAP595_COMMON_CATHODE, SEGMAP595_GLYPH_SET_1);
-
-// Specify a common-cathode display, select glyph set #2.
-//SegMap595.init(MAP_STR, SEGMAP595_COMMON_CATHODE, SEGMAP595_GLYPH_SET_2);
-
-// Specify a common-cathode display, omit the third parameter (glyph set #1 will be selected by default).
-//SegMap595.init(MAP_STR, SEGMAP595_COMMON_CATHODE);
-
-// Specify a common-anode display, select glyph set #1.
-//SegMap595.init(MAP_STR, SEGMAP595_COMMON_ANODE, SEGMAP595_GLYPH_SET_1);
-
-// Specify a common-anode display, select glyph set #2.
-//SegMap595.init(MAP_STR, SEGMAP595_COMMON_ANODE, SEGMAP595_GLYPH_SET_2);
-
-// Specify a common-anode display, omit the third parameter (glyph set #1 will be selected by default).
-//SegMap595.init(MAP_STR, SEGMAP595_COMMON_ANODE);
+SegMap595.init(MAP_STR,
+               CommonCathode,  // Other option is `CommonAnode`.
+               GlyphSetFirst   /* Other option is `GlyphSetSecond`. If omitted,
+                                * glyph set #1 will be selected be default.
+                                */
+              );
 ```
 
 Check the mapping status:
