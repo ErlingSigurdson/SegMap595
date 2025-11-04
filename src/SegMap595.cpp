@@ -43,16 +43,16 @@ int32_t SegMap595Class::init(const char *map_str, DisplayType display_common_pin
 {
     // Default value of glyph_set_id is 1.
     _status = select_glyph_set(glyph_set_id);  /* Within this call the passed glyph set number
-                                                 * gets copied into a private member variable.
-                                                 */
+                                                * gets copied into a private member variable.
+                                                */
 
     if (_status < 0) {
         return _status;
     }
 
-    _status = check_map_str(map_str);           /* Within this call the passed map string
-                                                 * gets copied into a private member buffer.
-                                                 */
+    _status = check_map_str(map_str);          /* Within this call the passed map string
+                                                * gets copied into a private member buffer.
+                                                */
 
     if (_status < 0) {
         return _status;
@@ -64,9 +64,9 @@ int32_t SegMap595Class::init(const char *map_str, DisplayType display_common_pin
         return _status;
     }
 
-    map_bytes(display_common_pin);              /* Within this call the value that defines the display type
-                                                 * gets copied into a private member variable.
-                                                 */
+    map_bytes(display_common_pin);             /* Within this call the value that defines the display type
+                                                * gets copied into a private member variable.
+                                                */
 
     return _status;
 }

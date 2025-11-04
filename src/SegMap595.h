@@ -83,7 +83,7 @@ class SegMap595Class {
          * successfully mapped and the passed glyph set ID was valid), negative integer otherwise
          * (see the preprocessor macros list for possible values).
          *
-         * Third parameter can be omitted. In this case glyph set #1 is used by default.
+         * Third parameter can be omitted. In this case glyph set #1 will be selected by default.
          *
          * Multiple calls to this method are valid, each call will lead to a fresh byte mapping.
          */
