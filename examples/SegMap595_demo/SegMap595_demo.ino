@@ -121,9 +121,9 @@ void loop()
 
         // Dot segment blink.
         if (counter % 2) {
-            /* Normally you should check returned value for being negative (error status indicator),
-             * since shifting for negative count leads to undefined behavior. But in this sketch
-             * it's safe to assume positive value because status has already been checked.
+            /* Normally you should check the returned value for being negative (error status indicator),
+             * since shifting for a negative count leads to an undefined behavior. But in this sketch
+             * it's safe to assume a positive value because the status has already been checked.
              */
             static int32_t dot_bit_pos = SegMap595.get_dot_bit_pos();
             static uint8_t mask = static_cast<uint8_t>(1u << dot_bit_pos);
