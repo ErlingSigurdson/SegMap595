@@ -170,9 +170,9 @@ class SegMap595Class {
         /* Get the pointer to a string that represents a standard (since GCC 4.3 or C++14)
          * binary number notation for a given byte (overload #1).
          *
-         * Returns: a pointer to a string if mapping was successful,
-         * nullptr otherwise (although the buffer always has a valid
-         * address in memory, nullptr serves as an error indicator).
+         * Returns: a pointer to a string.
+         *
+         * This method may be used regardless of whether mapping was successful.
          *
          * The string buffer is static and therefore a pointer to it can be returned correctly.
          */
@@ -181,9 +181,9 @@ class SegMap595Class {
         /* Get the pointer to a string that represents a standard (since GCC 4.3 or C++14)
          * binary number notation for a given byte (overload #2).
          *
-         * Returns: a pointer to a string if mapping was successful,
-         * nullptr otherwise (although the buffer always has a valid
-         * address in memory, nullptr serves as an error indicator).
+         * Returns: a pointer to a string.
+         *
+         * This method may be used regardless of whether mapping was successful.
          *
          * The string buffer is static and therefore a pointer to it can be returned correctly.
          */

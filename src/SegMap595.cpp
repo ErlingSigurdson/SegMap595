@@ -154,17 +154,13 @@ char SegMap595Class::get_represented_char(uint32_t index)
 
 const char* SegMap595Class::get_byte_bin_notation_as_str(unsigned char byte_to_write_down)
 {
-    if (_status < 0) {
-        return nullptr;
-    }
-
     // Standard (since GCC 4.3 or C++14) binary number notation prefix "0b".
     constexpr size_t bin_notation_prefix_len = 2;
 
     // Binary notation length for a byte: prefix + 8 bits.
     constexpr size_t notation_len = bin_notation_prefix_len + SEGMAP595_SEG_NUM;
 
-    static char buf[notation_len + 1];  // Plus one byte for null terminator.
+    static char buf[notation_len + 1] = {0};  // Plus one byte for null terminator.
     buf[0] = '0';
     buf[1] = 'b';
 
