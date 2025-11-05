@@ -177,7 +177,7 @@ class SegMap595Class {
          *
          * The string buffer is static and therefore a pointer to it can be returned correctly.
          */
-        const char* get_byte_bin_notation_as_str(char byte_to_write_down);
+        static const char* get_byte_bin_notation_as_str(char byte_to_write_down);
 
         /* Get the pointer to a string that represents a standard (since GCC 4.3 or C++14)
          * binary number notation for a given byte (overload #2).
@@ -189,7 +189,7 @@ class SegMap595Class {
          *
          * The string buffer is static and therefore a pointer to it can be returned correctly.
          */
-        const char* get_byte_bin_notation_as_str(unsigned char byte_to_write_down);
+        static const char* get_byte_bin_notation_as_str(unsigned char byte_to_write_down);
 
         /* Get the pointer to an object's internal buffer that holds the passed map string.
          *
