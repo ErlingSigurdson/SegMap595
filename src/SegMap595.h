@@ -172,7 +172,8 @@ class SegMap595Class {
          *
          * Returns: a pointer to a string.
          *
-         * This method may be used regardless of whether mapping was successful.
+         * This method may be used regardless of whether mapping was performed and
+         * whether it was successful.
          *
          * The string buffer is static and therefore a pointer to it can be returned correctly.
          */
@@ -183,7 +184,8 @@ class SegMap595Class {
          *
          * Returns: a pointer to a string.
          *
-         * This method may be used regardless of whether mapping was successful.
+         * This method may be used regardless of whether mapping was performed and
+         * whether it was successful.
          *
          * The string buffer is static and therefore a pointer to it can be returned correctly.
          */

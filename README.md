@@ -164,6 +164,7 @@ Get the pointer to a string that represents a standard (since GCC 4.3 or C++14) 
 ```cpp
 const char *byte_bin_notation = SegMap595.get_byte_bin_notation_as_str(byte_to_shift);
 ```
+This method can be used regardless of whether mapping was performed and whether it was successful.
 
 Get the pointer to an object's internal buffer that holds the map string you've passed earlier:
 ```cpp
