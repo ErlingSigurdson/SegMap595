@@ -171,7 +171,7 @@ Get the pointer to an object's internal buffer that holds the map string you've 
 const char *map_str_retrieved = SegMap595.get_map_str();
 ```
 
-Refer to `SegMap595.h` for the detailed API description if necessary.
+Refer to `SegMap595.h` for a detailed API description if necessary.
 
 ## Compatibility
 

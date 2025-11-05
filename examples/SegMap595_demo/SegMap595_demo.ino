@@ -12,7 +12,7 @@
  *           Additionally, prints mapping information via UART.
  * ----------------------------------------------------------------------------|---------------------------------------|
  * Notes:    Refer to the README for an API overview.
- *           Refer to SegMap595.h for a complete API description.
+ *           Refer to SegMap595.h for a detailed API description.
  */
 
 
