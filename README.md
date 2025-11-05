@@ -144,9 +144,11 @@ uint8_t mapped_byte = SegMap595.get_mapped_byte(SEGMAP595_GLYPH_SET_2_INDEX_UNDE
 Get the dot segment bit position and toggle the dot segment bit:
 ```cpp
 if (counter % 2) {
-    static uint32_t dot_bit_pos = SegMap595.get_dot_bit_pos();
-    uint8_t mask = static_cast<uint8_t>(1u << dot_bit_pos);
-    mapped_byte ^= mask;
+    static int32_t dot_bit_pos = SegMap595.get_dot_bit_pos();
+    if (dot_bit_pos > 0) {  // If mapping status doesn't indicate an error.
+        uint8_t mask = static_cast<uint8_t>(1u << dot_bit_pos);
+        mapped_byte ^= mask;
+    }
 }
 ```
 

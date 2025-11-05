@@ -50,7 +50,7 @@ SegMap595Class::GlyphSetId glyph_set_id = SegMap595GlyphSet1;
 #define CLOCK_PIN 18
 
 // Output interval ("once in X milliseconds").
-#define INTERVAL  1000
+#define INTERVAL 1000
 
 
 /******************* FUNCTIONS ******************/
@@ -121,7 +121,11 @@ void loop()
 
         // Dot segment blink.
         if (counter % 2) {
-            static uint32_t dot_bit_pos = SegMap595.get_dot_bit_pos();
+            /* Normally you should check returned value for being negative (error status indicator),
+             * since shifting for negative count leads to undefined behavior. But in this sketch
+             * it's safe to assume positive value because status has already been checked.
+             */
+            static int32_t dot_bit_pos = SegMap595.get_dot_bit_pos();
             static uint8_t mask = static_cast<uint8_t>(1u << dot_bit_pos);
             byte_to_shift ^= mask;
         }
