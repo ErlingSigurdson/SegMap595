@@ -3,7 +3,7 @@
 /**
  * Filename: SegMap595_glyph_set_2.h
  * ----------------------------------------------------------------------------|---------------------------------------|
- * Purpose:  Macros/constants related to glyphs and mapping.
+ * Purpose:  Glyph set-specific macros.
  * ----------------------------------------------------------------------------|---------------------------------------|
  * Notes:    Some resulting glyphs resemble their actual prototype characters,
  *           some are rather sketchy.
@@ -17,7 +17,7 @@
 #define SEGMAP595_GLYPH_SET_2_H
 
 
-/*--- Specific macros/constants related to mapping and glyphs ---*/
+/*--- Glyph set-specific macros ---*/
 
 #define SEGMAP595_GLYPH_SET_2_GLYPH_NUM 35
 

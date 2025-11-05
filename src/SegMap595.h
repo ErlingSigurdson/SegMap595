@@ -19,7 +19,7 @@
 
 /*--- Includes ---*/
 
-// Macros/constants related to glyphs and mapping.
+// Glyph set-specific macros.
 #include "SegMap595_glyph_set_1.h"
 #include "SegMap595_glyph_set_2.h"
 
@@ -35,14 +35,14 @@
 
 /*--- Misc ---*/
 
-#define SEGMAP595_SEG_NUM           8  // Including a dot segment.
+#define SEGMAP595_SEG_NUM 8  // Including a dot segment.
+
+#define SEGMAP595_GLYPH_SET_MAX_GLYPH_NUM 40  // Highest number of glyphs among all provided glyph sets.
 
 #define SEGMAP595_MSB               7
 #define SEGMAP595_ONLY_LSB_SET_MASK 0x01u
 #define SEGMAP595_ONLY_MSB_SET_MASK (SEGMAP595_ONLY_LSB_SET_MASK << SEGMAP595_MSB)
 #define SEGMAP595_ALL_BITS_SET_MASK 0xFF
-
-#define SEGMAP595_GLYPH_SET_MAX_GLYPH_NUM 40  // Highest number of glyphs among all provided glyph sets.
 
 // Mapping status codes. Double as return codes for some functions.
 #define SEGMAP595_STATUS_INITIAL                      -1
@@ -78,10 +78,8 @@ class SegMap595Class {
 
         /* "Load" a map string into an object, specify a display type (based on its common pin) and select a glyph set.
          *
-         * Returns:
-         * zero if mapping was successful (that is, if the passed map string was valid, the bytes were
-         * successfully mapped and the passed glyph set ID was valid), negative integer otherwise
-         * (see the preprocessor macros list for possible values).
+         * Returns: zero if mapping was successful (that is, if the passed map string is valid and the bytes were
+         * successfully mapped), negative integer otherwise (see the preprocessor macros list for possible values).
          *
          * Third parameter can be omitted. In this case glyph set #1 will be selected by default.
          *
@@ -100,16 +98,16 @@ class SegMap595Class {
 
         /* Get a mapped byte (overload #1).
          *
-         * Returns: a mapped byte if mapping was successful
-         * and the passed index is within the array bounds,
+         * Returns: a mapped byte if mapping was successful and
+         * the passed index is within the array bounds,
          * zero otherwise.
          */
         uint8_t  get_mapped_byte(size_t index);
 
         /* Get a mapped byte (overload #2).
          *
-         * Returns: a mapped byte if mapping was successful
-         * and the passed index is within the array bounds,
+         * Returns: a mapped byte if mapping was successful and
+         * the passed index is within the array bounds,
          * zero otherwise.
          */
         #if defined(UINT32_MAX) && defined(SIZE_MAX) && (UINT32_MAX > SIZE_MAX)
@@ -118,26 +116,26 @@ class SegMap595Class {
 
         /* Get a mapped byte (overload #3).
          *
-         * Returns: a mapped byte if mapping was successful
-         * and the passed character is represented in the selected glyph set,
+         * Returns: a mapped byte if mapping was successful and
+         * the passed character is represented in the selected glyph set,
          * zero otherwise.
          */
         uint8_t  get_mapped_byte(char represented_char);
 
         /* Get a mapped byte (overload #4).
          *
-         * Returns: a mapped byte if mapping was successful
-         * and the passed character is represented in the selected glyph set,
+         * Returns: a mapped byte if mapping was successful and
+         * the passed character is represented in the selected glyph set,
          * zero otherwise.
          */
         uint8_t  get_mapped_byte(unsigned char represented_char);
 
         /* Get the position of the bit that represents a dot segment.
          *
-         * Returns: integer from zero and up to SEGMAP595_MSB if mapping was successful,
+         * Returns: integer from zero to SEGMAP595_MSB (inclusive) if mapping was successful,
          * negative integer otherwise.
          */
-        int32_t get_dot_bit_pos();
+        int32_t  get_dot_bit_pos();
 
         /* Get the number of glyphs in the selected glyph set.
          *
