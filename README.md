@@ -145,7 +145,7 @@ Get the dot segment bit position and toggle the dot segment bit:
 ```cpp
 if (counter % 2) {
     static int32_t dot_bit_pos = SegMap595.get_dot_bit_pos();
-    if (dot_bit_pos > 0) {  // If mapping status doesn't indicate an error.
+    if (dot_bit_pos >= 0) {  // If mapping status doesn't indicate an error.
         uint8_t mask = static_cast<uint8_t>(1u << dot_bit_pos);
         mapped_byte ^= mask;
     }
