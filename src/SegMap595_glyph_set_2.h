@@ -174,7 +174,7 @@
 #define SEGMAP595_GLYPH_SET_2_CHAR_Z          'Z'
 #define SEGMAP595_GLYPH_SET_2_CHAR_DASH       '-'
 #define SEGMAP595_GLYPH_SET_2_CHAR_EQUAL      '='
-#define SEGMAP595_GLYPH_SET_2_CHAR_DEGREE     '*'  // Special case: there's no ASCII character for degree symbol.
+#define SEGMAP595_GLYPH_SET_2_CHAR_DEGREE     '*'  // Special case: there's no ASCII character for a degree symbol.
 #define SEGMAP595_GLYPH_SET_2_CHAR_UNDERSCORE '_'
 #define SEGMAP595_GLYPH_SET_2_CHARS SEGMAP595_GLYPH_SET_2_CHAR_0,      \
                                     SEGMAP595_GLYPH_SET_2_CHAR_1,      \
