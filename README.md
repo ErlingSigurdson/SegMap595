@@ -33,7 +33,7 @@ corresponds to the 7th (most significant) bit of the IC's parallel output (Q7 ou
 character corresponds to the 6th bit (Q6 output), etc.
 
 Uppercase characters may be replaced with their lowercase counterparts. Any other characters are invalid.
-Duplicating characters in the map string leads to an error.
+Duplicating characters is invalid as well.
 
 ```cpp
 #define MAP_STR "ED@CGAFB"    // Valid map string example.
