@@ -33,7 +33,7 @@ corresponds to the 7th (most significant) bit of the IC's parallel output (Q7 ou
 character corresponds to the 6th bit (Q6 output), etc.
 
 Uppercase characters may be replaced with their lowercase counterparts. Any other characters are invalid.
-Duplicating characters in the map string is invalid.
+Duplicating characters in the map string leads to an error.
 
 ```cpp
 #define MAP_STR "ED@CGAFB"    // Valid map string example.
@@ -82,10 +82,10 @@ Include the library:
 ```cpp
 SegMap595.init(MAP_STR,
                SegMap595CommonCathode,  // Other option is `SegMap595CommonAnode`.
-               SegMap595GlyphSet1       // Other option is `SegMap595GlyphSet2`.
+               SegMap595GlyphSet1       // Other option is `SegMap595GlyphSet2`. Omittable parameter.
               );
 ```
-Third parameter can be omitted. In this case glyph set #1 will be selected by default.
+If the third parameter is omitted, glyph set #1 will be selected by default.
 
 Check the mapping status:
 ```cpp
@@ -93,7 +93,7 @@ int32_t mapping_status = SegMap595.get_status();
 // Loop error output if mapping was unsuccessful.
 if (mapping_status < 0) {
     while(true) {
-        Serial.print("Byte mapping failed, error code: ");
+        Serial.print("Error: mapping failed, error code ");
         Serial.println(mapping_status);
         delay(INTERVAL);
     }
@@ -160,8 +160,7 @@ Get the character (its ASCII code) that corresponds to a given index in the resu
 char represented_char = SegMap595.get_represented_char(counter);
 ```
 
-Get the pointer to a string that represents a standard (since GCC 4.3 or C++14)
-binary number notation for a given byte:
+Get the pointer to a string that represents a standard (since GCC 4.3 or C++14) binary number notation for a given byte:
 ```cpp
 const char *byte_bin_notation = SegMap595.get_byte_bin_notation_as_str(byte_to_shift);
 ```

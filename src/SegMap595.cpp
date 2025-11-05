@@ -32,17 +32,16 @@ SegMap595Class SegMap595;
 
 /******************* FUNCTIONS ******************/
 
-/*--- Constructor ---*/
+/*--- Constructors ---*/
 
 SegMap595Class::SegMap595Class() {}
 
 
-/*--- Public API methods ---*/
+/*--- Public methods ---*/
 
 int32_t SegMap595Class::init(const char *map_str, DisplayType display_common_pin, GlyphSetId glyph_set_id)
 {
-    // Default value of glyph_set_id is 1.
-    _status = select_glyph_set(glyph_set_id);  /* Within this call the passed glyph set number
+    _status = select_glyph_set(glyph_set_id);  /* Within this call the passed glyph set ID
                                                 * gets copied into a private member variable.
                                                 */
 
@@ -104,7 +103,7 @@ uint8_t SegMap595Class::get_mapped_byte(char represented_char)
     }
 
     for (size_t i = 0; i < _glyph_set_selected->glyph_num; ++i) {
-        if (represented_char == _glyph_set_selected->valid_chars[i]) {
+        if (represented_char == _glyph_set_selected->chars[i]) {
             return _mapped_bytes[i];
         }
     }
@@ -143,7 +142,7 @@ char SegMap595Class::get_represented_char(size_t index)
         return 0;
     }
 
-    return _glyph_set_selected->valid_chars[index];
+    return _glyph_set_selected->chars[index];
 }
 
 #if defined(UINT32_MAX) && defined(SIZE_MAX) && (UINT32_MAX > SIZE_MAX)
@@ -211,7 +210,7 @@ int32_t SegMap595Class::select_glyph_set(GlyphSetId glyph_set_id)
             break;
 
         default:
-            break;  // Do nothing and hail MISRA.
+            return SEGMAP595_STATUS_ERR_GLYPH_SET_ID;
     }
 
     return SEGMAP595_STATUS_OK;
@@ -220,7 +219,7 @@ int32_t SegMap595Class::select_glyph_set(GlyphSetId glyph_set_id)
 int32_t SegMap595Class::check_map_str(const char *map_str)
 {
     if (map_str == nullptr) {
-        return SEGMAP595_STATUS_ERR_NULLPTR;
+        return SEGMAP595_STATUS_ERR_MAP_STR_NULLPTR;
     }
 
     size_t str_len = strlen(map_str);
