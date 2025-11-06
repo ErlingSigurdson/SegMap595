@@ -91,7 +91,7 @@ Check the mapping status:
 ```cpp
 int32_t mapping_status = SegMap595.get_status();
 // Loop error output if mapping was unsuccessful.
-if (mapping_status < 0) {
+if (mapping_status != SEGMAP595_STATUS_OK) {
     while(true) {
         Serial.print("Error: mapping failed, error code ");
         Serial.println(mapping_status);
