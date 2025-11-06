@@ -99,6 +99,7 @@ if (mapping_status < 0) {
     }
 }
 ```
+You can also check value returned by `init()` instead of calling `get_status()`.
 
 Get a mapped byte:
 ```cpp
