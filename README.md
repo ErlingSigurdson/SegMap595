@@ -199,7 +199,7 @@ include `Arduino.h` and can be readily used in non-Arduino embedded electronics 
 
 **Maintainer** — Dmitriy Efimov aka Erling Sigurdson
 * <efimov-d-v@yandex.ru>
-* <erlingsigurdson@gmail.com>
+* <erlingsigurdson1@gmail.com>
 * Telegram: @erlingsigurdson
 
 Your feedback and pull requests are welcome.
