@@ -11,7 +11,7 @@
  *           display by bit-banging a 74HC595 shift register IC.
  *           Additionally, prints mapping information via UART.
  * ----------------------------------------------------------------------------|---------------------------------------|
- * Notes:    Refer to the README for an API overview.
+ * Notes:    Refer to the README for a general library overview.
  *           Refer to SegMap595.h for a detailed API description.
  */
 
