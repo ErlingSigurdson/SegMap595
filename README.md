@@ -91,7 +91,7 @@ Check the mapping status:
 ```cpp
 int32_t mapping_status = SegMap595.get_status();
 // Loop error output if mapping was unsuccessful.
-if (mapping_status < 0) {
+if (mapping_status < 0) {  // If error is detected.
     while(true) {
         Serial.print("Error: mapping failed, error code ");
         Serial.println(mapping_status);
@@ -146,7 +146,7 @@ Get the dot segment bit position and toggle the dot segment bit:
 ```cpp
 if (counter % 2) {
     static int32_t dot_bit_pos = SegMap595.get_dot_bit_pos();
-    if (dot_bit_pos >= 0) {  // If mapping status doesn't indicate an error.
+    if (dot_bit_pos >= 0) {  // If no error is detected.
         uint8_t mask = static_cast<uint8_t>(1u << dot_bit_pos);
         mapped_byte ^= mask;
     }

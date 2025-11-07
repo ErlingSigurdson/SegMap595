@@ -73,7 +73,7 @@ void setup()
     int32_t mapping_status = SegMap595.get_status();
 
     // Loop error output if mapping was unsuccessful.
-    if (mapping_status < 0) {
+    if (mapping_status < 0) {  // If error is detected.
         while(true) {
             Serial.print("Error: mapping failed, error code ");
             Serial.println(mapping_status);
