@@ -44,7 +44,7 @@ SegMap595Class::GlyphSetId glyph_set_id = SegMap595GlyphSet1;
 // Set appropriately based on the baud rate you use.
 #define BAUD_RATE 115200
 
-// Set appropriately based on your wiring.
+// Specify appropriately based on your wiring.
 #define DATA_PIN  16
 #define LATCH_PIN 17
 #define CLOCK_PIN 18
