@@ -80,11 +80,11 @@ class SegMap595Class {
         /* "Load" a map string into an object, specify a display type (based on its common pin) and select a glyph set.
          *
          * Returns: zero if mapping was successful (that is, if the passed map string is valid and the bytes were
-         * successfully mapped), negative integer otherwise (see the preprocessor macros list for possible values).
+         * successfully mapped), a negative integer otherwise (see the preprocessor macros list for possible values).
          *
-         * Third parameter can be omitted. In this case glyph set #1 will be selected by default.
+         * The third parameter can be omitted. In this case, glyph set #1 will be selected by default.
          *
-         * Multiple calls to this method are valid, each call will lead to a fresh byte mapping.
+         * Multiple calls to this method are valid, each call leads to a fresh byte mapping.
          */
         int32_t  init(const char *map_str,
                       DisplayType display_common_pin,
@@ -92,7 +92,7 @@ class SegMap595Class {
 
         /* Get the last mapping status.
          *
-         * Returns: zero if mapping was successful, negative integer otherwise
+         * Returns: zero if mapping was successful, a negative integer otherwise
          * (see the preprocessor macros list for possible values).
          */
         int32_t  get_status();
@@ -121,7 +121,7 @@ class SegMap595Class {
          * the passed character is represented in the selected glyph set,
          * zero otherwise.
          *
-         * Case insensitive (lowercase letters will be converted to their uppercase counterparts).
+         * Case-insensitive (lowercase letters will be converted to their uppercase counterparts).
          */
         uint8_t  get_mapped_byte(char represented_char);
 
@@ -131,14 +131,14 @@ class SegMap595Class {
          * the passed character is represented in the selected glyph set,
          * zero otherwise.
          *
-         * Case insensitive (lowercase letters will be converted to their uppercase counterparts).
+         * Case-insensitive (lowercase letters will be converted to their uppercase counterparts).
          */
         uint8_t  get_mapped_byte(unsigned char represented_char);
 
         /* Get the position of the bit that represents a dot segment.
          *
-         * Returns: integer from zero to SEGMAP595_MSB (inclusive) if mapping was successful,
-         * negative integer otherwise.
+         * Returns: an integer from zero to SEGMAP595_MSB (inclusive) if mapping was successful,
+         * a negative integer otherwise.
          */
         int32_t  get_dot_bit_pos();
 
@@ -151,7 +151,7 @@ class SegMap595Class {
 
         /* Get the character represented by a glyph by its index (overload #1).
          *
-         * Returns: respective ASCII code if mapping was successful and
+         * Returns: the respective ASCII code if mapping was successful and
          * the passed index is within the array bounds,
          * zero otherwise.
          */
@@ -159,7 +159,7 @@ class SegMap595Class {
 
         /* Get the character represented by a glyph by its index (overload #2).
          *
-         * Returns: respective ASCII code if mapping was successful and
+         * Returns: the respective ASCII code if mapping was successful and
          * the passed index is within the array bounds,
          * zero otherwise.
          */
@@ -167,31 +167,43 @@ class SegMap595Class {
         char     get_represented_char(uint32_t index);
         #endif
 
-        /* Get the pointer to a string that represents a standard (since GCC 4.3 or C++14)
+        /* Get a pointer to a string that represents a standard (since GCC 4.3 or C++14)
          * binary number notation for a given byte (overload #1).
          *
          * Returns: a pointer to a string.
          *
-         * This method may be used regardless of whether mapping was performed and
-         * whether it was successful.
+         * The string buffer is static, and therefore a pointer to it can be returned correctly.
+         * Every call to this method rewrites the buffer contents.
          *
-         * The string buffer is static and therefore a pointer to it can be returned correctly.
+         * This method is a utility, not a part of per-instance (per-object) state,
+         * therefore it may be used regardless of whether mapping was performed and
+         * whether it was successful. However, that also means that the buffer is shared
+         * by all class instances.
+         *
+         * If you need to preserve the buffer contents for further use, consider copying them
+         * into an outer buffer at least 11 ("0b" prefix + 8 bits + null terminator) bytes in size.
          */
         static const char* get_byte_bin_notation_as_str(char byte_to_write_down);
 
-        /* Get the pointer to a string that represents a standard (since GCC 4.3 or C++14)
+        /* Get a pointer to a string that represents a standard (since GCC 4.3 or C++14)
          * binary number notation for a given byte (overload #2).
          *
          * Returns: a pointer to a string.
          *
-         * This method may be used regardless of whether mapping was performed and
-         * whether it was successful.
+         * The string buffer is static, and therefore a pointer to it can be returned correctly.
+         * Every call to this method rewrites the buffer contents.
          *
-         * The string buffer is static and therefore a pointer to it can be returned correctly.
+         * This method is a utility, not a part of per-instance (per-object) state,
+         * therefore it may be used regardless of whether mapping was performed and
+         * whether it was successful. However, that also means that the buffer is shared
+         * by all class instances.
+         *
+         * If you need to preserve the buffer contents for further use, consider copying them
+         * into an outer buffer at least 11 ("0b" prefix + 8 bits + null terminator) bytes in size.
          */
         static const char* get_byte_bin_notation_as_str(unsigned char byte_to_write_down);
 
-        /* Get the pointer to an object's internal buffer that holds the passed map string.
+        /* Get a pointer to an object's internal buffer that holds the passed map string.
          *
          * Returns: a pointer to a string if mapping was successful,
          * nullptr otherwise (although the buffer always has a valid
@@ -246,21 +258,21 @@ class SegMap595Class {
 
         /* Check the passed glyph set number and "load" the selected glyph set.
          *
-         * Returns: zero if the passed glyph set number is valid, negative integer otherwise
+         * Returns: zero if the passed glyph set number is valid, a negative integer otherwise
          * (see the preprocessor macros list for possible values).
          */
         int32_t select_glyph_set(GlyphSetId glyph_set_id);
 
         /* Check the passed map string validity and, if it's valid, copy its contents to the internal buffer.
          *
-         * Returns: zero if the passed map string is valid, negative integer otherwise
+         * Returns: zero if the passed map string is valid, a negative integer otherwise
          * (see the preprocessor macros list for possible values).
          */
         int32_t check_map_str(const char *map_str);
 
         /* Indicate a bit position for every display segment.
          *
-         * Returns: zero if all bit positions were indicated, negative integer otherwise
+         * Returns: zero if all bit positions were indicated, a negative integer otherwise
          * (see the preprocessor macros list for possible values).
          *
          * The map string isn't passed because it's already copied
