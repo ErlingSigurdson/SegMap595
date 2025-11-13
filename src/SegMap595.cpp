@@ -121,7 +121,7 @@ int32_t SegMap595Class::get_dot_bit_pos()
     if (_status < 0) {
         return _status;
     } else {
-        return _bit_pos[0];  /* Dot (represented by @ sign) is the first character
+        return _bit_pos[0];  /* Dot (represented by the @ sign) is the first character
                               * whose position is checked when a map string gets analyzed.
                               */
     }
