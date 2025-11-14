@@ -80,7 +80,7 @@ void setup()
     SegMap595.init(MAP_STR, display_common_pin, glyph_set_id);
 
     /* Mapping status check.
-     * You can also check value returned by init() instead of calling get_status().
+     * You can also check the value returned by init() instead of calling get_status().
      */
     int32_t mapping_status = SegMap595.get_status();
 
