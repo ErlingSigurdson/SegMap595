@@ -1,7 +1,7 @@
 # Overview
 
-**SegMap595** is a single-class embedded-oriented Arduino-compatible C++ library
-for mapping the outputs of a 74HC595 shift register IC to the segments of a 7-segment display.
+**SegMap595** is a single-class embedded-oriented Arduino-compatible C++ library for mapping
+the parallel outputs of a 74HC595 shift register IC to the segments of a 7-segment display.
 
 ## Concept
 
@@ -87,7 +87,7 @@ SegMap595.init(MAP_STR,
 ```
 If the third parameter is omitted, glyph set #1 will be selected by default.
 
-Check the mapping status:
+Check the last mapping status:
 ```cpp
 int32_t mapping_status = SegMap595.get_status();
 // Loop error output if mapping was unsuccessful.
@@ -142,7 +142,8 @@ uint8_t mapped_byte = SegMap595.get_mapped_byte(SEGMAP595_GLYPH_SET_2_INDEX_DASH
 uint8_t mapped_byte = SegMap595.get_mapped_byte(SEGMAP595_GLYPH_SET_2_INDEX_UNDERSCORE);
 ```
 
-Get the dot segment bit position and toggle the dot segment bit:
+Get the position of the bit that represents a dot segment. Commonly used
+to toggle the respective bit periodically and thus make the dot segment blink:
 ```cpp
 if (counter % 2) {
     static int32_t dot_bit_pos = SegMap595.get_dot_bit_pos();
@@ -158,19 +159,20 @@ Get the number of glyphs available in the selected glyph set (typically used as 
 size_t glyph_num = SegMap595.get_glyph_num();
 ```
 
-Get the character (its ASCII code) that corresponds to a given index in the resulting array of mapped bytes:
+Get a character (its ASCII code) that corresponds to a given index in the resulting array of mapped bytes:
 ```cpp
 char represented_char = SegMap595.get_represented_char(counter);
 ```
 
-Get the pointer to a string that represents a standard (since GCC 4.3 or C++14) binary number notation
+Get a pointer to a string that represents a standard (since GCC 4.3 or C++14) binary number notation
 for a given byte (`0bXXXXXXXX`):
 ```cpp
 const char *byte_bin_notation = SegMap595.get_byte_bin_notation_as_str(byte_to_shift);
 ```
-This method can be used regardless of whether mapping was performed and whether it was successful.
+This method works as a utility: it can be used regardless of whether mapping was performed and
+whether it was successful.
 
-Get the pointer to an object's internal buffer that holds the map string you've passed earlier:
+Get a pointer to an object's internal buffer that holds the map string you've passed earlier:
 ```cpp
 const char *map_str_retrieved = SegMap595.get_map_str();
 ```
