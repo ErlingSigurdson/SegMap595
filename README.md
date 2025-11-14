@@ -24,8 +24,8 @@ your device do the whole job in one go based on three parameters:
 
 ## Map string
 
-The **map string** is a C-style (null-terminated) string that must reflect the actual (physical) order
-of connections made between parallel outputs of your 74HC595 and segment control pins of your 7-segment display.
+The **map string** is a C-style (null-terminated) string that must reflect the actual (physical) order of connections
+made between the parallel outputs of your 74HC595 and the segment control pins of your 7-segment display.
 
 The map string must consist of exactly 8 ASCII characters: **@, A, B, C, D, E, F and G**.
 Every character corresponds to a single segment (@ stands for a dot).
@@ -51,7 +51,7 @@ they represent: from 0 to 9, from A to Z, non-alphanumerics at the end.
 
 By default, the dot bit will be in an OFF state (cleared for a common-cathode display, set for a common-anode display)
 in all mapped bytes, therefore you will have to manipulate this bit in your code as necessary. The dot bit position
-within a byte is indicated by a return value of `get_dot_bit_pos()` method, as shown below.
+within a byte is indicated by the return value of `get_dot_bit_pos()` method, as shown below.
 
 Glyphs are not standardized globally. Some of them do resemble their actual prototype characters,
 some are rather sketchy (like G, K, T, V, X and Z), others are outright arbitrary (like M and W).
@@ -66,7 +66,7 @@ This set includes all English letters, although some of them are represented by 
 
 ### Set #2
 
-This set avoids arbitrary glyphs, but lacks letters K, M, V, W and X:
+This set avoids arbitrary glyphs, but lacks the letters K, M, V, W and X:
 
 ![Glyphs](assets/glyph_set_2.jpg)
 
@@ -99,7 +99,7 @@ if (mapping_status < 0) {  // If error is detected.
     }
 }
 ```
-You can also check value returned by `init()` instead of calling `get_status()`.
+You can also check the value returned by `init()` instead of calling `get_status()`.
 
 Get a mapped byte:
 ```cpp
@@ -169,7 +169,7 @@ for a given byte (`0bXXXXXXXX`):
 ```cpp
 const char *byte_bin_notation = SegMap595.get_byte_bin_notation_as_str(byte_to_shift);
 ```
-This method works as a utility: it can be used regardless of whether mapping was performed and
+This method works as a utility: it can be used regardless of whether the mapping was performed and
 whether it was successful.
 
 Get a pointer to an object's internal buffer that holds the map string you've passed earlier:
