@@ -28,7 +28,7 @@
 /* Map string.
  *
  * This string must reflect the actual (physical) order of connections made between
- * parallel outputs of your 74HC595 and segment control pins of your 7-segment display.
+ * the parallel outputs of your 74HC595 and the segment control pins of your 7-segment display.
  *
  * The map string must consist of exactly 8 ASCII characters: @, A, B, C, D, E, F and G.
  * Every character corresponds to a single segment (@ stands for a dot).
