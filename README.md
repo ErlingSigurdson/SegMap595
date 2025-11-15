@@ -47,14 +47,14 @@ Duplicating characters is invalid as well.
 ## Mapped bytes
 
 If the map string is valid, mapped bytes will be placed in a member array in the ascending order of characters
-they represent: from 0 to 9, from A to Z, non-alphanumerics at the end.
+they represent: from 0 to 9, from 'A' to 'Z', non-alphanumerics at the end.
 
 By default, the dot bit will be in an OFF state (cleared for a common-cathode display, set for a common-anode display)
 in all mapped bytes, therefore you will have to manipulate this bit in your code as necessary. The dot bit position
 within a byte is indicated by the return value of `get_dot_bit_pos()` method, as shown below.
 
-Glyphs are not standardized globally. Some of them do resemble their actual prototype characters,
-some are rather sketchy (like G, K, T, V, X and Z), others are outright arbitrary (like M and W).
+Glyphs are not standardized globally. Some of them do resemble their actual prototype characters, some are
+rather sketchy (like 'G', 'K', 'T', 'V', 'X' and 'Z'), others are outright arbitrary (like 'M' and 'W').
 
 This library offers two glyph sets:
 
@@ -115,14 +115,14 @@ uint8_t mapped_byte = SegMap595.get_mapped_byte('*');  /* The asterisk represent
                                                         */
 
 // Get by a decimal digit's numerical value (from 0 to 9).
-uint8_t mapped_byte = SegMap595.get_mapped_byte(0);    // Returns a byte for '0' character.
-uint8_t mapped_byte = SegMap595.get_mapped_byte(9);    // Returns a byte for '9' character.
+uint8_t mapped_byte = SegMap595.get_mapped_byte(0);    // Returns a byte for the '0' character.
+uint8_t mapped_byte = SegMap595.get_mapped_byte(9);    // Returns a byte for the '9' character.
 
 // Get by a hexadecimal digit's numerical value (from 0 to 15, or from 0x0 to 0xF).
-uint8_t mapped_byte = SegMap595.get_mapped_byte(15);   // Returns a byte for 'F' character.
-uint8_t mapped_byte = SegMap595.get_mapped_byte(0x0);  // Returns a byte for '0' character.
-uint8_t mapped_byte = SegMap595.get_mapped_byte(0xA);  // Returns a byte for 'A' character.
-uint8_t mapped_byte = SegMap595.get_mapped_byte(0xF);  // Returns a byte for 'F' character.
+uint8_t mapped_byte = SegMap595.get_mapped_byte(15);   // Returns a byte for the 'F' character.
+uint8_t mapped_byte = SegMap595.get_mapped_byte(0x0);  // Returns a byte for the '0' character.
+uint8_t mapped_byte = SegMap595.get_mapped_byte(0xA);  // Returns a byte for the 'A' character.
+uint8_t mapped_byte = SegMap595.get_mapped_byte(0xF);  // Returns a byte for the 'F' character.
 
 // Get by an incremental index. Use `counter < SegMap595.get_glyph_num()` as an appropriate boundary.
 uint8_t mapped_byte = SegMap595.get_mapped_byte(counter);
