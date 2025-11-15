@@ -66,7 +66,7 @@ This set includes all English letters, although some of them are represented by 
 
 ### Set #2
 
-This set avoids arbitrary glyphs, but lacks the letters K, M, V, W and X:
+This set avoids arbitrary glyphs, but lacks the letters 'K', 'M', 'V', 'W' and 'X':
 
 ![Glyphs](assets/glyph_set_2.jpg)
 
