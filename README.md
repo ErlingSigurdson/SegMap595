@@ -110,7 +110,7 @@ uint8_t mapped_byte = SegMap595.get_mapped_byte('A');
 uint8_t mapped_byte = SegMap595.get_mapped_byte('Z');
 uint8_t mapped_byte = SegMap595.get_mapped_byte('-');
 uint8_t mapped_byte = SegMap595.get_mapped_byte('_');
-uint8_t mapped_byte = SegMap595.get_mapped_byte('*');  /* An asterisk represents the degree symbol because
+uint8_t mapped_byte = SegMap595.get_mapped_byte('*');  /* The asterisk represents the degree symbol because
                                                         * the actual degree symbol isn't listed in ASCII.
                                                         */
 
