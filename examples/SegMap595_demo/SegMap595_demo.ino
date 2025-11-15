@@ -61,7 +61,7 @@ SegMap595Class::GlyphSetId glyph_set_id = SegMap595GlyphSet1;
 #define LATCH_PIN 17
 #define CLOCK_PIN 18
 
-// Output interval ("once in X milliseconds").
+// Output interval ("once every X milliseconds").
 #define INTERVAL 1000
 
 
@@ -84,8 +84,8 @@ void setup()
      */
     int32_t mapping_status = SegMap595.get_status();
 
-    // Loop error output if mapping was unsuccessful.
-    if (mapping_status < 0) {  // If error is detected.
+    // Loop the error output if the mapping was unsuccessful.
+    if (mapping_status < 0) {  // If an error is detected.
         while(true) {
             Serial.print("Error: mapping failed, error code ");
             Serial.println(mapping_status);
@@ -134,10 +134,10 @@ void loop()
         Serial.print("corresponds to mapped byte ");
         Serial.println(SegMap595.get_byte_bin_notation_as_str(byte_to_shift));
 
-        // Dot segment blink.
+        // Dot-segment blink.
         if (counter % 2) {
             /* Normally you should check the returned value for being negative (error status indicator),
-             * since shifting for a negative count leads to an undefined behavior. But in this sketch
+             * since shifting for a negative count leads to undefined behavior. But in this sketch
              * it's safe to assume a positive value because the status has already been checked.
              */
             static int32_t dot_bit_pos = SegMap595.get_dot_bit_pos();
@@ -148,10 +148,10 @@ void loop()
         // Output a glyph on the display.
         digitalWrite(LATCH_PIN, LOW);
         shiftOut(DATA_PIN, CLOCK_PIN, MSBFIRST, byte_to_shift);
-        /* Note that if your display's common pin is connected to a ground (for a common-cathode display)
-         * or a positive rail (for a common-anode display) not directly, but via a switching device
+        /* Note that if your display's common pin is connected to the ground (for a common-cathode display)
+         * or the positive rail (for a common-anode display) not directly, but via a switching device
          * (typically a transistor), at this point you also have to call a function that will turn on
-         * the switch and thus power up your display.
+         * the switch and thus power your display.
          */
         digitalWrite(LATCH_PIN, HIGH);
 
