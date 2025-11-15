@@ -181,7 +181,7 @@ class SegMap595Class {
          * by all class instances.
          *
          * If you need to preserve the buffer contents for further use, consider copying them
-         * into an outer buffer at least 11 ("0b" prefix + 8 bits + null terminator) bytes in size.
+         * into an outer buffer at least 11 ("0b" prefix + 8 bits + the null terminator) bytes in size.
          */
         static const char* get_byte_bin_notation_as_str(char byte_to_write_down);
 
@@ -199,7 +199,7 @@ class SegMap595Class {
          * by all class instances.
          *
          * If you need to preserve the buffer contents for further use, consider copying them
-         * into an outer buffer at least 11 ("0b" prefix + 8 bits + null terminator) bytes in size.
+         * into an outer buffer at least 11 ("0b" prefix + 8 bits + the null terminator) bytes in size.
          */
         static const char* get_byte_bin_notation_as_str(unsigned char byte_to_write_down);
 
@@ -270,7 +270,7 @@ class SegMap595Class {
          */
         int32_t check_map_str(const char *map_str);
 
-        /* Indicate a bit position for every display segment.
+        /* Indicate the bit position for every display segment.
          *
          * Returns: zero if all bit positions were indicated, a negative integer otherwise
          * (see the preprocessor macros list for possible values).

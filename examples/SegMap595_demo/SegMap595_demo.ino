@@ -121,7 +121,7 @@ void loop()
         Serial.print(SegMap595.get_map_str());
 
         char represented_char = SegMap595.get_represented_char(counter);
-        if (represented_char == '*') {        /* An asterisk represents a degree symbol because
+        if (represented_char == '*') {        /* An asterisk represents the degree symbol because
                                                * the actual degree symbol isn't listed in ASCII.
                                                */
             Serial.print(" degree symbol ");

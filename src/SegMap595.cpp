@@ -41,7 +41,7 @@ SegMap595Class::SegMap595Class() {}
 
 int32_t SegMap595Class::init(const char *map_str, DisplayType display_common_pin, GlyphSetId glyph_set_id)
 {
-    _status = select_glyph_set(glyph_set_id);  /* Within this call the passed glyph set ID
+    _status = select_glyph_set(glyph_set_id);  /* Within this call, the passed glyph set ID
                                                 * gets copied into a private member variable.
                                                 */
 
@@ -49,7 +49,7 @@ int32_t SegMap595Class::init(const char *map_str, DisplayType display_common_pin
         return _status;
     }
 
-    _status = check_map_str(map_str);          /* Within this call the passed map string
+    _status = check_map_str(map_str);          /* Within this call, the passed map string
                                                 * gets copied into a private member buffer.
                                                 */
 
@@ -63,7 +63,7 @@ int32_t SegMap595Class::init(const char *map_str, DisplayType display_common_pin
         return _status;
     }
 
-    map_bytes(display_common_pin);             /* Within this call the value that defines the display type
+    map_bytes(display_common_pin);             /* Within this call, the value that defines the display type
                                                 * gets copied into a private member variable.
                                                 */
 
@@ -121,7 +121,7 @@ int32_t SegMap595Class::get_dot_bit_pos()
     if (_status < 0) {
         return _status;
     } else {
-        return _bit_pos[0];  /* Dot (represented by the @ sign) is the first character
+        return _bit_pos[0];  /* Dot (represented by the '@' sign) is the first character
                               * whose position is checked when a map string gets analyzed.
                               */
     }
@@ -160,7 +160,7 @@ const char* SegMap595Class::get_byte_bin_notation_as_str(unsigned char byte_to_w
     // Binary notation length for a byte: prefix + 8 bits.
     constexpr size_t notation_len = bin_notation_prefix_len + SEGMAP595_SEG_NUM;
 
-    static char buf[notation_len + 1] = {0};  // Plus one byte for null terminator.
+    static char buf[notation_len + 1] = {0};  // Plus one byte for the null terminator.
     buf[0] = '0';
     buf[1] = 'b';
 
@@ -223,7 +223,7 @@ int32_t SegMap595Class::check_map_str(const char *map_str)
         return SEGMAP595_STATUS_ERR_MAP_STR_LEN;
     }
 
-    // Copy to internal buffer.
+    // Copy to the internal buffer.
     memcpy(_map_str, map_str, SEGMAP595_SEG_NUM);
     _map_str[SEGMAP595_SEG_NUM] = '\0';
 
@@ -268,7 +268,7 @@ int32_t SegMap595Class::read_map_str()
         }
     }
 
-    // Bit position must be set for all segments. If not, that's an error.
+    // Bit positions must be set for all segments. If not, that's an error.
     if (bit_pos_set == SEGMAP595_SEG_NUM) {
         return SEGMAP595_STATUS_OK;
     } else {

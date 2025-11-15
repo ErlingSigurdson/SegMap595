@@ -27,7 +27,7 @@ your device do the whole job in one go based on three parameters:
 The **map string** is a C-style (null-terminated) string that must reflect the actual (physical) order of connections
 made between the parallel outputs of your 74HC595 and the segment control pins of your 7-segment display.
 
-The map string must consist of exactly 8 ASCII characters: **@, A, B, C, D, E, F and G**.
+The map string must consist of exactly 8 ASCII characters: **'@', 'A', 'B', 'C', 'D', 'E', 'F' and 'G'**.
 Every character corresponds to a single segment (@ stands for a dot).
 The first (leftmost) character in the map string corresponds to the 7th (most significant) bit of the IC's parallel
 outputs (Q7 output), the last (rightmost) character corresponds to the 0th (least significant) bit (Q0 output).
@@ -110,7 +110,7 @@ uint8_t mapped_byte = SegMap595.get_mapped_byte('A');
 uint8_t mapped_byte = SegMap595.get_mapped_byte('Z');
 uint8_t mapped_byte = SegMap595.get_mapped_byte('-');
 uint8_t mapped_byte = SegMap595.get_mapped_byte('_');
-uint8_t mapped_byte = SegMap595.get_mapped_byte('*');  /* An asterisk represents a degree symbol because
+uint8_t mapped_byte = SegMap595.get_mapped_byte('*');  /* An asterisk represents the degree symbol because
                                                         * the actual degree symbol isn't listed in ASCII.
                                                         */
 

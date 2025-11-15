@@ -21,10 +21,10 @@
 
 #define SEGMAP595_GLYPH_SET_2_GLYPH_NUM 35
 
-/* Bytes formed as if the map string is "@ABCDEFG" (@ is for a dot).
+/* Bytes formed as if the map string is "@ABCDEFG" ('@' is for a dot).
  * In reality the map string is unlikely to be like that,
  * and the alphabetically mapped bytes are just a set
- * of default combinations used in a mapping process.
+ * of default combinations used in the mapping process.
  */
 #define SEGMAP595_GLYPH_SET_2_ABC_BYTE_0 0b01111110
 #define SEGMAP595_GLYPH_SET_2_ABC_BYTE_1 0b00110000
@@ -36,31 +36,31 @@
 #define SEGMAP595_GLYPH_SET_2_ABC_BYTE_7 0b01110000
 #define SEGMAP595_GLYPH_SET_2_ABC_BYTE_8 0b01111111
 #define SEGMAP595_GLYPH_SET_2_ABC_BYTE_9 0b01111011
-#define SEGMAP595_GLYPH_SET_2_ABC_BYTE_A 0b01110111  // Like actual 'A'.
-#define SEGMAP595_GLYPH_SET_2_ABC_BYTE_B 0b00011111  // Like actual 'b'.
-#define SEGMAP595_GLYPH_SET_2_ABC_BYTE_C 0b01001110  // Like actual 'C'.
-#define SEGMAP595_GLYPH_SET_2_ABC_BYTE_D 0b00111101  // Like actual 'd'.
-#define SEGMAP595_GLYPH_SET_2_ABC_BYTE_E 0b01001111  // Like actual 'E'.
-#define SEGMAP595_GLYPH_SET_2_ABC_BYTE_F 0b01000111  // Like actual 'F'.
+#define SEGMAP595_GLYPH_SET_2_ABC_BYTE_A 0b01110111  // Like the actual 'A'.
+#define SEGMAP595_GLYPH_SET_2_ABC_BYTE_B 0b00011111  // Like the actual 'b'.
+#define SEGMAP595_GLYPH_SET_2_ABC_BYTE_C 0b01001110  // Like the actual 'C'.
+#define SEGMAP595_GLYPH_SET_2_ABC_BYTE_D 0b00111101  // Like the actual 'd'.
+#define SEGMAP595_GLYPH_SET_2_ABC_BYTE_E 0b01001111  // Like the actual 'E'.
+#define SEGMAP595_GLYPH_SET_2_ABC_BYTE_F 0b01000111  // Like the actual 'F'.
 
-#define SEGMAP595_GLYPH_SET_2_ABC_BYTE_G 0b01011110  /* More or less like actual 'G',
+#define SEGMAP595_GLYPH_SET_2_ABC_BYTE_G 0b01011110  /* More or less like the actual 'G',
                                                       * but without the short horizontal stroke.
                                                       */
 
-#define SEGMAP595_GLYPH_SET_2_ABC_BYTE_H 0b00110111  // Like actual 'H'.
-#define SEGMAP595_GLYPH_SET_2_ABC_BYTE_I 0b00110000  // Like actual 'I', equivalent to '1'.
-#define SEGMAP595_GLYPH_SET_2_ABC_BYTE_J 0b00111100  // Like actual 'J'.
-#define SEGMAP595_GLYPH_SET_2_ABC_BYTE_L 0b00001110  // Like actual 'L'.
-#define SEGMAP595_GLYPH_SET_2_ABC_BYTE_N 0b00010101  // Like actual 'n'.
-#define SEGMAP595_GLYPH_SET_2_ABC_BYTE_O 0b00011101  // Like actual 'o' (to distinguish from zero).
-#define SEGMAP595_GLYPH_SET_2_ABC_BYTE_P 0b01100111  // Like actual 'P'.
-#define SEGMAP595_GLYPH_SET_2_ABC_BYTE_Q 0b01110011  // Like actual 'q'.
-#define SEGMAP595_GLYPH_SET_2_ABC_BYTE_R 0b00000101  // Like actual 'r'.
-#define SEGMAP595_GLYPH_SET_2_ABC_BYTE_S 0b01011011  // Like actual 'S', equivalent to '5'.
-#define SEGMAP595_GLYPH_SET_2_ABC_BYTE_T 0b00001111  // More or less like actual 't'.
-#define SEGMAP595_GLYPH_SET_2_ABC_BYTE_U 0b00111110  // Like actual 'U'.
-#define SEGMAP595_GLYPH_SET_2_ABC_BYTE_Y 0b00111011  // Like actual 'y', but the size of a capital letter.
-#define SEGMAP595_GLYPH_SET_2_ABC_BYTE_Z 0b01101101  // More or less like actual 'Z', equivalent to '2'.
+#define SEGMAP595_GLYPH_SET_2_ABC_BYTE_H 0b00110111  // Like the actual 'H'.
+#define SEGMAP595_GLYPH_SET_2_ABC_BYTE_I 0b00110000  // Like the actual 'I', equivalent to '1'.
+#define SEGMAP595_GLYPH_SET_2_ABC_BYTE_J 0b00111100  // Like the actual 'J'.
+#define SEGMAP595_GLYPH_SET_2_ABC_BYTE_L 0b00001110  // Like the actual 'L'.
+#define SEGMAP595_GLYPH_SET_2_ABC_BYTE_N 0b00010101  // Like the actual 'n'.
+#define SEGMAP595_GLYPH_SET_2_ABC_BYTE_O 0b00011101  // Like the actual 'o' (to distinguish from zero).
+#define SEGMAP595_GLYPH_SET_2_ABC_BYTE_P 0b01100111  // Like the actual 'P'.
+#define SEGMAP595_GLYPH_SET_2_ABC_BYTE_Q 0b01110011  // Like the actual 'q'.
+#define SEGMAP595_GLYPH_SET_2_ABC_BYTE_R 0b00000101  // Like the actual 'r'.
+#define SEGMAP595_GLYPH_SET_2_ABC_BYTE_S 0b01011011  // Like the actual 'S', equivalent to '5'.
+#define SEGMAP595_GLYPH_SET_2_ABC_BYTE_T 0b00001111  // More or less like the actual 't'.
+#define SEGMAP595_GLYPH_SET_2_ABC_BYTE_U 0b00111110  // Like the actual 'U'.
+#define SEGMAP595_GLYPH_SET_2_ABC_BYTE_Y 0b00111011  // Like the actual 'y', but the size of a capital letter.
+#define SEGMAP595_GLYPH_SET_2_ABC_BYTE_Z 0b01101101  // More or less like the actual 'Z', equivalent to '2'.
 #define SEGMAP595_GLYPH_SET_2_ABC_BYTE_DASH       0b00000001
 #define SEGMAP595_GLYPH_SET_2_ABC_BYTE_EQUAL      0b00001001
 #define SEGMAP595_GLYPH_SET_2_ABC_BYTE_DEGREE     0b01100011
@@ -140,7 +140,7 @@
 #define SEGMAP595_GLYPH_SET_2_INDEX_DEGREE     33
 #define SEGMAP595_GLYPH_SET_2_INDEX_UNDERSCORE 34
 
-// Contents of an array used to get mapped bytes by the characters they represent.
+// Array contents used to get mapped bytes by the characters they represent.
 #define SEGMAP595_GLYPH_SET_2_CHAR_0          '0'
 #define SEGMAP595_GLYPH_SET_2_CHAR_1          '1'
 #define SEGMAP595_GLYPH_SET_2_CHAR_2          '2'
@@ -174,7 +174,7 @@
 #define SEGMAP595_GLYPH_SET_2_CHAR_Z          'Z'
 #define SEGMAP595_GLYPH_SET_2_CHAR_DASH       '-'
 #define SEGMAP595_GLYPH_SET_2_CHAR_EQUAL      '='
-#define SEGMAP595_GLYPH_SET_2_CHAR_DEGREE     '*'  // Special case: there's no ASCII character for a degree symbol.
+#define SEGMAP595_GLYPH_SET_2_CHAR_DEGREE     '*'  // Special case: there's no ASCII character for the degree symbol.
 #define SEGMAP595_GLYPH_SET_2_CHAR_UNDERSCORE '_'
 #define SEGMAP595_GLYPH_SET_2_CHARS SEGMAP595_GLYPH_SET_2_CHAR_0,      \
                                     SEGMAP595_GLYPH_SET_2_CHAR_1,      \
