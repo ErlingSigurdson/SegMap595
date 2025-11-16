@@ -44,7 +44,7 @@
 #define SEGMAP595_ONLY_MSB_SET_MASK (SEGMAP595_ONLY_LSB_SET_MASK << SEGMAP595_MSB)
 #define SEGMAP595_ALL_BITS_SET_MASK 0xFF
 
-// Mapping status codes. Double as return codes for some functions.
+// Mapping status codes. Double as return codes for some methods.
 #define SEGMAP595_STATUS_INITIAL                      -1
 #define SEGMAP595_STATUS_ERR_GLYPH_SET_ID             -2
 #define SEGMAP595_STATUS_ERR_MAP_STR_NULLPTR          -3
