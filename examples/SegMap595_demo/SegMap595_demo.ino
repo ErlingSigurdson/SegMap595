@@ -98,8 +98,8 @@ void loop()
 {
     /*--- Counter and output trigger ---*/
 
-    uint64_t current_millis = millis();
-    static uint64_t previous_millis = current_millis;
+    uint32_t current_millis = millis();
+    static uint32_t previous_millis = current_millis;
 
     static size_t counter = 0;
     static size_t glyph_num = SegMap595.get_glyph_num();
