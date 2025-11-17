@@ -63,7 +63,7 @@ int32_t SegMap595Class::init(const char *map_str, DisplayType display_common_pin
         return _status;
     }
 
-    map_bytes(display_common_pin);             /* Within this call, the value that defines the display type
+    _status = map_bytes(display_common_pin);   /* Within this call, the value that defines the display type
                                                 * gets copied into a private member variable.
                                                 */
 
@@ -276,9 +276,13 @@ int32_t SegMap595Class::read_map_str()
     }
 }
 
-void SegMap595Class::map_bytes(DisplayType display_common_pin)
+int32_t SegMap595Class::map_bytes(DisplayType display_common_pin)
 {
-    _display_common_pin = display_common_pin;
+    if (_display_common_pin != SegMap595CommonCathode && _display_common_pin != SegMap595CommonAnode) {
+        return SEGMAP595_STATUS_ERR_INVALID_DISPLAY_TYPE;
+    } else {
+        _display_common_pin = display_common_pin;   
+    }
 
     for (size_t i = 0; i < _glyph_set_selected->glyph_num; ++i) {
         for (size_t j = 0; j < SEGMAP595_SEG_NUM; ++j) {
@@ -296,4 +300,6 @@ void SegMap595Class::map_bytes(DisplayType display_common_pin)
             _mapped_bytes[i] ^= static_cast<uint8_t>(SEGMAP595_ALL_BITS_SET_MASK);  // Toggle all bits.
         }
     }
+
+    return SEGMAP595_STATUS_OK;
 }

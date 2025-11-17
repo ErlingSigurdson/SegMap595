@@ -52,6 +52,7 @@
 #define SEGMAP595_STATUS_ERR_MAP_STR_INVALID_CHAR     -5
 #define SEGMAP595_STATUS_ERR_MAP_STR_CHAR_DUPLICATION -6
 #define SEGMAP595_STATUS_ERR_BIT_POS_SET              -7
+#define SEGMAP595_STATUS_ERR_INVALID_DISPLAY_TYPE     -8
 #define SEGMAP595_STATUS_OK                            0
 
 
@@ -282,9 +283,10 @@ class SegMap595Class {
 
         /* Do the main job of mapping the bytes.
          *
-         * Returns: nothing.
+         * Returns: zero if mapping was succesful, a negative integer otherwise
+         * (see the preprocessor macros list for possible values).
          */
-        void    map_bytes(DisplayType display_common_pin);
+        int32_t map_bytes(DisplayType display_common_pin);
 };
 
 // Class-related aliases.
