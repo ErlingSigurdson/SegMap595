@@ -80,8 +80,8 @@ class SegMap595Class {
 
         /* "Load" a map string into an object, specify a display type (based on its common pin) and select a glyph set.
          *
-         * Returns: zero if mapping was successful (that is, if the passed map string is valid and the bytes were
-         * successfully mapped), a negative integer otherwise (see the preprocessor macros list for possible values).
+         * Returns: zero if mapping was successful (if all parameters are valid), a negative integer otherwise
+         * (see the preprocessor macros list for possible values).
          *
          * The third parameter can be omitted. In this case, glyph set #1 will be selected by default.
          *
