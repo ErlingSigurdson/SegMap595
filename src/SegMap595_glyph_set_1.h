@@ -21,7 +21,7 @@
 
 #define SEGMAP595_GLYPH_SET_1_GLYPH_NUM 40
 
-/* Bytes formed as if the map string is "@ABCDEFG" (@ is for a dot).
+/* Bytes formed as if the map string is "@ABCDEFG" ('@' is for a dot).
  * In reality the map string is unlikely to be like that,
  * and the alphabetically mapped bytes are just a set
  * of default combinations used in the mapping process.

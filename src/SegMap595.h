@@ -35,7 +35,7 @@
 
 /*--- Misc ---*/
 
-#define SEGMAP595_SEG_NUM 8  // Including a dot segment.
+#define SEGMAP595_SEG_NUM 8  // Including a dot segment, also known as a decimal point or 'DP'.
 
 #define SEGMAP595_GLYPH_SET_MAX_GLYPH_NUM 40  // Highest number of glyphs among all provided glyph sets.
 
