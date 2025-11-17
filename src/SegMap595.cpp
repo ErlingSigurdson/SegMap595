@@ -281,7 +281,7 @@ int32_t SegMap595Class::map_bytes(DisplayType display_common_pin)
     if (_display_common_pin != SegMap595CommonCathode && _display_common_pin != SegMap595CommonAnode) {
         return SEGMAP595_STATUS_ERR_INVALID_DISPLAY_TYPE;
     } else {
-        _display_common_pin = display_common_pin;   
+        _display_common_pin = display_common_pin;
     }
 
     for (size_t i = 0; i < _glyph_set_selected->glyph_num; ++i) {
