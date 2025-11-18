@@ -105,7 +105,7 @@ You can also check the value returned by `init()` instead of calling `get_status
 
 Get a mapped byte:
 ```cpp
-// Get by a represented character (case insensitive).
+// Get by a represented character (case-insensitive).
 uint8_t mapped_byte = SegMap595.get_mapped_byte('0');
 uint8_t mapped_byte = SegMap595.get_mapped_byte('9');
 uint8_t mapped_byte = SegMap595.get_mapped_byte('A');
