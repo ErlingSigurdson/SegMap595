@@ -241,9 +241,9 @@ class SegMap595Class {
 
         /*--- Methods ---*/
 
-        /* Check the passed glyph set number and "load" the selected glyph set.
+        /* Check the passed glyph set ID and "load" the selected glyph set.
          *
-         * Returns: zero if the passed glyph set number is valid, a negative integer otherwise
+         * Returns: zero if the passed glyph set ID is valid, a negative integer otherwise
          * (see the preprocessor macros list for possible values).
          */
         int32_t select_glyph_set(GlyphSetId glyph_set_id);
