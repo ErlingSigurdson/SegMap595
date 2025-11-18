@@ -27,10 +27,12 @@ your device do the whole job in one go based on three parameters:
 The **map string** is a C-style (null-terminated) string that must reflect the actual (physical) order of connections
 made between the parallel outputs of your 74HC595 and the segment control pins of your 7-segment display.
 
-The map string must consist of exactly 8 ASCII characters: **'@', 'A', 'B', 'C', 'D', 'E', 'F' and 'G'**.
-Every character corresponds to a single segment ('@' stands for a dot, also known as a decimal point or 'DP').
-The first (leftmost) character in the map string corresponds to the 7th (most significant) bit of the IC's parallel
-outputs ('Q7' output), the last (rightmost) character corresponds to the 0th (least significant) bit ('Q0' output).
+The map string must consist of exactly 8 ASCII characters: **@**, **A**, **B**, **C**, **D**, **E**, **F** and **G**.
+Every character corresponds to a single segment (@ stands for a dot, also known as a decimal point or DP).
+The first (leftmost) character in the map string corresponds to the 7th bit (most significant bit, MSB) of a byte
+stored in the shift register, connected to the Q7 parallel output.
+The last (rightmost) character in the map string corresponds to the 0th bit (least significant bit, LSB) of a byte
+stored in the shift register, connected to the Q0 parallel output.
 
 Uppercase characters may be replaced with their lowercase counterparts. Any other characters are invalid.
 Duplicating characters is invalid as well.
@@ -47,14 +49,14 @@ Duplicating characters is invalid as well.
 ## Mapped bytes
 
 If the map string is valid, mapped bytes will be placed in a member array in the ascending order of characters
-they represent: from 0 to 9, from 'A' to 'Z', non-alphanumerics at the end.
+they represent: from 0 to 9, from A to Z, non-alphanumerics at the end.
 
 By default, the dot bit will be in an OFF state (cleared for a common-cathode display, set for a common-anode display)
 in all mapped bytes, therefore you will have to manipulate this bit in your code as necessary. The dot bit position
 within a byte is indicated by the return value of `get_dot_bit_pos()` method, as shown below.
 
 Glyphs are not standardized globally. Some of them do resemble their actual prototype characters, some are
-rather sketchy (like 'G', 'K', 'T', 'V', 'X' and 'Z'), others are outright arbitrary (like 'M' and 'W').
+rather sketchy (like G, K, T, V, X and Z), others are outright arbitrary (like M and W).
 
 This library offers two glyph sets:
 
@@ -66,7 +68,7 @@ This set includes all English letters, although some of them are represented by 
 
 ### Set #2
 
-This set avoids arbitrary glyphs, but lacks the letters 'K', 'M', 'V', 'W' and 'X':
+This set avoids arbitrary glyphs, but lacks the letters K, M, V, W and X:
 
 ![Glyphs](assets/glyph_set_2.jpg)
 
@@ -87,11 +89,11 @@ SegMap595.init(MAP_STR,
 ```
 If the third parameter is omitted, glyph set #1 will be selected by default.
 
-Check the last mapping status:
+Get the last mapping status:
 ```cpp
 int32_t mapping_status = SegMap595.get_status();
-// Loop error output if mapping was unsuccessful.
-if (mapping_status < 0) {  // If error is detected.
+// Loop the error output if the mapping was unsuccessful.
+if (mapping_status < 0) {  // If an error is detected.
     while(true) {
         Serial.print("Error: mapping failed, error code ");
         Serial.println(mapping_status);
@@ -115,14 +117,15 @@ uint8_t mapped_byte = SegMap595.get_mapped_byte('*');  /* The asterisk represent
                                                         */
 
 // Get by a decimal digit's numerical value (from 0 to 9).
-uint8_t mapped_byte = SegMap595.get_mapped_byte(0);    // Returns a byte for the '0' character.
-uint8_t mapped_byte = SegMap595.get_mapped_byte(9);    // Returns a byte for the '9' character.
+uint8_t mapped_byte = SegMap595.get_mapped_byte(0);    // Returns a byte for '0'.
+uint8_t mapped_byte = SegMap595.get_mapped_byte(9);    // Returns a byte for '9'.
 
 // Get by a hexadecimal digit's numerical value (from 0 to 15, or from 0x0 to 0xF).
-uint8_t mapped_byte = SegMap595.get_mapped_byte(15);   // Returns a byte for the 'F' character.
-uint8_t mapped_byte = SegMap595.get_mapped_byte(0x0);  // Returns a byte for the '0' character.
-uint8_t mapped_byte = SegMap595.get_mapped_byte(0xA);  // Returns a byte for the 'A' character.
-uint8_t mapped_byte = SegMap595.get_mapped_byte(0xF);  // Returns a byte for the 'F' character.
+uint8_t mapped_byte = SegMap595.get_mapped_byte(0);    // Returns a byte for '0'.
+uint8_t mapped_byte = SegMap595.get_mapped_byte(15);   // Returns a byte for 'F'.
+uint8_t mapped_byte = SegMap595.get_mapped_byte(0x0);  // Returns a byte for '0'.
+uint8_t mapped_byte = SegMap595.get_mapped_byte(0xA);  // Returns a byte for 'A'.
+uint8_t mapped_byte = SegMap595.get_mapped_byte(0xF);  // Returns a byte for 'F'.
 
 // Get by an incremental index. Use `counter < SegMap595.get_glyph_num()` as an appropriate boundary.
 uint8_t mapped_byte = SegMap595.get_mapped_byte(counter);
@@ -164,12 +167,12 @@ Get a character (its ASCII code) that corresponds to a given index in the result
 char represented_char = SegMap595.get_represented_char(counter);
 ```
 
-Get a pointer to a string that represents a standard (since GCC 4.3 or C++14) binary number notation
+Get a pointer to a string that represents a standard (since GCC 4.3 and C++14) binary number notation
 for a given byte (`0bXXXXXXXX`):
 ```cpp
 const char *byte_bin_notation = SegMap595.get_byte_bin_notation_as_str(byte_to_shift);
 ```
-This method works as a utility: it can be used regardless of whether the mapping was performed and
+This method works as a utility: it can be used regardless of whether mapping was performed and
 whether it was successful.
 
 Get a pointer to an object's internal buffer that holds the map string you've passed earlier:
@@ -177,7 +180,7 @@ Get a pointer to an object's internal buffer that holds the map string you've pa
 const char *map_str_retrieved = SegMap595.get_map_str();
 ```
 
-Refer to `SegMap595.h` for a detailed API description if necessary.
+Refer to `SegMap595.h` for more API details.
 
 ## Compatibility
 

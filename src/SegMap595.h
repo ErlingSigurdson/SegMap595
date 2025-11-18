@@ -35,7 +35,7 @@
 
 /*--- Misc ---*/
 
-#define SEGMAP595_SEG_NUM 8  // Including a dot segment, also known as a decimal point or 'DP'.
+#define SEGMAP595_SEG_NUM 8  // Including a dot segment, also known as a decimal point or DP.
 
 #define SEGMAP595_GLYPH_SET_MAX_GLYPH_NUM 40  // Highest number of glyphs among all provided glyph sets.
 
@@ -87,7 +87,7 @@ class SegMap595Class {
          *
          * Multiple calls to this method are valid, each call leads to a fresh byte mapping.
          */
-        int32_t  init(const char *map_str,
+        int32_t init(const char *map_str,
                       DisplayType display_common_pin,
                       GlyphSetId glyph_set_id = GlyphSetId::GlyphSet1);
 
@@ -96,7 +96,7 @@ class SegMap595Class {
          * Returns: zero if mapping was successful, a negative integer otherwise
          * (see the preprocessor macros list for possible values).
          */
-        int32_t  get_status();
+        int32_t get_status();
 
         /* Get a mapped byte (overload #1).
          *
@@ -104,16 +104,14 @@ class SegMap595Class {
          * the passed index is within the array bounds,
          * zero otherwise.
          */
-        uint8_t  get_mapped_byte(size_t index);
+        uint8_t get_mapped_byte(size_t index);
 
         /* Get a mapped byte (overload #2).
          *
-         * Returns: a mapped byte if mapping was successful and
-         * the passed index is within the array bounds,
-         * zero otherwise.
+         * Returns: equivalent to the previous overload.
          */
         #if defined(UINT32_MAX) && defined(SIZE_MAX) && (UINT32_MAX > SIZE_MAX)
-        uint8_t  get_mapped_byte(uint32_t index);
+        uint8_t get_mapped_byte(uint32_t index);
         #endif
 
         /* Get a mapped byte (overload #3).
@@ -124,31 +122,29 @@ class SegMap595Class {
          *
          * Case-insensitive (lowercase letters will be converted to their uppercase counterparts).
          */
-        uint8_t  get_mapped_byte(char represented_char);
+        uint8_t get_mapped_byte(char represented_char);
 
         /* Get a mapped byte (overload #4).
          *
-         * Returns: a mapped byte if mapping was successful and
-         * the passed character is represented in the selected glyph set,
-         * zero otherwise.
+         * Returns: equivalent to the previous overload.
          *
-         * Case-insensitive (lowercase letters will be converted to their uppercase counterparts).
+         * Other applicable notes are as for the previous overload.
          */
-        uint8_t  get_mapped_byte(unsigned char represented_char);
+        uint8_t get_mapped_byte(unsigned char represented_char);
 
         /* Get the position of the bit that represents a dot segment.
          *
          * Returns: an integer from zero to SEGMAP595_MSB (inclusive) if mapping was successful,
          * a negative integer otherwise.
          */
-        int32_t  get_dot_bit_pos();
+        int32_t get_dot_bit_pos();
 
         /* Get the number of glyphs in the selected glyph set.
          *
          * Returns: a positive integer if mapping was successful,
          * zero otherwise.
          */
-        size_t   get_glyph_num();
+        size_t  get_glyph_num();
 
         /* Get the character represented by a glyph by its index (overload #1).
          *
@@ -156,51 +152,39 @@ class SegMap595Class {
          * the passed index is within the array bounds,
          * zero otherwise.
          */
-        char     get_represented_char(size_t index);
+        char    get_represented_char(size_t index);
 
         /* Get the character represented by a glyph by its index (overload #2).
          *
-         * Returns: the respective ASCII code if mapping was successful and
-         * the passed index is within the array bounds,
-         * zero otherwise.
+         * Returns: equivalent to the previous overload.
          */
         #if defined(UINT32_MAX) && defined(SIZE_MAX) && (UINT32_MAX > SIZE_MAX)
-        char     get_represented_char(uint32_t index);
+        char    get_represented_char(uint32_t index);
         #endif
 
-        /* Get a pointer to a string that represents a standard (since GCC 4.3 or C++14)
+        /* Get a pointer to a string that represents a standard (since GCC 4.3 and C++14)
          * binary number notation for a given byte (overload #1).
          *
          * Returns: a pointer to a string.
          *
          * The string buffer is static, and therefore a pointer to it can be returned correctly.
-         * Every call to this method rewrites the buffer contents.
          *
-         * This method is a utility, not a part of per-instance (per-object) state,
-         * therefore it may be used regardless of whether mapping was performed and
-         * whether it was successful. However, that also means that the buffer is shared
-         * by all class instances.
+         * This method is a utility, not a part of per-instance (per-object) state, therefore it can
+         * be used regardless of whether mapping was performed and whether it was successful. However,
+         * that also means that the buffer is shared by all class instances.
          *
-         * If you need to preserve the buffer contents for further use, consider copying them
-         * into an outer buffer at least 11 ("0b" prefix + 8 bits + the null terminator) bytes in size.
+         * Every call to this method rewrites the buffer contents. If you want to preserve the buffer
+         * contents for further use, consider copying them into an outer buffer at least 11
+         * ("0b" prefix + 8 bits + the null terminator) bytes in size.
          */
         static const char* get_byte_bin_notation_as_str(char byte_to_write_down);
 
-        /* Get a pointer to a string that represents a standard (since GCC 4.3 or C++14)
+        /* Get a pointer to a string that represents a standard (since GCC 4.3 and C++14)
          * binary number notation for a given byte (overload #2).
          *
-         * Returns: a pointer to a string.
+         * Returns: equivalent to the previous overload.
          *
-         * The string buffer is static, and therefore a pointer to it can be returned correctly.
-         * Every call to this method rewrites the buffer contents.
-         *
-         * This method is a utility, not a part of per-instance (per-object) state,
-         * therefore it may be used regardless of whether mapping was performed and
-         * whether it was successful. However, that also means that the buffer is shared
-         * by all class instances.
-         *
-         * If you need to preserve the buffer contents for further use, consider copying them
-         * into an outer buffer at least 11 ("0b" prefix + 8 bits + the null terminator) bytes in size.
+         * Other applicable notes are as for the previous overload.
          */
         static const char* get_byte_bin_notation_as_str(unsigned char byte_to_write_down);
 
@@ -247,7 +231,7 @@ class SegMap595Class {
         DisplayType _display_common_pin;
 
         /* Resulting array.
-         * If mapping was successful, this array will hold the mapped bytes.
+         * If mapping was successful, this array holds the mapped bytes.
          */
         uint8_t  _mapped_bytes[SEGMAP595_GLYPH_SET_MAX_GLYPH_NUM] = {0};
 

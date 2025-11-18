@@ -21,7 +21,7 @@
 
 #define SEGMAP595_GLYPH_SET_1_GLYPH_NUM 40
 
-/* Bytes formed as if the map string is "@ABCDEFG" ('@' is for a dot).
+/* Bytes formed as if the map string is "@ABCDEFG" (@ is for a dot).
  * In reality the map string is unlikely to be like that,
  * and the alphabetically mapped bytes are just a set
  * of default combinations used in the mapping process.
@@ -155,7 +155,7 @@
 #define SEGMAP595_GLYPH_SET_1_INDEX_DEGREE     38
 #define SEGMAP595_GLYPH_SET_1_INDEX_UNDERSCORE 39
 
-// Array contents used to get mapped bytes by the characters they represent.
+// Array contents used to get the mapped bytes by the characters they represent.
 #define SEGMAP595_GLYPH_SET_1_CHAR_0          '0'
 #define SEGMAP595_GLYPH_SET_1_CHAR_1          '1'
 #define SEGMAP595_GLYPH_SET_1_CHAR_2          '2'

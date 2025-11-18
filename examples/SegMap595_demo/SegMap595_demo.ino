@@ -12,7 +12,7 @@
  *           Additionally, prints mapping information via UART.
  * ----------------------------------------------------------------------------|---------------------------------------|
  * Notes:    Refer to the README for a general library overview.
- *           Refer to SegMap595.h for a detailed API description.
+ *           Refer to SegMap595.h for more API details.
  */
 
 
@@ -30,15 +30,16 @@
  * This string must reflect the actual (physical) order of connections made between
  * the parallel outputs of your 74HC595 and the segment control pins of your 7-segment display.
  *
- * The map string must consist of exactly 8 ASCII characters: '@', 'A', 'B', 'C', 'D', 'E', 'F' and 'G'.
- * Every character corresponds to a single segment ('@' stands for a dot, also known as a decimal point or 'DP').
+ * The map string must consist of exactly 8 ASCII characters: @, A, B, C, D, E, F and G.
+ * Every character corresponds to a single segment (@ stands for a dot, also known as a decimal point or DP).
  *
- * The first (leftmost) character in the map string corresponds to the 7th (most significant)
- * bit of the IC's parallel outputs ('Q7' output), the last (rightmost) character corresponds to
- * the 0th (least significant) bit ('Q0' output).
+ * The first (leftmost) character in the map string corresponds to the 7th bit (most significant bit, MSB) of a byte
+ * stored in the shift register, connected to the Q7 parallel output.
+ * The last (rightmost) character in the map string corresponds to the 0th bit (least significant bit, LSB) of a byte
+ * stored in the shift register, connected to the Q0 parallel output.
  *
- * Uppercase characters may be replaced with their lowercase counterparts. Any other characters
- * are invalid. Duplicating characters is invalid as well.
+ * Uppercase characters may be replaced with their lowercase counterparts. Any other characters are invalid.
+ * Duplicating characters is invalid as well.
  */
 #define MAP_STR "ED@CGAFB"
 
@@ -98,6 +99,7 @@ void loop()
 {
     /*--- Counter and output trigger ---*/
 
+    // Counter.
     uint32_t current_millis = millis();
     static uint32_t previous_millis = current_millis;
 

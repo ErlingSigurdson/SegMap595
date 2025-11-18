@@ -41,7 +41,7 @@ SegMap595Class::SegMap595Class() {}
 
 int32_t SegMap595Class::init(const char *map_str, DisplayType display_common_pin, GlyphSetId glyph_set_id)
 {
-    _status = select_glyph_set(glyph_set_id);  /* Within this call, the passed glyph set ID
+    _status = select_glyph_set(glyph_set_id);  /* Inside this call the passed glyph set ID
                                                 * gets copied into a private member variable.
                                                 */
 
@@ -49,7 +49,7 @@ int32_t SegMap595Class::init(const char *map_str, DisplayType display_common_pin
         return _status;
     }
 
-    _status = check_map_str(map_str);          /* Within this call, the passed map string
+    _status = check_map_str(map_str);          /* Inside this call the passed map string
                                                 * gets copied into a private member buffer.
                                                 */
 
@@ -63,7 +63,7 @@ int32_t SegMap595Class::init(const char *map_str, DisplayType display_common_pin
         return _status;
     }
 
-    _status = map_bytes(display_common_pin);   /* Within this call, the value that defines the display type
+    _status = map_bytes(display_common_pin);   /* Inside this call the value that defines the display type
                                                 * gets copied into a private member variable.
                                                 */
 
@@ -121,7 +121,7 @@ int32_t SegMap595Class::get_dot_bit_pos()
     if (_status < 0) {
         return _status;
     } else {
-        return _bit_pos[0];  /* Dot (represented by the '@' sign) is the first character
+        return _bit_pos[0];  /* Dot (represented by @) is the first character
                               * whose position is checked when a map string gets analyzed.
                               */
     }
@@ -154,7 +154,7 @@ char SegMap595Class::get_represented_char(uint32_t index)
 
 const char* SegMap595Class::get_byte_bin_notation_as_str(unsigned char byte_to_write_down)
 {
-    // Standard (since GCC 4.3 or C++14) binary number notation prefix "0b".
+    // Standard (since GCC 4.3 and C++14) binary number notation prefix "0b".
     constexpr size_t bin_notation_prefix_len = 2;
 
     // Binary notation length for a byte: prefix + 8 bits.
