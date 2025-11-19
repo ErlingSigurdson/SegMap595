@@ -6,7 +6,8 @@
  * Purpose:  A class for mapping the parallel outputs of a 74HC595 shift
  *           register IC to the segments of a 7-segment display.
  * ----------------------------------------------------------------------------|---------------------------------------|
- * Notes:
+ * Notes:    Refer to the README for a general library overview and
+ *           a basic API usage description.
  */
 
 
