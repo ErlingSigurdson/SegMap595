@@ -44,12 +44,12 @@
 #define MAP_STR "ED@CGAFB"
 
 // Specify your display type based on its common pin. Use one variant, comment out or delete the other.
-SegMap595Class::DisplayType display_common_pin = SegMap595CommonCathode;
-//SegMap595Class::DisplayType display_common_pin = SegMap595CommonAnode;
+#define DISPLAY_COMMON_PIN SegMap595CommonCathode
+//#define DISPLAY_COMMON_PIN SegMap595CommonAnode
 
 // Select a glyph set. Use one variant, comment out or delete the other.
-SegMap595Class::GlyphSetId glyph_set_id = SegMap595GlyphSet1;
-//SegMap595Class::GlyphSetId glyph_set_id = SegMap595GlyphSet2;
+#define GLYPH_SET_ID SegMap595GlyphSet1
+//#define GLYPH_SET_ID SegMap595GlyphSet2
 
 
 /*--- Misc ---*/
@@ -78,7 +78,7 @@ void setup()
     pinMode(CLOCK_PIN, OUTPUT);
 
     // Byte mapping.
-    SegMap595.init(MAP_STR, display_common_pin, glyph_set_id);
+    SegMap595.init(MAP_STR, DISPLAY_COMMON_PIN, GLYPH_SET_ID);
 
     /* Mapping status check.
      * You can also check the value returned by init() instead of calling get_status().
