@@ -89,8 +89,8 @@ class SegMap595Class {
          * Multiple calls to this method are valid, each call leads to a fresh byte mapping.
          */
         int32_t init(const char *map_str,
-                      DisplayType display_common_pin,
-                      GlyphSetId glyph_set_id = GlyphSetId::GlyphSet1);
+                     DisplayType display_common_pin,
+                     GlyphSetId glyph_set_id = GlyphSetId::GlyphSet1);
 
         /* Get the last mapping status.
          *
