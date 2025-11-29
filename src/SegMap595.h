@@ -268,7 +268,7 @@ class SegMap595Class {
 
         /* Do the main job of mapping the bytes.
          *
-         * Returns: zero if mapping was succesful, a negative integer otherwise
+         * Returns: zero if the passed display type is valid, a negative integer otherwise
          * (see the preprocessor macros list for possible values).
          */
         int32_t map_bytes(DisplayType display_common_pin);
