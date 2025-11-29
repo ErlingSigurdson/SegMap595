@@ -236,8 +236,18 @@ class SegMap595Class {
          */
         uint8_t  _mapped_bytes[SEGMAP595_GLYPH_SET_MAX_GLYPH_NUM] = {0};
 
-        // Array of values that indicate a bit position number for every display segment.
-        uint32_t _bit_pos[SEGMAP595_SEG_NUM] = {0xFFFFFFFF};  // Initial values are intentionally invalid.
+        /* Array of values that indicate a bit position number for every display segment.
+         * Initial values are intentionally invalid.
+         */
+        uint32_t _bit_pos[SEGMAP595_SEG_NUM] = {0xFFFFFFFF,
+                                                0xFFFFFFFF,
+                                                0xFFFFFFFF,
+                                                0xFFFFFFFF,
+                                                0xFFFFFFFF,
+                                                0xFFFFFFFF,
+                                                0xFFFFFFFF,
+                                                0xFFFFFFFF
+                                               };
 
 
         /*--- Methods ---*/
