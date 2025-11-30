@@ -64,13 +64,13 @@ This library offers two glyph sets:
 
 This set includes all English letters, although some of them are represented by arbitrary glyphs:
 
-![Glyphs](assets/glyph_set_1.jpg)
+![Glyphs](extras/glyph_set_1.jpg)
 
 ### Set #2
 
 This set avoids arbitrary glyphs, but lacks the letters K, M, V, W and X:
 
-![Glyphs](assets/glyph_set_2.jpg)
+![Glyphs](extras/glyph_set_2.jpg)
 
 ## API usage
 
