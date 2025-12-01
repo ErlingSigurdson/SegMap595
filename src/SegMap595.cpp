@@ -42,9 +42,7 @@ SegMap595Class::SegMap595Class() {}
 
 int32_t SegMap595Class::init(const char *map_str, DisplayType display_common_pin, GlyphSetId glyph_set_id)
 {
-    _status = select_glyph_set(glyph_set_id);  /* Inside this call the passed glyph set ID
-                                                * gets copied into a private member variable.
-                                                */
+    _status = select_glyph_set(glyph_set_id);
 
     if (_status < 0) {
         return _status;
