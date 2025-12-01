@@ -149,6 +149,9 @@ Get the position of the bit that represents a dot segment. Commonly used
 to toggle the respective bit periodically and thus make the dot segment blink:
 ```cpp
 if (counter % 2) {
+    /* static keyword is only suitable if you're not planning subsequent
+     * init() calls that can change the actual dot bit position.
+     */
     static int32_t dot_bit_pos = SegMap595.get_dot_bit_pos();
     if (dot_bit_pos >= 0) {  // If no error is detected.
         uint8_t mask = static_cast<uint8_t>(1u << dot_bit_pos);

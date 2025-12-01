@@ -140,13 +140,19 @@ void loop()
 
         // Dot-segment blink.
         if (counter % 2) {
-            /* Normally you should check the returned value for being negative (error status indicator),
-             * since shifting for a negative count leads to undefined behavior. But in this sketch
-             * it's safe to assume a positive value because the status has already been checked.
+            /* static keyword is only suitable if you're not planning subsequent
+             * init() calls that can change the actual dot bit position.
              */
             static int32_t dot_bit_pos = SegMap595.get_dot_bit_pos();
-            static uint8_t mask = static_cast<uint8_t>(1u << dot_bit_pos);
-            byte_to_shift ^= mask;
+            if (dot_bit_pos >= 0) {  /* If no error is detected.
+                                      * In this example sketch, the error check is already done before, but this check
+                                      * is provided here despite the redundancy to prevent the user from omitting it in
+                                      * their own implementation (shifting by a negative value would cause undefined
+                                      * behavior, which must be avoided at all costs).
+                                      */
+                uint8_t mask = static_cast<uint8_t>(1u << dot_bit_pos);
+                byte_to_shift ^= mask;
+            }
         }
 
         // Output a glyph on the display.
