@@ -48,9 +48,9 @@ int32_t SegMap595Class::init(const char *map_str, DisplayType display_common_pin
         return _status;
     }
 
-    _status = check_map_str(map_str);          /* Inside this call the passed map string
-                                                * gets copied into a private member buffer.
-                                                */
+    _status = check_map_str(map_str);         /* Inside this call the passed map string
+                                               * gets copied into a private member buffer.
+                                               */
 
     if (_status < 0) {
         return _status;
@@ -62,9 +62,9 @@ int32_t SegMap595Class::init(const char *map_str, DisplayType display_common_pin
         return _status;
     }
 
-    _status = map_bytes(display_common_pin);   /* Inside this call the value that defines the display type
-                                                * gets copied into a private member variable.
-                                                */
+    _status = map_bytes(display_common_pin);  /* Inside this call the value that defines the display type
+                                               * gets copied into a private member variable.
+                                               */
 
     return _status;
 }
