@@ -13,10 +13,10 @@ pattern is called **mapping**.
 **74HC595**, sometimes simply called **595**, is a widely used 8-bit serial-in, parallel-out (SIPO) shift register
 integrated circuit (IC) commonly employed to drive 7-segment displays.
 
-**Mapped bytes** (sometimes called **bit masks**) can be precomputed and hard-coded into a program
-run by a microcontroller unit (MCU) or a similar device that drives a display. Although it may be perfectly
-acceptable, it may become troublesome if the program needs to be adapted to a circuit with a different wiring
-order between the device's outputs and the display's control pins. This library automates the task and lets
+**Mapped bytes** (sometimes called **bit masks**) can be precomputed and hard-coded into a program run by
+a microcontroller (MC) or a similar device that drives a display. Although it may be perfectly acceptable,
+it may become troublesome if the program needs to be adapted to a circuit with a different wiring order
+between the device's outputs and the display's control pins. This library automates the task and lets
 your device do the whole job in one go based on three parameters:
 * a map string
 * a display type (either common-cathode or common-anode)
@@ -192,7 +192,7 @@ C++14 or later. It will also compile with C++11 if your compiler supports binary
 (e.g., GCC 4.3+).
 
 Actual interfacing with a 74HC595 (such as demonstrated in the example sketch) requires
-an MCU or a similar embedded device capable of bit-banging or SPI data transfer.
+an MC or a similar embedded device capable of bit-banging or SPI data transfer.
 
 The library is primarily intended and documented for use with the Arduino framework, but it doesn't
 include `Arduino.h` and can be readily used in non-Arduino embedded electronics projects.
