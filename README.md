@@ -84,7 +84,7 @@ Include the library:
 ```cpp
 SegMap595.init(MAP_STR,
                SegMap595CommonCathode,  // Other option is `SegMap595CommonAnode`.
-               SegMap595GlyphSet1       // Other option is `SegMap595GlyphSet2`. Omittable parameter.
+               SegMap595GlyphSet1       // Other option is `SegMap595GlyphSet2`. Optional parameter.
               );
 ```
 If the third parameter is omitted, glyph set #1 will be selected by default.

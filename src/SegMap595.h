@@ -84,7 +84,7 @@ class SegMap595Class {
          * Returns: zero if mapping was successful (if all parameters are valid), a negative integer otherwise
          * (see the preprocessor macros list for possible values).
          *
-         * The third parameter can be omitted. In this case, glyph set #1 will be selected by default.
+         * The third parameter is optional. If it's omitted, glyph set #1 will be selected by default.
          *
          * Multiple calls to this method are valid, each call leads to a fresh byte mapping.
          */
