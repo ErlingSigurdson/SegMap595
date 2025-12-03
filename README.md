@@ -202,6 +202,7 @@ include `Arduino.h` and can be readily used in non-Arduino embedded electronics 
 ### This library
 * [Primary repository on GitHub](https://github.com/ErlingSigurdson/SegMap595)
 * [Backup repository on GitFlic](https://gitflic.ru/project/efimov-d-v/segmap595)
+* [Backup repository on Codeberg](https://codeberg.org/ErlingSigurdson/SegMap595)
 
 ## Contact details
 
