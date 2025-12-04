@@ -121,21 +121,29 @@ void loop()
         uint8_t byte_to_shift = SegMap595.get_mapped_byte(counter);
 
         // Print mapping information via UART.
-        Serial.print("Based on map string ");
+        Serial.print("Based on the map string ");
         Serial.print(SegMap595.get_map_str());
+
+        Serial.print(" and in case of a common-");
+        if (DISPLAY_COMMON_PIN == SegMap595CommonCathode) {
+            Serial.print("cathode ");
+        } else {
+            Serial.print("anode ");
+        }
+        Serial.print("display, ");
 
         char represented_char = SegMap595.get_represented_char(counter);
         if (represented_char == '*') {        /* The asterisk represents the degree symbol because
                                                * the actual degree symbol isn't listed in ASCII.
                                                */
-            Serial.print(" degree symbol ");
+            Serial.print("degree symbol ");
         } else {
-            Serial.print(" character '");
+            Serial.print("character '");
             Serial.print(represented_char);
             Serial.print("' ");
         }
 
-        Serial.print("corresponds to mapped byte ");
+        Serial.print("corresponds to the mapped byte ");
         Serial.println(SegMap595.get_byte_bin_notation_as_str(byte_to_shift));
 
         // Dot-segment blink.
