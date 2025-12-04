@@ -197,6 +197,10 @@ an MC or a similar embedded device capable of bit-banging or SPI data transfer.
 The library is primarily intended and documented for use with the Arduino framework, but it doesn't
 include `Arduino.h` and can be readily used in non-Arduino embedded electronics projects.
 
+## License
+
+This library is licensed under the **MIT License** (see `LICENSE`).
+
 ## Links
 
 ### This library
