@@ -205,7 +205,7 @@ int32_t SegMap595Class::select_glyph_set(GlyphSetId glyph_set_id)
             break;
 
         default:
-            return SEGMAP595_STATUS_ERR_GLYPH_SET_ID;
+            return SEGMAP595_STATUS_ERR_INVALID_GLYPH_SET_ID;
     }
 
     return SEGMAP595_STATUS_OK;

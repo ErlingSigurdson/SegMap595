@@ -47,7 +47,7 @@
 
 // Mapping status codes. Double as return codes for some methods.
 #define SEGMAP595_STATUS_INITIAL                      -1
-#define SEGMAP595_STATUS_ERR_GLYPH_SET_ID             -2
+#define SEGMAP595_STATUS_ERR_INVALID_GLYPH_SET_ID     -2
 #define SEGMAP595_STATUS_ERR_MAP_STR_NULLPTR          -3
 #define SEGMAP595_STATUS_ERR_MAP_STR_LEN              -4
 #define SEGMAP595_STATUS_ERR_MAP_STR_INVALID_CHAR     -5
