@@ -199,7 +199,7 @@ include `Arduino.h` and can be readily used in non-Arduino embedded electronics 
 
 ## License
 
-This library is licensed under the **MIT License** (see `LICENSE` (here)[LICENSE]).
+This library is licensed under the **MIT License** (see `LICENSE` [here](LICENSE).
 
 ## Links
 
