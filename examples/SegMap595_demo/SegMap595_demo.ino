@@ -124,7 +124,7 @@ void loop()
         Serial.print("Based on the map string ");
         Serial.print(SegMap595.get_map_str());
 
-        Serial.print(" and in case of a common-");
+        Serial.print(" and assuming a common-");
         if (DISPLAY_COMMON_PIN == SegMap595CommonCathode) {
             Serial.print("cathode ");
         } else {
