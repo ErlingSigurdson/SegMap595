@@ -132,7 +132,7 @@ int32_t SegMap595Class::set_dot_bit(uint8_t mapped_byte)
         return _status;
     }
 
-    int32_t dot_bit_pos = SegMap595.get_dot_bit_pos();
+    int32_t dot_bit_pos = get_dot_bit_pos();
     uint8_t mask = static_cast<uint8_t>(1u << dot_bit_pos);
     return mapped_byte | mask;
 }
@@ -143,7 +143,7 @@ int32_t SegMap595Class::clear_dot_bit(uint8_t mapped_byte)
         return _status;
     }
 
-    int32_t dot_bit_pos = SegMap595.get_dot_bit_pos();
+    int32_t dot_bit_pos = get_dot_bit_pos();
     uint8_t mask = static_cast<uint8_t>(1u << dot_bit_pos);
     return mapped_byte & ~mask;
 }
@@ -154,7 +154,7 @@ int32_t SegMap595Class::toggle_dot_bit(uint8_t mapped_byte)
         return _status;
     }
 
-    int32_t dot_bit_pos = SegMap595.get_dot_bit_pos();
+    int32_t dot_bit_pos = get_dot_bit_pos();
     uint8_t mask = static_cast<uint8_t>(1u << dot_bit_pos);
     return mapped_byte ^ mask;
 }

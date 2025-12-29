@@ -136,14 +136,14 @@ class SegMap595Class {
         /* Get the position of the bit that represents a dot segment.
          *
          * Returns: an integer from zero to SEGMAP595_MSB (inclusive) if mapping was successful,
-         * a negative integer otherwise.
+         * a negative integer otherwise (see the preprocessor macros list for possible values).
          */
         int32_t get_dot_bit_pos();
 
         /* Manipulate the bit that represents a dot segment.
          *
-         * Return: an accordingly modified byte if mapping was successful,
-         * zero otherwise.
+         * Return: an accordingly modified byte if mapping was successful, a negative integer otherwise
+         * (see the preprocessor macros list for possible values).
          */
         int32_t set_dot_bit(uint8_t mapped_byte);
         int32_t clear_dot_bit(uint8_t mapped_byte);
