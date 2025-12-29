@@ -20,6 +20,9 @@ init	KEYWORD2
 get_status	KEYWORD2
 get_mapped_byte	KEYWORD2
 get_dot_bit_pos	KEYWORD2
+set_dot_bit	KEYWORD2
+clear_dot_bit	KEYWORD2
+toggle_dot_bit	KEYWORD2
 get_glyph_num	KEYWORD2
 get_represented_char	KEYWORD2
 get_byte_bin_notation_as_str	KEYWORD2

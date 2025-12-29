@@ -140,6 +140,15 @@ class SegMap595Class {
          */
         int32_t get_dot_bit_pos();
 
+        /* Manipulate the bit that represents a dot segment.
+         *
+         * Return: an accordingly modified byte if mapping was successful,
+         * zero otherwise.
+         */
+        int32_t set_dot_bit(uint8_t mapped_byte);
+        int32_t clear_dot_bit(uint8_t mapped_byte);
+        int32_t toggle_dot_bit(uint8_t mapped_byte);
+
         /* Get the number of glyphs in the selected glyph set.
          *
          * Returns: a positive integer if mapping was successful,
