@@ -52,7 +52,7 @@ If the map string is valid, mapped bytes will be placed in a member array in the
 they represent: from 0 to 9, from A to Z, non-alphanumerics at the end.
 
 By default, the dot bit will be in an OFF state (cleared for a common-cathode display, set for a common-anode display)
-in all mapped bytes, therefore you will have to manipulate this bit in your code as necessary (see suggestions below).
+in all mapped bytes, therefore you will have to control the dot state in your code as necessary (see suggestions below).
 
 Glyphs are not standardized globally. Some of them do resemble their actual prototype characters, some are
 rather sketchy (like G, K, T, V, X and Z), others are outright arbitrary (like M and W).
@@ -144,30 +144,15 @@ uint8_t mapped_byte = SegMap595.get_mapped_byte(SEGMAP595_GLYPH_SET_2_INDEX_DASH
 uint8_t mapped_byte = SegMap595.get_mapped_byte(SEGMAP595_GLYPH_SET_2_INDEX_UNDERSCORE);
 ```
 
-Manipulate (set, clear or toggle) the bit that represents a dot segment.
+Control the dot segment state:
 ```cpp
-mapped_byte = SegMap595.set_dot_bit(mapped_byte);
-mapped_byte = SegMap595.clear_dot_bit(mapped_byte);
-mapped_byte = SegMap595.toggle_dot_bit(mapped_byte);
+mapped_byte = SegMap595.turn_on_dot(mapped_byte);
+mapped_byte = SegMap595.turn_off_dot(mapped_byte);
+mapped_byte = SegMap595.toggle_dot(mapped_byte);
 
-// Toggle the corresponding bit periodically to make the dot segment blink.
+// Toggle the dot segment periodically to make it blink.
 if (counter % 2) {
-    mapped_byte = SegMap595.toggle_dot_bit(mapped_byte);
-}
-```
-
-You can also get the position of the bit that represents a dot segment (say, if you want to manipulate it directly).
-Again, toggling the corresponding bit periodically to make the dot segment blink is a common example:
-```cpp
-if (counter % 2) {
-    /* static keyword is only suitable if you're not planning subsequent
-     * init() calls that can change the actual dot bit position.
-     */
-    static int32_t dot_bit_pos = SegMap595.get_dot_bit_pos();
-    if (dot_bit_pos >= 0) {  // If no error is detected.
-        uint8_t mask = static_cast<uint8_t>(1u << dot_bit_pos);
-        mapped_byte ^= mask;
-    }
+    mapped_byte = SegMap595.toggle_dot(mapped_byte);
 }
 ```
 

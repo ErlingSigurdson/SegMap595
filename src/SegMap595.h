@@ -133,21 +133,14 @@ class SegMap595Class {
          */
         uint8_t get_mapped_byte(unsigned char represented_char);
 
-        /* Get the position of the bit that represents a dot segment.
-         *
-         * Returns: an integer from zero to SEGMAP595_MSB (inclusive) if mapping was successful,
-         * a negative integer otherwise (see the preprocessor macros list for possible values).
-         */
-        int32_t get_dot_bit_pos();
-
-        /* Manipulate the bit that represents a dot segment.
+        /* Control the dot segment state.
          *
          * Return: an accordingly modified byte if mapping was successful, a negative integer otherwise
          * (see the preprocessor macros list for possible values).
          */
-        int32_t set_dot_bit(uint8_t mapped_byte);
-        int32_t clear_dot_bit(uint8_t mapped_byte);
-        int32_t toggle_dot_bit(uint8_t mapped_byte);
+        int32_t turn_on_dot(uint8_t mapped_byte);
+        int32_t turn_off_dot(uint8_t mapped_byte);
+        int32_t toggle_dot(uint8_t mapped_byte);
 
         /* Get the number of glyphs in the selected glyph set.
          *
@@ -291,6 +284,21 @@ class SegMap595Class {
          * (see the preprocessor macros list for possible values).
          */
         int32_t map_bytes(DisplayType display_common_pin);
+
+        /* Get the position of the bit that represents a dot segment.
+         *
+         * Returns: an integer from zero to SEGMAP595_MSB (inclusive) if mapping was successful,
+         * a negative integer otherwise (see the preprocessor macros list for possible values).
+         */
+        int32_t get_dot_bit_pos();
+
+        /* Manipulate the bit that represents a dot segment.
+         *
+         * Return: an accordingly modified byte if mapping was successful, a negative integer otherwise
+         * (see the preprocessor macros list for possible values).
+         */
+        int32_t set_dot_bit(uint8_t mapped_byte);
+        int32_t clear_dot_bit(uint8_t mapped_byte);
 };
 
 // Class-related aliases.

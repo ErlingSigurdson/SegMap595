@@ -115,40 +115,33 @@ uint8_t SegMap595Class::get_mapped_byte(unsigned char represented_char)
     return get_mapped_byte(static_cast<char>(represented_char));
 }
 
-int32_t SegMap595Class::get_dot_bit_pos()
+int32_t SegMap595Class::turn_on_dot(uint8_t mapped_byte)
 {
     if (_status < 0) {
         return _status;
+    }
+
+    if (_display_common_pin == SegMap595CommonAnode) {
+        return clear_dot_bit(mapped_byte);
     } else {
-        return _bit_pos[0];  /* Dot (represented by @) is the first character whose
-                              * position is checked when a map string gets analyzed.
-                              */
+        return set_dot_bit(mapped_byte);
     }
 }
 
-int32_t SegMap595Class::set_dot_bit(uint8_t mapped_byte)
+int32_t SegMap595Class::turn_off_dot(uint8_t mapped_byte)
 {
     if (_status < 0) {
         return _status;
     }
 
-    int32_t dot_bit_pos = get_dot_bit_pos();
-    uint8_t mask = static_cast<uint8_t>(1u << dot_bit_pos);
-    return mapped_byte | mask;
-}
-
-int32_t SegMap595Class::clear_dot_bit(uint8_t mapped_byte)
-{
-    if (_status < 0) {
-        return _status;
+    if (_display_common_pin == SegMap595CommonAnode) {
+        return set_dot_bit(mapped_byte);
+    } else {
+        return clear_dot_bit(mapped_byte);
     }
-
-    int32_t dot_bit_pos = get_dot_bit_pos();
-    uint8_t mask = static_cast<uint8_t>(1u << dot_bit_pos);
-    return mapped_byte & ~mask;
 }
 
-int32_t SegMap595Class::toggle_dot_bit(uint8_t mapped_byte)
+int32_t SegMap595Class::toggle_dot(uint8_t mapped_byte)
 {
     if (_status < 0) {
         return _status;
@@ -334,4 +327,37 @@ int32_t SegMap595Class::map_bytes(DisplayType display_common_pin)
     }
 
     return SEGMAP595_STATUS_OK;
+}
+
+int32_t SegMap595Class::get_dot_bit_pos()
+{
+    if (_status < 0) {
+        return _status;
+    } else {
+        return _bit_pos[0];  /* Dot (represented by @) is the first character whose
+                              * position is checked when a map string gets analyzed.
+                              */
+    }
+}
+
+int32_t SegMap595Class::set_dot_bit(uint8_t mapped_byte)
+{
+    if (_status < 0) {
+        return _status;
+    }
+
+    int32_t dot_bit_pos = get_dot_bit_pos();
+    uint8_t mask = static_cast<uint8_t>(1u << dot_bit_pos);
+    return mapped_byte | mask;
+}
+
+int32_t SegMap595Class::clear_dot_bit(uint8_t mapped_byte)
+{
+    if (_status < 0) {
+        return _status;
+    }
+
+    int32_t dot_bit_pos = get_dot_bit_pos();
+    uint8_t mask = static_cast<uint8_t>(1u << dot_bit_pos);
+    return mapped_byte & ~mask;
 }

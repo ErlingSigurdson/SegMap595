@@ -148,7 +148,7 @@ void loop()
 
         // Dot-segment blink.
         if (counter % 2) {
-            byte_to_shift = SegMap595.toggle_dot_bit(byte_to_shift);
+            byte_to_shift = SegMap595.toggle_dot(byte_to_shift);
         }
 
         // Output a glyph on the display.
