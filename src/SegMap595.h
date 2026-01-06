@@ -212,17 +212,15 @@ class SegMap595Class {
         /*--- Variables ---*/
 
         // Glyph sets aggregate initialization.
-        GlyphSet  _glyph_set_1 = {
-                                  SEGMAP595_GLYPH_SET_1_GLYPH_NUM,
-                                  {SEGMAP595_GLYPH_SET_1_ABC_BYTES},
-                                  {SEGMAP595_GLYPH_SET_1_CHARS}
-                                 };
-        GlyphSet  _glyph_set_2 = {
-                                  SEGMAP595_GLYPH_SET_2_GLYPH_NUM,
-                                  {SEGMAP595_GLYPH_SET_2_ABC_BYTES},
-                                  {SEGMAP595_GLYPH_SET_2_CHARS}
-                                 };
-        GlyphSet *_glyph_set_selected = nullptr;
+        static constexpr GlyphSet _glyph_set_1 = {SEGMAP595_GLYPH_SET_1_GLYPH_NUM,
+                                                  {SEGMAP595_GLYPH_SET_1_ABC_BYTES},
+                                                  {SEGMAP595_GLYPH_SET_1_CHARS}
+                                                 };
+        static constexpr GlyphSet _glyph_set_2 = {SEGMAP595_GLYPH_SET_2_GLYPH_NUM,
+                                                  {SEGMAP595_GLYPH_SET_2_ABC_BYTES},
+                                                  {SEGMAP595_GLYPH_SET_2_CHARS}
+                                                 };
+        const GlyphSet *_glyph_set_selected = nullptr;
 
         // Internal buffer that holds the passed map string.
         char     _map_str[SEGMAP595_SEG_NUM + 1] = {0};

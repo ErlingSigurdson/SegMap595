@@ -30,6 +30,10 @@
 
 SegMap595Class SegMap595;
 
+// Necessary to follow ODR rules strictly.
+constexpr SegMap595Class::GlyphSet SegMap595Class::_glyph_set_1;
+constexpr SegMap595Class::GlyphSet SegMap595Class::_glyph_set_2;
+
 
 /******************* FUNCTIONS ******************/
 
