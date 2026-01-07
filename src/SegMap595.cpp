@@ -87,6 +87,7 @@ uint8_t SegMap595Class::get_mapped_byte(size_t index)
     return _mapped_bytes[index];
 }
 
+// This overload can theoretically truncate the argument value, but given the realistic index values, it's a non-issue.
 #if defined(UINT32_MAX) && defined(SIZE_MAX) && (UINT32_MAX > SIZE_MAX)
 uint8_t SegMap595Class::get_mapped_byte(uint32_t index)
 {
@@ -174,6 +175,7 @@ char SegMap595Class::get_represented_char(size_t index)
     return _glyph_set_selected->chars[index];
 }
 
+// This overload can theoretically truncate the argument value, but given the realistic index values, it's a non-issue.
 #if defined(UINT32_MAX) && defined(SIZE_MAX) && (UINT32_MAX > SIZE_MAX)
 char SegMap595Class::get_represented_char(uint32_t index)
 {
